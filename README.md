@@ -22,7 +22,11 @@
 * 作ったデスク環境を見てもらい、反応を得たい時。
 
 ## 設計書
-<...>
+* ER図：https://drive.google.com/file/d/1GdweiZjypsgWxOhfnyV_H8rGmAM7G2kp/view?usp=sharing
+* UI Flow：https://drive.google.com/file/d/132AjR_doeQnlPAo2oZ2ypXfp0-n71GZf/view?usp=sharing
+* テーブル定義書：https://docs.google.com/spreadsheets/d/1Z6HErhvS63dtjl4z_pGEX1reuf1etI1LaKwjm1c8yjQ/edit?usp=sharing
+* 詳細設計：https://docs.google.com/spreadsheets/d/1mbIUArqLyAN15Q0ctspemDmpbD8OV0_muwns3IjfI50/edit?usp=sharing
+
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1GQomQcAm4YTpmRF72-VA_P8Cz_qRoXzSdfiEru8Dyjw/edit?usp=sharing
