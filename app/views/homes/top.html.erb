@@ -1,2 +1,63 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<section id="mv">
+  <div class="mv-mask">
+    <div class="container">
+      <h1 class="mv-title">DeskHack</h1>
+      <p class="mv-content">快適を共有しよう。</p>
+    </div>
+  </div>
+</section>
+<section id="how-to-use">
+  <div class="container mx-auto py-4">
+    <h1 class="section-title">DeskHackで出来ること</h1>
+    <div class="howto-content d-flex flex-wrap justify-content-center">
+      <div class="howto-box text-center">
+        <div class="col">
+          <i class="fas fa-share howto-icon"></i>
+        </div>
+        <h5 class="howto-title">投稿と共有</h5>
+        <p class="howto-text mb-5">様々なユーザーと共有しよう</p>
+      </div>
+      <div class="howto-box text-center">
+        <div class="col">
+          <i class="fas fa-bookmark howto-icon"></i>
+        </div>
+        <h5 class="howto-title">ブックマーク</h5>
+        <p class="howto-text mb-5">お気に入りは保存できる</p>
+      </div>
+      <div class="howto-box text-center">
+        <div class="col">
+          <i class="fas fa-users howto-icon"></i>
+        </div>
+        <h5 class="howto-title">フォロー</h5>
+        <p class="howto-text mb-5">コミュニティを築こう</p>
+      </div>
+      <div class="howto-box text-center">
+        <div class="col">
+          <i class="fas fa-bell howto-icon"></i>
+        </div>
+        <h5 class="howto-title">通知</h5>
+        <p class="howto-text">レスポンスはいち早く</p>
+      </div>
+      <div class="howto-box text-center">
+        <div class="col">
+          <i class="fas fa-hashtag howto-icon"></i>
+        </div>
+        <h5 class="howto-title">ハッシュタグ</h5>
+        <p class="howto-text">共有はシンプルに</p>
+      </div>
+      <div class="howto-box text-center">
+        <div class="col">
+          <i class="fas fa-search howto-icon"></i>
+        </div>
+        <h5 class="howto-title">検索</h5>
+        <p class="howto-text">より多くの発見ができる</p>
+      </div>
+    </div>
+    <div class="row mx-auto sign-up-link">
+      <%= link_to "会員登録する", "#",class: "btn btn-success mx-auto" %>
+    </div>
+    <p class="sign-in-link text-light">
+      すでに登録済みの方は、<%= link_to "こちら ", "#", class: "text-success" %>からログインをお願いします。
+    </p>
+  </div>
+</section>
