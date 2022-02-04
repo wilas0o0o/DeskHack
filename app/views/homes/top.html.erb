@@ -54,10 +54,10 @@
       </div>
     </div>
     <div class="row mx-auto sign-up-link">
-      <%= link_to "会員登録する", "#",class: "btn btn-success mx-auto" %>
+      <%= link_to "会員登録する", new_user_registration_path,class: "btn btn-success mx-auto" %>
     </div>
     <p class="sign-in-link text-light">
-      すでに登録済みの方は、<%= link_to "こちら ", "#", class: "text-success" %>からログインをお願いします。
+      すでに登録済みの方は、<%= link_to "こちら ", new_user_session_path, class: "text-success" %>からログインをお願いします。
     </p>
   </div>
 </section>
