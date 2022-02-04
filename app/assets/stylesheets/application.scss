@@ -21,6 +21,11 @@ a {
   text-decoration: none;
 }
 
+.section-title {
+  color: #fafafa;
+  text-align: center;
+}
+
 //---------- header ---------//
 header {
   width: 100%;
@@ -44,11 +49,10 @@ footer {
   height: 60px;
   width: 100%;
   background-color: #1B1B1B;
-}
-
-.footer-content {
-  line-height: 60px;
-  color: #fafafa
+  .footer-content {
+    line-height: 60px;
+    color: #fafafa
+  }
 }
 
 //---------- mv ----------//
@@ -60,61 +64,51 @@ footer {
   width: 100%;
   display: flex;
   text-align: center;
-}
-
-.mv-mask {
-  width: 100%;
-  background-color: rgba( 0, 0, 0, 0.3);
-}
-
-.mv-title {
-  font-size: 90px;
-  color: #fafafa;
-  margin-top: 200px;
-  margin-bottom: 10px;
-}
-
-.mv-content {
-  font-size: 20px;
-  color: #fafafa;
-  text-align: center;
+  .mv-mask {
+    width: 100%;
+    background-color: rgba( 0, 0, 0, 0.3);
+  }
+  .mv-title {
+    font-size: 90px;
+    color: #fafafa;
+    margin-top: 200px;
+    margin-bottom: 10px;
+  }
+  .mv-content {
+    font-size: 20px;
+    color: #fafafa;
+    text-align: center;
+  }
 }
 
 //---------- how-to-use ----------//
 #how-to-use {
   background-color: #202731;
+  .howto-content {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    .howto-box {
+      width: 360px;
+      .howto-icon {
+        color: #fafafa;
+        font-size: 62px;
+        margin-bottom: 10px;
+      }
+      .howto-title {
+        color: #fafafa;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      .howto-text {
+        color: #fafafa;
+      }
+    }
+  }
+  .sign-in-link {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
-.section-title {
-  color: #fafafa;
-  text-align: center;
-}
-.howto-content {
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
-.howto-box {
-  width: 360px;
-}
 
-.howto-icon {
-  color: #fafafa;
-  font-size: 62px;
-  margin-bottom: 10px;
-}
-
-.howto-title {
-  color: #fafafa;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.howto-text {
-  color: #fafafa;
-}
-
-.sign-in-link {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
