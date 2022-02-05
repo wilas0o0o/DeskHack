@@ -1,0 +1,31 @@
+<div class="form-wrapper">
+  <div class="form-signin">
+    <div class="form-logo">
+      <img src="/assets/Logo_white.png" alt="" class="mb-4 form-logo-img mx-auto d-flex">
+    </div>
+    <%= form_with model: @user, url: user_session_path, local: true do |f| %>
+      <div class="form-group">
+        <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-grope">
+          <%= f.check_box :remember_me %>
+          <%= f.label :"ログインを保持する" %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      未登録の方は<%= link_to "こちら", new_user_registration_path %>
+    </div>
+  </div>
+</div>
