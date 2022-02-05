@@ -13,7 +13,7 @@
         <tr>
           <td><%= post.user.name %></td>
           <td><%= post.situation %></td>
-          <td><%= post.text %></td>
+          <td><%= link_to post.text, post_path(post) %></td>
         </tr>
       <% end %>
     </tbody>
