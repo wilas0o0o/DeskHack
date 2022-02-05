@@ -17,6 +17,12 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+body {
+  min-height: 100vh;
+  padding-bottom: 60px;
+  position: relative;
+}
+
 a {
   text-decoration: none;
 }
@@ -77,8 +83,8 @@ footer {
   height: 60px;
   width: 100%;
   background-color: #1B1B1B;
-  // position: fixed;
-  // bottom: 0;
+  position: absolute;
+  bottom: 0;
   .footer-content {
     line-height: 60px;
     color: #fafafa
