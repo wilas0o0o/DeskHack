@@ -9,7 +9,8 @@
       <h3 class="text-center"><%= @user.name %></h3>
       <% if @user == current_user %>
         <h5 class="text-center"><%= @user.email %></h5>
-        <%= link_to "編集", edit_user_path(@user), class: "btn btn-success brn-sm" %>
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-success btn-sm" %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-sm" %>
       <% end %>
       <div class="d-flex justify-content-center">
         <div>
