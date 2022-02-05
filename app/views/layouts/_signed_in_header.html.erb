@@ -1,0 +1,18 @@
+<header class="signed-header">
+  <div class="header-logo">
+    <%= link_to image_tag("Logo_black.png"), root_path %>
+  </div>
+  <div class="home">
+    <%= link_to "\uf015", root_path %>
+  </div>
+  <div class="search_form">
+    <%= form_with local: true do |f| %>
+      <%= f.text_field :search, placeholder: "Search" %>
+    <% end %>
+  </div>
+  <ul class="header-nav">
+    <li class="icon"><%= link_to "\uf0fe", root_path %></li>
+    <li class="icon"><%= link_to "\uf0f3", root_path %></li>
+    <li class="icon"><%= link_to "\uf007", user_path(current_user) %></li>
+  </ul>
+</header>

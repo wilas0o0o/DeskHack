@@ -4,13 +4,17 @@
     <title>Deskhack</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/f656cbd2da.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
+    <% if user_signed_in? %>
+      <%= render 'layouts/signed_in_header' %>
+    <% else %>
+      <%= render 'layouts/unsigned_header' %>
+    <% end %>
     <main>
       <%= yield %>
     </main>
