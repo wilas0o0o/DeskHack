@@ -1,2 +1,0 @@
-class SituationsController < ApplicationController
-end
