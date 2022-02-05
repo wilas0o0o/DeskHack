@@ -4,11 +4,11 @@
       <img src="/assets/Logo_white.png" alt="" class="mb-4 form-logo-img mx-auto d-flex">
     </div>
     <%= form_with model: @user, local: true do |f| %>
-      
+
       <div class="form-group">
-        <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: "form-control" %>
+        <%= f.file_field :avatar %>
       </div>
-      
+
       <div class="form-group">
         <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: "form-control" %>
       </div>
