@@ -1,15 +1,15 @@
-<header class="unsigned-header">
-  <div class="header-top d-flex flex-wrap align-items-center justify-content-center">
+<header>
+  <div class="header-logo d-flex flex-wrap align-items-center justify-content-center">
     <%= link_to image_tag("Logo_black.png"), root_path, class: "d-flex mx-auto" %>
   </div>
   <% if current_page?(root_path)%>
-    <div class="root_header_nav">
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><%= link_to "About", "#", class: "nav-link px-5" %></li>
-        <li><%= link_to "Content", "#", class: "nav-link px-5" %></li>
-        <li><%= link_to "How to Use", "#how-to-use", class: "nav-link px-5" %></li>
-        <li><%= link_to "Sign up", new_user_registration_path, class: "nav-link px-5" %></li>
-        <li><%= link_to "Sign in", new_user_session_path, class: "nav-link px-5" %></li>
+    <div class="unsigned-header">
+      <ul class="nav col-12 col-md-auto mb-2 d-flex justify-content-center mb-md-0">
+        <li class="unsigned-nav"><%= link_to "About", "#", class: "nav-link px-5 text-dark" %></li>
+        <li class="unsigned-nav"><%= link_to "Content", "#", class: "nav-link px-5 text-dark" %></li>
+        <li class="unsigned-nav"><%= link_to "How to Use", "#how-to-use", class: "nav-link px-5 text-dark" %></li>
+        <li class="unsigned-nav"><%= link_to "Sign up", new_user_registration_path, class: "nav-link px-5 text-dark" %></li>
+        <li class="unsigned-nav"><%= link_to "Sign in", new_user_session_path, class: "nav-link px-5 text-dark" %></li>
       </ul>
     </div>
   <% end %>
