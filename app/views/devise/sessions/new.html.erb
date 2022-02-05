@@ -5,22 +5,22 @@
         <img src="/assets/Logo_white.png" alt="" class="mb-4 form-logo-img mx-auto d-flex">
       </div>
       <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-        <div class="form-group">
+        <div class="form-group my-3">
           <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: "form-control" %>
         </div>
 
-        <div class="form-group">
+        <div class="form-group my-3">
           <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "form-control" %>
         </div>
 
         <% if devise_mapping.rememberable? %>
-          <div class="form-grope">
+          <div class="form-grope my-3">
             <%= f.check_box :remember_me %>
             <%= f.label :"ログインを保持する" %>
           </div>
         <% end %>
 
-        <div class="actions">
+        <div class="actions my-3">
           <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
         </div>
       <% end %>
