@@ -1,2 +1,21 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<div class="posts-container">
+  <h1>投稿一覧</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>投稿者名</td>
+        <td>状況</td>
+        <td>本文</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.user.name %></td>
+          <td><%= post.situation %></td>
+          <td><%= post.text %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

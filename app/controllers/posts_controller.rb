@@ -8,8 +8,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
     if @post.save
-      redirect_to post_path(@post)
+      redirect_to posts_path
     else
       render :new
     end
@@ -41,8 +42,8 @@ class PostsController < ApplicationController
 
   private
 
-    def posts_params
-      params.require(:post).permit(:user_id, :situation_id, :text)
+    def post_params
+      params.require(:post).permit(:user_id, :situation, :text)
     end
 
     def ensure_correct_user

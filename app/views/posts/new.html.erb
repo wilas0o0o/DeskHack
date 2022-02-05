@@ -1,16 +1,28 @@
 <div class="post-form-container">
   <div class="container">
     <h1>新規投稿</h1>
+    <%= render 'layouts/errors', obj: @post %>
     <div class="post-form">
       <%= form_with model: @post, local: true do |f| %>
 
         <div class="form-group">
-          < %= f.text_area :text, class: "form-control" %>
+          <%= f.label "本文" %>
+          <%= f.text_area :text, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :situation_working, "Working" %>
+          <%= f.radio_button :situation, Post.situations.key(0) %>
+
+          <%= f.label :situation_gaming, "Gaming" %>
+          <%= f.radio_button :situation, Post.situations.key(1) %>
         </div>
 
         <div class="actions">
-          <%= f.submit "投稿する", class: "btn btn-primary"%>
+          <%= f.submit "投稿する", class: "btn btn-primary" %>
         </div>
+
+      <% end %>
     </div>
   </div>
 </div>
