@@ -1,2 +1,25 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="form-wrapper">
+  <div class="form-signin">
+    <div class="form-logo">
+      <img src="/assets/Logo_white.png" alt="" class="mb-4 form-logo-img mx-auto d-flex">
+    </div>
+    <%= form_with model: @user, local: true do |f| %>
+      
+      <div class="form-group">
+        <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "変更を保存する", class: "btn btn-primary btn-block" %>
+      </div>
+    <% end %>
+  </div>
+</div>
