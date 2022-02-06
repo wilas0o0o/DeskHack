@@ -1,0 +1,44 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+//---------- mv ----------//
+#mv {
+  background-image: url(mv.jpeg);
+  background-position: center;
+  background-size: cover;
+  height: 650px;
+  .mv-mask {
+    background-color: rgba( 0, 0, 0, 0.3);
+  }
+  .mv-title {
+    font-size: 90px;
+  }
+  .mv-content {
+    font-size: 20px;
+  }
+}
+
+//---------- how-to-use ----------//
+#how-to-use {
+  background-color: #202731;
+  .howto-content {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    .howto-box {
+      width: 360px;
+      .howto-icon {
+        font-size: 62px;
+        margin-bottom: 10px;
+      }
+      .howto-title {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .sign-in-link {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}

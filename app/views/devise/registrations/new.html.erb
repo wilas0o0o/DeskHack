@@ -1,34 +1,36 @@
-<div class="form-wrapper">
-  <div class="form-signin">
-    <div class="form-logo">
-      <img src="/assets/Logo_white.png" alt="" class="mb-4 form-logo-img mx-auto d-flex">
-    </div>
-    <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-
-      <div class="form-group">
-        <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: "form-control" %>
+<div class="form-container w-100 d-flex justify-content-center align-items-center">
+  <div class="form-wrapper">
+    <div class="form-signin w-100">
+      <div class="form-logo">
+        <img src="/assets/Logo_white.png" alt="" class="mb-4 form-logo-img mx-auto d-flex">
       </div>
+      <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="form-group">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>
+        <div class="form-group d-flex justify-content-center">
+          <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: "form-control" %>
+        </div>
+
+        <div class="form-group d-flex justify-content-center">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>
+        </div>
+
+        <div class="form-group d-flex justify-content-center">
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（6文字以上）", class: "form-control" %>
+        </div>
+
+        <div class="form-group d-flex justify-content-center">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認用パスワード", class: "form-control" %>
+        </div>
+
+        <div class="actions mt-4">
+          <%= f.submit "新規登録", class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
+
+      <div class="text-center mt-4">
+        登録済みの方は<%= link_to "こちら", new_user_session_path %>
       </div>
-
-      <div class="form-group">
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（6文字以上）", class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認用パスワード", class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "新規登録", class: "btn btn-primary btn-block" %>
-      </div>
-    <% end %>
-
-    <div class="text-center mt-3">
-      登録済みの方は<%= link_to "こちら", new_user_session_path %>
     </div>
   </div>
 </div>

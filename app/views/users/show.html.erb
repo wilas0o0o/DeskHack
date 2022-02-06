@@ -1,0 +1,25 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="profile text-center mx-auto">
+      <% if @user.avatar? %>
+        <%= image_tag @user.avatar.url, class: "rounded-circle", size: "150x150" %>
+      <% else %>
+        <%= image_tag "no_image_avatar.png", class: "rounded-circle", size: "150x150" %>
+      <% end %>
+      <h3 class="text-center"><%= @user.name %></h3>
+      <% if @user == current_user %>
+        <h5 class="text-center"><%= @user.email %></h5>
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-success btn-sm" %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-sm" %>
+      <% end %>
+      <div class="d-flex justify-content-center">
+        <div>
+          <p class="mx-5">フォロー数</p>
+        </div>
+        <div>
+          <p class="mx-5">フォロワー数</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
