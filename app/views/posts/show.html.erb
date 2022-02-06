@@ -1,31 +1,51 @@
-<div class="post-container">
-  <h1>投稿詳細</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <td>投稿者名</td>
-        <td>状況</td>
-        <td>本文</td>
-        <td colspan="3"></td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr id="post_<% @post.id %>">
-        <td><%= @post.user.name %></td>
-        <td><%= @post.situation %></td>
-        <td><%= @post.text %></td>
-        <td>
-          <% @post.images.each do |image| %>
-             <%= image_tag image.to_s, size: "240x150" %>
-          <% end %>
-        </td>
-        <td class="favorite-btn"><%= render 'favorites/favorite_btn', post: @post %></td>
-        <td class="bookmark-btn"><%= render 'bookmarks/bookmark_btn', post: @post %></td>
-        <% if @post.user == current_user %>
-          <td><%= link_to "編集", edit_post_path(@post), class: "btn btn-success" %></td>
-          <td><%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-danger" %></td>
+<div class="container px-5 px-sm-0">
+  <div class="row mt-4">
+    <div class="post-user d-flex w-100 mb-3">
+      <div class="user-info d-flex align-items-end">
+        <%= link_to user_path(@post.user) do %>
+          <%= image_tag @post.user.avatar.url, class: "rounded-circle", size: "60x60" %>
         <% end %>
-      </tr>
-    </tbody>
-  </table>
+        <h4 class="m-0 ml-1"><%= @post.user.name %></h4>
+      </div>
+      <div class="post-option ml-auto d-flex align-items-end">
+        <% if @post.user == current_user %>
+          <%= link_to "", edit_post_path(@post), class: "fas fa-edit fa-2x text-dark mr-3" %>
+          <%= link_to "", post_path(@post), method: :delete, class: "far fa-trash-alt fa-2x text-dark" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="images">
+        <% @post.images.each do |image| %>
+          <%= image_tag image.to_s, size: "220x150" %>
+        <% end %>
+      </div>
+      <div class="post-action d-flex align-items-center">
+        <h5 class="favorite-btn mr-3"><%= render 'favorites/favorite_btn', post: @post %></h5>
+        <h5 class="bookmark-btn"><%= render 'bookmarks/bookmark_btn', post: @post %></h5>
+        <div class="post-detail ml-auto">
+          <p class="text-light bg-dark text-center m-0"><%= @post.situation%></p>
+          <p><%= @post.created_at.to_s(:date_jp) %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 pr-md-0">
+      <div class="text-box bg-white p-3">
+        <%= simple_format(@post.text) %>
+      </div>
+      <div class="comment-box bg-white p-3 mt-3">
+        <p class="comments-count border-bottom"><%= @post.post_comments.count %>件のコメントがあります。</p>
+        <%= render 'post_comments/comment', post: @post, post_comments: @post_comments %>
+        <div class="comment-form d-flex flex-column">
+          <%= render 'layouts/errors', obj: @post_comment %>
+          <%= form_with model: [@post, @post_comment], remote: true do |f| %>
+            <%= f.text_area :comment, class: "form-control" %>
+            <div class="action d-flex justify-content-end">
+              <%= f.submit "送信", class: "btn btn-secondary btn-sm mt-1"%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

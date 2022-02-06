@@ -29,27 +29,23 @@ a {
 .application-container {
   width: 100vw;
   height: 100vh;
+  background-color: #f5f5f5;
 }
 
 .application-main {
   flex: 1;
 }
 
-.form-container {
-  background-color: #f5f5f5;
-}
-
 .nav-icon {
-  font-family: "FontAwesome";
-  font-size: 25px;
+  list-style: none;
 }
 //---------- header ---------//
 header {
   background-color: #1B1B1B;
 }
 
-.unsigned-header {
-  background-color: #fafafa;
+.sub-header {
+  background-color: #fff;
 }
 .unsigned-nav a {
   font-size: 24px;
