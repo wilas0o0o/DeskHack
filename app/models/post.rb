@@ -10,4 +10,8 @@ class Post < ApplicationRecord
   scope :working, -> { where(situation: 0) }
   scope :gaming, -> { where(situation: 1) }
   enum situation: { working: 0, gaming: 1 }
+
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
 end
