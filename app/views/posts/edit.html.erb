@@ -1,35 +1,37 @@
-<div class="post-form-container">
+<div class="post-form-container w-100 d-flex justify-content-center">
   <div class="container">
-    <h1>投稿編集</h1>
-    <%= render 'layouts/errors', obj: @post %>
-    <div class="post-form">
-      <%= form_with model: @post, local: true do |f| %>
+    <h2 class="text-center mt-5 mb-5">投稿を編集</h2>
+    <div class="row d-flex flex-column col-8 offset-2">
+      <%= render 'layouts/errors', obj: @post %>
+        <%= form_with model: @post, local: true do |f| %>
+          <table class="table table-borderless d-flex justify-content-center">
 
-        <div class="form-group">
-          <%= f.label "画像" %>
-          <%= f.file_field :images %>
-          <%= f.file_field :images %>
-          <%= f.file_field :images %>
-        </div>
+            <tr class="form-group mx-3">
+              <td class="col-md-3">画像</td>
+              <td class="col-md-8 offset-md-1"><%= f.file_field :images, multiple: true %></td>
+            </tr>
 
-        <div class="form-group">
-          <%= f.label "本文" %>
-          <%= f.text_area :text, class: "form-control" %>
-        </div>
+            <tr class="form-group mx-3">
+              <td class="col-md-3">本文</td>
+              <td class="col-md-8 offset-md-1"><%= f.text_area :text, class: "form-control" %></td>
+            </tr>
 
-        <div class="form-group">
-          <%= f.label :situation_working, "Working" %>
-          <%= f.radio_button :situation, Post.situations.key(0) %>
+            <tr class="form-group mx-3">
+              <td class="col-md-3">カテゴリー</td>
+              <td class="col-md-8 offset-md-1">
+                <%= f.radio_button :situation, Post.situations.key(0) %>
+                <%= f.label :situation_working, "Working", class: "mr-5" %>
 
-          <%= f.label :situation_gaming, "Gaming" %>
-          <%= f.radio_button :situation, Post.situations.key(1) %>
-        </div>
+                <%= f.radio_button :situation, Post.situations.key(1) %>
+                <%= f.label :situation_gaming, "Gaming" %>
+              </td>
+            </tr>
 
-        <div class="actions">
-          <%= f.submit "変更を保存する", class: "btn btn-primary" %>
-        </div>
-
-      <% end %>
+          </table>
+          <div class="actions d-flex justify-content-end">
+            <%= f.submit "変更を保存", class: "btn btn-primary" %>
+          </div>
+        <% end %>
     </div>
   </div>
 </div>
