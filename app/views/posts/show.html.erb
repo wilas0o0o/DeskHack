@@ -34,12 +34,15 @@
         <%= simple_format(@post.text) %>
       </div>
       <div class="comment-box bg-white p-3 mt-3">
+        <p class="comments-count border-bottom"><%= @post.post_comments.count %>件のコメントがあります。</p>
         <%= render 'post_comments/comment', post: @post, post_comments: @post_comments %>
-        <div class="comment-form">
+        <div class="comment-form d-flex flex-column">
           <%= render 'layouts/errors', obj: @post_comment %>
-          <%= form_with model: [@post, @post_comment], local: true do |f| %>
+          <%= form_with model: [@post, @post_comment], remote: true do |f| %>
             <%= f.text_area :comment, class: "form-control" %>
-            <%= f.submit "送信", class: "btn btn-secondary btn-sm mt-1"%>
+            <div class="action d-flex justify-content-end">
+              <%= f.submit "送信", class: "btn btn-secondary btn-sm mt-1"%>
+            </div>
           <% end %>
         </div>
       </div>

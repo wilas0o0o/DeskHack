@@ -1,14 +1,14 @@
-<table class="table table-borderless">
+<table class="table table-borderless comments-index">
   <% post.post_comments.each do |post_comment| %>
     <tr>
-      <td>
+      <td class="col-1">
         <%= link_to user_path(post_comment.user) do %>
           <%= image_tag post_comment.user.avatar.url, class: "rounded-circle", size: "40x40"%>
         <% end %>
       </td>
-      <td><%= simple_format(post_comment.comment) %></td>
+      <td class="col-8"><%= simple_format(post_comment.comment) %></td>
       <% if post_comment.user == current_user %>
-        <td><%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, local: true, class: "btn btn-danger brn-sm"%></td>
+        <td class="col-3"><%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class: "btn btn-danger btn-sm"%></td>
       <% end %>
     </tr>
   <% end %>
