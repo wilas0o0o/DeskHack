@@ -1,11 +1,11 @@
 <header class="row mx-0">
-  <div class="header-logo col">
+  <div class="header-logo col-2 d-flex justify-content-center">
     <%= link_to image_tag("Logo_black.png"), root_path %>
   </div>
-  <div class="col-8">
+  <div class="col-7">
     <div class="row h-100 align-items-center">
       <div class="home col-3 text-center nav-icon">
-        <%= link_to "\uf015", posts_path, class: "text-light" %>
+        <%= link_to "", posts_path, class: "fas fa-home fa-lg text-light" %>
       </div>
       <div class="text-center search_form col-9">
         <%= form_with local: true do |f| %>
@@ -14,11 +14,11 @@
       </div>
     </div>
   </div>
-  <div class="col d-flex align-items-center justify-content-center">
-    <ul class="header-nav d-flex p-0 mb-0 w-100 justify-content-between">
-      <li class="nav-icon"><%= link_to "\uf0fe", new_post_path, class: "nav text-light" %></li>
-      <li class="nav-icon"><%= link_to "\uf0f3", root_path, class: "nav text-light" %></li>
-      <li class="nav-icon"><%= link_to "\uf007", user_path(current_user), class: "nav text-light" %></li>
+  <div class="col-2 d-flex align-items-center justify-content-center">
+    <ul class="header-nav d-flex p-0 mb-0 w-100 justify-content-around">
+      <li class="nav-icon"><%= link_to "", new_post_path, class: "far fa-plus-square fa-lg text-light" %></li>
+      <li class="nav-icon"><%= link_to "", root_path, class: "fas fa-bell fa-lg text-light" %></li>
+      <li class="nav-icon"><%= link_to "", user_path(current_user), class: "fas fa-user fa-lg text-light" %></li>
     </ul>
   </div>
 </header>

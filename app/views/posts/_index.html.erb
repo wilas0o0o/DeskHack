@@ -1,7 +1,7 @@
-<div class="post-index d-flex flex-wrap justify-content-around">
-  <% posts.each do |post| %>
-    <%= link_to post_path(post) do %>
-      <%= image_tag post.images[0].to_s, size: "240x150" %>
-    <% end %>
+<% posts.each do |post| %>
+  <%= link_to post_path(post) do %>
+    <div class="post-image mb-3">
+      <%= image_tag post.images[0].to_s, size: "360x240" %>
+    </div>
   <% end %>
-</div>
+<% end %>
