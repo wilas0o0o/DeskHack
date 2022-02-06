@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts
   end
 
   def edit
@@ -15,6 +16,13 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def bookmarked_posts
+    @user = User.find(params[:id])
+    bookmarked_post_ids = @user.bookmarks.pluck(:post_id)
+    @posts = Post.where(id: bookmarked_post_ids)
+    render 'show'
   end
 
   private

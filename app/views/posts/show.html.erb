@@ -20,8 +20,11 @@
           <% end %>
         </td>
         <td class="favorite-btn"><%= render 'favorites/favorite_btn', post: @post %></td>
-        <td><%= link_to "編集", edit_post_path(@post), class: "btn btn-success" %></td>
-        <td><%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-danger" %></td>
+        <td class="bookmark-btn"><%= render 'bookmarks/bookmark_btn', post: @post %></td>
+        <% if @post.user == current_user %>
+          <td><%= link_to "編集", edit_post_path(@post), class: "btn btn-success" %></td>
+          <td><%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-danger" %></td>
+        <% end %>
       </tr>
     </tbody>
   </table>
