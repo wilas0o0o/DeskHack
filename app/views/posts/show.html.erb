@@ -2,7 +2,9 @@
   <div class="row mt-4">
     <div class="post-user d-flex w-100 mb-3">
       <div class="user-info d-flex align-items-end">
-        <%= image_tag @post.user.avatar.url, class: "rounded-circle", size: "80x80" %>
+        <%= link_to user_path(@post.user) do %>
+          <%= image_tag @post.user.avatar.url, class: "rounded-circle", size: "60x60" %>
+        <% end %>
         <h4 class="m-0 ml-1"><%= @post.user.name %></h4>
       </div>
       <div class="post-option ml-auto d-flex align-items-end">
@@ -12,25 +14,35 @@
         <% end %>
       </div>
     </div>
-      <div class="col-md-8">
-        <div class="images">
-          <% @post.images.each do |image| %>
-            <%= image_tag image.to_s, size: "220x150" %>
+    <div class="col-md-8">
+      <div class="images">
+        <% @post.images.each do |image| %>
+          <%= image_tag image.to_s, size: "220x150" %>
+        <% end %>
+      </div>
+      <div class="post-action d-flex align-items-center">
+        <h5 class="favorite-btn mr-3"><%= render 'favorites/favorite_btn', post: @post %></h5>
+        <h5 class="bookmark-btn"><%= render 'bookmarks/bookmark_btn', post: @post %></h5>
+        <div class="post-detail ml-auto">
+          <p class="text-light bg-dark text-center m-0"><%= @post.situation%></p>
+          <p><%= @post.created_at.to_s(:date_jp) %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 pr-md-0">
+      <div class="text-box bg-white p-3">
+        <%= simple_format(@post.text) %>
+      </div>
+      <div class="comment-box bg-white p-3 mt-3">
+        <%= render 'post_comments/comment', post: @post, post_comments: @post_comments %>
+        <div class="comment-form">
+          <%= render 'layouts/errors', obj: @post_comment %>
+          <%= form_with model: [@post, @post_comment], local: true do |f| %>
+            <%= f.text_area :comment, class: "form-control" %>
+            <%= f.submit "送信", class: "btn btn-secondary btn-sm mt-1"%>
           <% end %>
         </div>
-        <div class="post-action d-flex mt-3">
-          <h5 class="favorite-btn mr-3"><%= render 'favorites/favorite_btn', post: @post %></h5>
-          <h5 class="bookmark-btn"><%= render 'bookmarks/bookmark_btn', post: @post %></h5>
-          <div class="post-detail">
-            <h5><%= @post.situation %></h5>
-            <h5><%= @post.created_at.to_s(:date_jp) %></h5>
-          </div>
-        </div>
       </div>
-      <div class="col-md-4 pr-md-0">
-        <div class="text-box bg-white p-3">
-          <%= @post.text %>
-        </div>
-      </div>
+    </div>
   </div>
 </div>
