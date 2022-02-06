@@ -6,14 +6,7 @@
       <li class="unsigned-nav"><%= link_to "Gaming", posts_path(sort_gaming: true), class: "nav-link px-5 text-dark" %></li>
     </ul>
   </div>
-
   <div class="container mt-5">
-    <div class="post-index d-flex flex-wrap justify-content-around">
-      <% @posts.each do |post| %>
-        <%= link_to post_path(post) do %>
-          <%= image_tag post.images[0].to_s, size: "240x150" %>
-        <% end %>
-      <% end %>
-    </div>
+    <%= render 'posts/index', posts: @posts%>
   </div>
 </div>
