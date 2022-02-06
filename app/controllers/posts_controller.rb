@@ -55,7 +55,7 @@ class PostsController < ApplicationController
     def ensure_correct_user
       @post = Post.find(params[:id])
       unless @post.user_id == current_user.id
-        redirect_to book_path(@book)
+        redirect_to post_path(@post)
       end
     end
 end

@@ -7,6 +7,7 @@ class Post < ApplicationRecord
 
   validates :text, presence: true, length: { maximum: 140 }
   validates :situation, presence: true
+  validates :images, presence: true, length: { maximum: 5 }
 
   scope :working, -> { where(situation: 0) }
   scope :gaming, -> { where(situation: 1) }

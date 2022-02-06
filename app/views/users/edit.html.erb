@@ -4,20 +4,24 @@
       <div class="form-logo">
         <img src="/assets/Logo_white.png" alt="" class="mb-4 form-logo-img mx-auto d-flex">
       </div>
+      <%= render 'layouts/errors', obj: @user %>
       <%= form_with model: @user, local: true do |f| %>
 
         <div class="form-group d-flex flex-column">
           <%= f.label :avatar, "プロフィール画像" %>
           <%= f.file_field :avatar %>
         </div>
+
         <div class="form-group d-flex flex-column">
           <%= f.label :name, "ユーザー名" %>
           <%= f.text_field :name, class: "form-control" %>
         </div>
+
         <div class="form-group d-flex flex-column">
           <%= f.label :email, "メールアドレス" %>
           <%= f.email_field :email, class: "form-control" %>
         </div>
+
         </table>
         <div class="actions mt-5">
           <%= f.submit "変更を保存", class: "btn btn-success btn-block" %>

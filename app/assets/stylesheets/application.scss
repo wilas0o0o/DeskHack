@@ -80,3 +80,23 @@ footer {
     }
   }
 }
+
+//---------- errors ----------//
+
+.field_with_errors {
+  input, textarea {
+  @extend .is-invalid;
+  }
+}
+
+.form-group {
+  .field_with_errors {
+    label {
+    font-size: 20px;
+    font-weight: 500;
+    }
+    input {
+    height: 50px;
+    }
+  }
+}
