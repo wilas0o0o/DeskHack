@@ -1,21 +1,19 @@
-<div class="posts-container">
-  <h1>投稿一覧</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <td>投稿者名</td>
-        <td>状況</td>
-        <td>本文</td>
-      </tr>
-    </thead>
-    <tbody>
+<div class="posts-container w-100 d-flex flex-column">
+  <div class="posts-header d-flex text-center justify-content-center">
+    <ul class="nav col-12 col-md-auto mb-2 d-flex justify-content-center mb-md-0">
+      <li class="unsigned-nav"><%= link_to "すべての投稿", posts_path, class: "nav-link px-5 text-dark" %></li>
+      <li class="unsigned-nav"><%= link_to "Working", posts_path(sort_working: true), class: "nav-link px-5 text-dark" %></li>
+      <li class="unsigned-nav"><%= link_to "Gaming", posts_path(sort_gaming: true), class: "nav-link px-5 text-dark" %></li>
+    </ul>
+  </div>
+
+  <div class="container mt-5">
+    <div class="post-index d-flex flex-wrap justify-content-around">
       <% @posts.each do |post| %>
-        <tr>
-          <td><%= post.user.name %></td>
-          <td><%= post.situation %></td>
-          <td><%= link_to post.text, post_path(post) %></td>
-        </tr>
+        <%= link_to post_path(post) do %>
+          <%= image_tag post.images[0].to_s, size: "240x150" %>
+        <% end %>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
 </div>

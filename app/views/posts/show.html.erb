@@ -16,7 +16,7 @@
         <td><%= @post.text %></td>
         <td>
           <% @post.images.each do |image| %>
-             <%= image_tag image.to_s, size: "150x150" %>
+             <%= image_tag image.to_s, size: "240x150" %>
           <% end %>
         </td>
         <td><%= link_to "編集", edit_post_path(@post), class: "btn btn-success" %></td>

@@ -17,7 +17,13 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    if params[:sort_working]
+      @posts = Post.working
+    elsif params[:sort_gaming]
+      @posts = Post.gaming
+    else
+      @posts = Post.all
+    end
   end
 
   def show
