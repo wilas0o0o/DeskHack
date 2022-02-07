@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="user-info col-md-3 d-flex">
+        <h5><%= link_to "", user_path(@user), class: "fas fa-arrow-left mr-4 text-dark" %></h5>
+        <h5><%= @user.name %></h5>
+      </div>
+      <div class="follow-title d-flex justify-content-center border-bottom px-4">
+        <%= link_to "フォロー中", user_followings_path, class: "h5 mx-5 text-dark font-weight-bold" %>
+        <%= link_to "フォロワー", user_followers_path, class: "h5 mx-5 text-dark font-weight-bold" %>
+      </div>
+      <div class="users-list d-flex justify-content-center">
+        <% if @users.present? %>
+          <%= render 'relationships/users_list', users: @users %>
+        <% else %>
+          <div class="no-users mt-3">
+            <div class="d-flex justify-content-center">
+              <span class="fa-stack fa-3x">
+                <i class="far fa-circle fa-stack-2x"></i>
+                <i class="fas fa-user-plus fa-stack-1x"></i>
+              </span>
+            </div>
+            <h4 class="text-center mt-3">フォローしているユーザー</h4>
+            <p>ユーザーをフォローするとここに表示されます。</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>

@@ -18,11 +18,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def bookmarked_posts
+  def bookmarked
     @user = User.find(params[:id])
     bookmarked_post_ids = @user.bookmarks.pluck(:post_id)
     @posts = Post.where(id: bookmarked_post_ids)
-    render 'show'
   end
 
   private

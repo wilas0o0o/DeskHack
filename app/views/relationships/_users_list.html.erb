@@ -1,0 +1,22 @@
+<table class="table table-borderless">
+  <% users.each do |user| %>
+    <tr id="user_<%= user.id %>">
+      <td class="col-2">
+        <%= link_to user_path(user) do %>
+          <% if user.avatar? %>
+            <%= image_tag user.avatar.url, class: "rounded-circle", size: "50x50" %>
+          <% else %>
+            <%= image_tag "no_image_avatar.png", class: "rounded-circle", size: "50x50" %>
+          <% end %>
+        <% end %>
+      </td>
+      <td class="col-6"><%= user.name %></td>
+      <td class="col-4 follow-btn">
+        <% if user == current_user %>
+        <% else %>
+          <%= render 'relationships/follow_btn', user: user %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

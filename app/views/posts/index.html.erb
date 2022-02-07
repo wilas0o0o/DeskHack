@@ -6,11 +6,11 @@
       <li class="unsigned-nav"><%= link_to "Gaming", posts_path(sort_gaming: true), class: "nav-link px-5 text-dark" %></li>
     </ul>
   </div>
-  <div class="d-flex justify-content-center mt-5">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 d-flex flex-wrap justify-content-between">
-      <%= render 'posts/index', posts: @posts%>
+  <div class="container mt-5">
+    <div class="row d-flex flex-column justify-content-center">
+      <div class="d-flex flex-wrap justify-content-around">
+        <%= render 'posts/index', posts: @posts%>
+      </div>
     </div>
-    <div class="col-md-2"></div>
   </div>
 </div>

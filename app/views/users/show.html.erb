@@ -1,5 +1,5 @@
 <div class="container mt-3">
-  <div class="row">
+  <div class="row d-flex flex-column">
     <div class="profile text-center mx-auto">
       <% if @user.avatar? %>
         <%= image_tag @user.avatar.url, class: "rounded-circle", size: "150x150" %>
@@ -11,28 +11,41 @@
         <h5 class="text-center"><%= @user.email %></h5>
         <%= link_to "編集", edit_user_path(@user), class: "btn btn-success btn-sm" %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-sm" %>
+      <% else %>
+        <p class="follow-btn"><%= render 'relationships/follow_btn', user: @user %></p>
       <% end %>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center mt-2">
         <div>
-          <p class="mx-5">フォロー数</p>
+          <h5 class="mx-5"><%= link_to "フォロー中", user_followings_path(@user.id), class: "text-dark font-weight-bold" %></h5>
+          <h5 class="mx-5"><%= link_to @user.followings.count, user_followings_path(@user.id), class: "text-dark font-weight-bold" %></h5>
         </div>
         <div>
-          <p class="mx-5">フォロワー数</p>
+          <h5 class="mx-5"><%= link_to "フォロワー", user_followers_path(@user.id), class: "text-dark font-weight-bold" %></h5>
+          <h5 class="mx-5"><%= link_to @user.followers.count, user_followers_path(@user.id), class: "text-dark font-weight-bold" %></h5>
         </div>
       </div>
     </div>
-    <div class="mt-5">
+    <div class="post-box mt-5">
       <div class="post-menu d-flex justify-content-around border-bottom mb-3">
-        <%= link_to "投稿", user_path(@user) %>
+        <h5><%= link_to "投稿一覧", user_path(@user), class: "text-dark font-weight-bold" %></h5>
         <% if @user == current_user %>
-          <%= link_to "保存した投稿", bookmarked_posts_user_path(@user) %>
+          <h5><%= link_to "保存した投稿", bookmarked_user_path(@user), class: "text-dark font-weight-bold" %></h5>
         <% end %>
       </div>
-      <div class="my-posts d-flex flex-wrap justify-content-between">
+      <div class="my-posts d-flex flex-wrap justify-content-around">
         <% if @posts.present? %>
           <%= render 'posts/index', posts: @posts %>
         <% else %>
-          投稿がありません。
+          <div class="no-users mt-3 mx-auto">
+            <div class="d-flex justify-content-center">
+              <span class="fa-stack fa-3x">
+                <i class="far fa-circle fa-stack-2x"></i>
+                <i class="fas fa-images fa-stack-1x"></i>
+              </span>
+            </div>
+            <h4 class="text-center mt-3">投稿一覧</h4>
+            <p>すべての投稿がここに表示されます。</p>
+          </div>
         <% end %>
       </div>
     </div>
