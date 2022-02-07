@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     member do
       get :bookmarked_posts
     end
+    resource :relationship, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationship#followers', as: 'followers'
   end
   resources :posts do
     resource :favorites, only: [:create, :destroy]
