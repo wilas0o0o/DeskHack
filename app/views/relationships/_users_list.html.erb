@@ -1,6 +1,6 @@
 <table class="table table-borderless">
   <% users.each do |user| %>
-    <tr>
+    <tr id="user_<%= user.id %>">
       <td class="col-2">
         <%= link_to user_path(user) do %>
           <% if user.avatar? %>
@@ -11,14 +11,10 @@
         <% end %>
       </td>
       <td class="col-6"><%= user.name %></td>
-      <td class="col-4">
+      <td class="col-4 follow-btn">
         <% if user == current_user %>
         <% else %>
-          <% if current_user.followings?(user) %>
-            <%= link_to "フォロー中", user_relationships_path(user.id), method: :delete, class: "btn btn-secondary" %>
-          <% else %>
-            <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-primary" %>
-          <% end %>
+          <%= render 'relationships/follow_btn', user: user %>
         <% end %>
       </td>
     </tr>

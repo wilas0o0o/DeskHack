@@ -12,13 +12,9 @@
         <%= link_to "編集", edit_user_path(@user), class: "btn btn-success btn-sm" %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-sm" %>
       <% else %>
-        <% if current_user.followings?(@user) %>
-          <%= link_to "フォロー中", user_relationships_path(@user.id), method: :delete, class: "btn btn-secondary" %>
-        <% else %>
-          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-primary" %>
-        <% end %>
+        <p class="follow-btn"><%= render 'relationships/follow_btn', user: @user %></p>
       <% end %>
-      <div class="d-flex justify-content-center mt-3">
+      <div class="d-flex justify-content-center mt-2">
         <div>
           <h5 class="mx-5"><%= link_to "フォロー中", user_followings_path(@user.id), class: "text-dark font-weight-bold" %></h5>
           <h5 class="mx-5"><%= link_to @user.followings.count, user_followings_path(@user.id), class: "text-dark font-weight-bold" %></h5>

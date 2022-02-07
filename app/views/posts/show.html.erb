@@ -11,16 +11,12 @@
         <% end %>
         <h4 class="m-0 ml-1"><%= @post.user.name %></h4>
       </div>
-      <div class="post-option ml-auto d-flex align-items-end">
+      <div class="post-option follow-btn ml-auto d-flex align-items-end">
         <% if @post.user == current_user %>
           <%= link_to "", edit_post_path(@post), class: "fas fa-edit fa-2x text-dark mr-3" %>
           <%= link_to "", post_path(@post), method: :delete, class: "far fa-trash-alt fa-2x text-dark" %>
         <% else %>
-          <% if current_user.followings?(@post.user) %>
-            <%= link_to "フォロー中", user_relationships_path(@post.user_id), method: :delete, class: "btn btn-secondary" %>
-          <% else %>
-            <%= link_to "フォローする", user_relationships_path(@post.user_id), method: :post, class: "btn btn-primary" %>
-          <% end %>
+          <%= render 'relationships/follow_btn', user: @post.user %>
         <% end %>
       </div>
     </div>
