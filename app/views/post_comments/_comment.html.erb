@@ -3,7 +3,11 @@
     <tr>
       <td class="col-1">
         <%= link_to user_path(post_comment.user) do %>
-          <%= image_tag post_comment.user.avatar.url, class: "rounded-circle", size: "40x40"%>
+          <% if post_comment.user.avatar? %>
+            <%= image_tag post_comment.user.avatar.url, class: "rounded-circle", size: "40x40"%>
+          <% else %>
+            <%= image_tag "no_image_avatar.png", class: "rounded-circle", size: "40x40" %>
+          <% end %>
         <% end %>
       </td>
       <td class="col-8"><%= simple_format(post_comment.comment) %></td>

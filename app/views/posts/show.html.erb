@@ -3,7 +3,11 @@
     <div class="post-user d-flex w-100 mb-3">
       <div class="user-info d-flex align-items-end">
         <%= link_to user_path(@post.user) do %>
-          <%= image_tag @post.user.avatar.url, class: "rounded-circle", size: "60x60" %>
+          <% if @post.user.avatar? %>
+            <%= image_tag @post.user.avatar.url, class: "rounded-circle", size: "60x60" %>
+          <% else %>
+            <%= image_tag "no_image_avatar.png", class: "rounded-circle", size: "60x60" %>
+          <% end %>
         <% end %>
         <h4 class="m-0 ml-1"><%= @post.user.name %></h4>
       </div>
@@ -11,6 +15,12 @@
         <% if @post.user == current_user %>
           <%= link_to "", edit_post_path(@post), class: "fas fa-edit fa-2x text-dark mr-3" %>
           <%= link_to "", post_path(@post), method: :delete, class: "far fa-trash-alt fa-2x text-dark" %>
+        <% else %>
+          <% if current_user.followings?(@post.user) %>
+            <%= link_to "フォロー中", user_relationships_path(@post.user_id), method: :delete, class: "btn btn-secondary" %>
+          <% else %>
+            <%= link_to "フォローする", user_relationships_path(@post.user_id), method: :post, class: "btn btn-primary" %>
+          <% end %>
         <% end %>
       </div>
     </div>
