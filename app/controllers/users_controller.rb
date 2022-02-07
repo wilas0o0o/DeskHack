@@ -22,7 +22,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     bookmarked_post_ids = @user.bookmarks.pluck(:post_id)
     @posts = Post.where(id: bookmarked_post_ids)
-    render :show
   end
 
   private
@@ -32,7 +31,7 @@ class UsersController < ApplicationController
     end
 
     def ensure_correct_user
-      @user = User.find(params[:id])
+    @user = User.find(params[:id])
       unless @user == current_user
         redirect_to user_path(current_user)
       end
