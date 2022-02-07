@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'homes#top'
   resources :users, only: [:show, :edit, :update] do
     member do
-      get :bookmarked_posts
+      get :bookmarked
     end
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
