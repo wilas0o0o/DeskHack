@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
+  acts_as_taggable
   mount_uploaders :images, ImageUploader
 
   validates :text, presence: true, length: { maximum: 140 }

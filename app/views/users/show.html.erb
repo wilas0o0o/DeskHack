@@ -32,22 +32,7 @@
           <h5><%= link_to "保存した投稿", bookmarked_user_path(@user), class: "text-dark font-weight-bold" %></h5>
         <% end %>
       </div>
-      <div class="my-posts d-flex flex-wrap justify-content-around">
-        <% if @posts.present? %>
-          <%= render 'posts/index', posts: @posts %>
-        <% else %>
-          <div class="no-users mt-3 mx-auto">
-            <div class="d-flex justify-content-center">
-              <span class="fa-stack fa-3x">
-                <i class="far fa-circle fa-stack-2x"></i>
-                <i class="fas fa-images fa-stack-1x"></i>
-              </span>
-            </div>
-            <h4 class="text-center mt-3">投稿一覧</h4>
-            <p>すべての投稿がここに表示されます。</p>
-          </div>
-        <% end %>
-      </div>
+      <%= render 'posts/index', posts: @posts %>
     </div>
   </div>
 </div>

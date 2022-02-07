@@ -12,11 +12,7 @@
         <%= link_to "編集", edit_user_path(@user), class: "btn btn-success btn-sm" %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-sm" %>
       <% else %>
-        <% if current_user.followings?(@user) %>
-          <%= link_to "フォロー中", user_relationships_path(@user.id), method: :delete, class: "btn btn-secondary" %>
-        <% else %>
-          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-primary" %>
-        <% end %>
+        <p class="follow-btn"><%= render 'relationships/follow_btn', user: @user %></p>
       <% end %>
       <div class="d-flex justify-content-center mt-3">
         <div>
@@ -36,20 +32,11 @@
           <h5><%= link_to "保存した投稿", bookmarked_user_path(@user), class: "text-dark font-weight-bold" %></h5>
         <% end %>
       </div>
-      <div class="my-posts d-flex flex-wrap justify-content-between">
+      <div class="my-posts d-flex flex-wrap">
         <% if @posts.present? %>
           <%= render 'posts/index', posts: @posts %>
         <% else %>
-          <div class="no-users mt-3 mx-auto">
-            <div class="d-flex justify-content-center">
-              <span class="fa-stack fa-3x">
-                <i class="far fa-circle fa-stack-2x"></i>
-                <i class="fas fa-bookma fa-stack-1x"></i>
-              </span>
-            </div>
-            <h4 class="text-center mt-3">保存済の投稿一覧</h4>
-            <p>気に入った投稿を保存すると、何度でも見返せます。</p>
-          </div>
+          
         <% end %>
       </div>
     </div>

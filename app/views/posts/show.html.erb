@@ -14,7 +14,7 @@
       <div class="post-option follow-btn ml-auto d-flex align-items-end">
         <% if @post.user == current_user %>
           <%= link_to "", edit_post_path(@post), class: "fas fa-edit fa-2x text-dark mr-3" %>
-          <%= link_to "", post_path(@post), method: :delete, class: "far fa-trash-alt fa-2x text-dark" %>
+          <%= link_to "", post_path(@post), method: :delete, class: "far fa-trash-alt fa-2x text-dark", data: { confirm: '投稿を削除しますか？' } %>
         <% else %>
           <%= render 'relationships/follow_btn', user: @post.user %>
         <% end %>
@@ -38,6 +38,11 @@
     <div class="col-md-4 pr-md-0">
       <div class="text-box bg-white p-3">
         <%= simple_format(@post.text) %>
+        <% if @tags.present? %>
+          <% @tags.each do |tag| %>
+            <%= link_to "##{tag.name}", posts_path(tag: tag.name) %>
+          <% end %>
+        <% end %>
       </div>
       <div class="comment-box bg-white p-3 mt-3">
         <p class="comments-count border-bottom"><%= @post.post_comments.count %>件のコメントがあります。</p>
