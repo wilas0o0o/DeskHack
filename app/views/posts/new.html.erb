@@ -25,6 +25,14 @@
             </td>
           </tr>
 
+          <tr class="form-group mx-3">
+            <td class="col-md-3">タグ</td>
+            <td class="col-md-8 offset-md-1">
+              <%= f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control" %>
+              <span class="text-secondary">カンマ（,）で区切ることができます</span>
+            </td>
+          </tr>
+
         </table>
         <div class="actions d-flex justify-content-end">
           <%= f.submit "投稿する", class: "btn btn-primary" %>

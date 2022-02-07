@@ -8,7 +8,7 @@
       </div>
       <div class="follow-title d-flex justify-content-center border-bottom px-4">
         <%= link_to "フォロー中", user_followings_path, class: "h5 mx-5 text-dark font-weight-bold" %>
-        <%= link_to "フォロワー", user_followers_path, class: "h5 mx-5 text-dark font-weight-bold" %>
+        <%= link_to "フォロワー", user_followers_path, class: "h5 mx-5 text-dark font-weight-bold current-link" %>
       </div>
       <div class="users-list d-flex justify-content-center">
         <% if @users.present? %>

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  mount_uploader :avatar, AvatarUploader
 
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -15,7 +16,6 @@ class User < ApplicationRecord
   has_many :followers, through: "passive_relationships", source: :follower
 
   validates :name, presence: true
-  mount_uploader :avatar, AvatarUploader
 
   # すでにフォローしているかどうか
   def followings?(user)

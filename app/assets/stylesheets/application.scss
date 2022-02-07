@@ -26,6 +26,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .application-container {
   width: 100vw;
   height: 100vh;
@@ -36,19 +40,16 @@ a {
   flex: 1;
 }
 
+.current-link {
+  border-bottom: 2px solid #1b1b1b;
+}
+
 .nav-icon {
   list-style: none;
 }
 //---------- header ---------//
 header {
   background-color: #1B1B1B;
-}
-
-.sub-header {
-  background-color: #fff;
-}
-.unsigned-nav a {
-  font-size: 24px;
 }
 
 .header-logo img {

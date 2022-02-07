@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to posts_path
+      redirect_to post_path(@post)
     else
       render :new
     end
@@ -21,6 +21,8 @@ class PostsController < ApplicationController
       @posts = Post.working
     elsif params[:sort_gaming]
       @posts = Post.gaming
+    elsif @tag = params[:tag]
+      @posts = Post.tagged_with(params[:tag])
     else
       @posts = Post.all
     end
@@ -29,6 +31,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
+    @tags = @post.tag_counts_on(:tags)
   end
 
   def edit
@@ -44,13 +47,13 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path
+    redirect_to user_path(@post.user)
   end
 
   private
 
     def post_params
-      params.require(:post).permit(:user_id, :situation, :text, { images: [] })
+      params.require(:post).permit(:user_id, :situation, :text, :tag_list, { images: [] })
     end
 
     def ensure_correct_user

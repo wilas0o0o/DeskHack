@@ -1,16 +1,14 @@
 <div class="posts-container w-100 d-flex flex-column">
-  <div class="sub-header d-flex justify-content-around border-bottom">
-    <ul class="nav col-12 col-md-auto mb-2 mb-md-0">
-      <li class="unsigned-nav"><%= link_to "すべての投稿", posts_path, class: "nav-link px-5 text-dark" %></li>
-      <li class="unsigned-nav"><%= link_to "Working", posts_path(sort_working: true), class: "nav-link px-5 text-dark" %></li>
-      <li class="unsigned-nav"><%= link_to "Gaming", posts_path(sort_gaming: true), class: "nav-link px-5 text-dark" %></li>
+  <div class="d-flex justify-content-center border-bottom bg-white">
+    <ul class="container nav d-flex justify-content-center mb-2 mb-sm-0">
+      <li class="unsigned-nav"><%= link_to "すべての投稿", posts_path, class: "nav-link px-5 text-dark h4" %></li>
+      <li class="unsigned-nav"><%= link_to "Working", posts_path(sort_working: true), class: "nav-link px-5 text-dark h4" %></li>
+      <li class="unsigned-nav"><%= link_to "Gaming", posts_path(sort_gaming: true), class: "nav-link px-5 text-dark h4" %></li>
     </ul>
   </div>
   <div class="container mt-5">
-    <div class="row d-flex flex-column justify-content-center">
-      <div class="d-flex flex-wrap justify-content-around">
+    <div class="row flex-wrap justify-content-center">
         <%= render 'posts/index', posts: @posts%>
-      </div>
     </div>
   </div>
 </div>
