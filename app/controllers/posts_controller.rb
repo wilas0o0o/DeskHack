@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.post_images.build
   end
 
   def create
@@ -54,7 +55,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:user_id, :situation, :text, :tag_list, post_images_attributes:[:name, :id])
+      params.require(:post).permit(:user_id, :situation, :text, :tag_list, post_images_attributes:[:image, :id])
     end
 
     def ensure_correct_user
