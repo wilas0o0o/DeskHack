@@ -26,9 +26,9 @@
         <div class="mainImg mb-1">
           <%= image_tag @first_image.to_s, class: "img-fluid" %>
         </div>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex">
           <% @post.images.each do |image| %>
-            <div class="subImg">
+            <div class="subImg pr-1">
               <%= image_tag image.to_s, class: "img-fluid" %>
             </div>
           <% end %>

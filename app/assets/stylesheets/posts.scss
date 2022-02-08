@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .subImg img {
-  height: 120px;
+  height: 110px;
   width: 184px;
+}
+
+.subImg:nth-child(4) {
+  padding-right: 0 !important;
 }
