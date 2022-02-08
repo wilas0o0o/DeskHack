@@ -2,14 +2,17 @@
   <div class="header-logo col-2 d-flex justify-content-center">
     <%= link_to image_tag("Logo_black.png"), root_path %>
   </div>
-  <div class="col-7">
+  <div class="col-sm-8">
     <div class="row h-100 align-items-center">
-      <div class="home col-3 text-center nav-icon">
+      <div class="home col-md-2 justify-content-end d-flex nav-icon">
         <%= link_to "", posts_path, class: "fas fa-home fa-lg text-light" %>
       </div>
-      <div class="text-center search_form col-9">
-        <%= form_with local: true do |f| %>
-          <%= f.text_field :search, placeholder: "Search", class: "w-100" %>
+      <div class="col-md-8">
+        <%= form_with url: search_path, method: :get, local: true do |f| %>
+          <i class="fas fa-search text-light fa-lg"></i>
+          <%= f.text_field :content, placeholder: "Search", class: "search-box col-md-8 search-select" %>
+          <%= f.select :model, options_for_select({ "User" => "user", "Hashtag" => "tag" }), class: "col-md-2" %>
+          <%= f.submit "検索", class: "fas fa-search" %>
         <% end %>
       </div>
     </div>
@@ -22,3 +25,12 @@
     </ul>
   </div>
 </header>
+<% if current_page?(posts_path) %>
+  <div class="d-flex justify-content-center border-bottom bg-white">
+    <ul class="container nav d-flex justify-content-center mb-2 mb-sm-0 align-items-center">
+      <li class="unsigned-nav"><%= link_to "Working", posts_path(sort_working: true), class: "nav-link px-5 text-dark h4 m-0" %></li>
+      <li class="unsigned-nav"><%= link_to "All Posts", posts_path, class: "nav-link px-5 text-dark h3 m-0" %></li>
+      <li class="unsigned-nav"><%= link_to "Gaming", posts_path(sort_gaming: true), class: "nav-link px-5 text-dark h4 m-0" %></li>
+    </ul>
+  </div>
+<% end %>

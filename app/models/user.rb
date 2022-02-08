@@ -31,4 +31,8 @@ class User < ApplicationRecord
   def unfollow(user_id)
     active_relationships.find_by(followed_id: user_id).destroy
   end
+
+  def self.search_for(content)
+    User.where('name LIKE ?', '%' + content + '%')
+  end
 end

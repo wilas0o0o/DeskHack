@@ -1,5 +1,5 @@
 <div class="d-flex flex-wrap justify-content-center">
-  <% if @posts.present? %>
+  <% if posts.present? %>
     <% posts.each do |post| %>
       <%= link_to post_path(post) do %>
         <div class="post-image m-2">
