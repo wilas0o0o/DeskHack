@@ -30,6 +30,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @first_image = @post.images[0]
     @post_comment = PostComment.new
     @tags = @post.tag_counts_on(:tags)
   end
