@@ -1,16 +1,16 @@
 <%= form_with model:@post, local:true do |f| %>
   <div class="sell__block__form">
     <div class="sell__block__form__upload form-group mx-3">
-      <%= f.label "画像" %><span>必須</span>
-      <p>最大４枚までアップロードできます</p>
-      <div class="post__drop__box__container">
-        <div class="prev-content"></div>
-        <div class="label-content">
-          <label class="label-box" for="post_images_attributes_0_image" id="label-box--0">
-            <pre class="label-box__text-visible">クリックしてファイルをアップロード</pre>
-          </label>
-        </div>
-        <div class="hidden-content">
+      <%= f.label "画像", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1 mr-1">必須</span>
+      <span>※最大４枚まで</span>
+      <div class="post__drop__box__container d-flex flex-wrap">
+        <!--<div class="preview-content d-flex"></div>-->
+        <!--<div class="label-content mt-2">-->
+        <!--  <label class="label-box" for="post_images_attributes_0_image" id="label-box-0">-->
+        <!--    <pre class="label-box__text-visible">クリックしてファイルをアップロード</pre>-->
+        <!--  </label>-->
+        <!--</div>-->
+        <div class="hidden-content mb-3">
           <%= f.fields_for :post_images do |i| %>
             <%= i.file_field :image, class: "hidden-field" %>
           <% end %>
@@ -18,114 +18,14 @@
       </div>
     </div>
 
-    <script>
-      $(document).on('turbolinks:load', function(){
-  $(function(){
-
-    //プレビューのhtmlを定義
-    function buildHTML(count) {
-      var html = `<div class="preview-box" id="preview-box__${count}">
-                    <div class="upper-box">
-                      <img src="" alt="preview">
-                    </div>
-                    <div class="lower-box">
-                      <div class="update-box">
-                        <label class="edit_btn">編集</label>
-                      </div>
-                      <div class="delete-box" id="delete_btn_${count}">
-                        <span>削除</span>
-                      </div>
-                    </div>
-                  </div>`
-      return html;
-    }
-
-    // ラベルのwidth操作
-    function setLabel() {
-      //プレビューボックスのwidthを取得し、maxから引くことでラベルのwidthを決定
-      var prevContent = $('.label-content').prev();
-      labelWidth = (620 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
-      $('.label-content').css('width', labelWidth);
-    }
-
-    // プレビューの追加
-    $(document).on('change', '.hidden-field', function() {
-      setLabel();
-      //hidden-fieldのidの数値のみ取得
-      var id = $(this).attr('id').replace(/[^0-9]/g, '');
-      //labelボックスのidとforを更新
-      $('.label-box').attr({id: `label-box--${id}`,for: `post_images_attributes_${id}_image`});
-      //選択したfileのオブジェクトを取得
-      var file = this.files[0];
-      var reader = new FileReader();
-      //readAsDataURLで指定したFileオブジェクトを読み込む
-      reader.readAsDataURL(file);
-      //読み込み時に発火するイベント
-      reader.onload = function() {
-        var image = this.result;
-        //プレビューが元々なかった場合はhtmlを追加
-        if ($(`#preview-box__${id}`).length == 0) {
-          var count = $('.preview-box').length;
-          var html = buildHTML(id);
-          //ラベルの直前のプレビュー群にプレビューを追加
-          var prevContent = $('.label-content').prev();
-          $(prevContent).append(html);
-        }
-        //イメージを追加
-        $(`#preview-box__${id} img`).attr('src', `${image}`);
-        var count = $('.preview-box').length;
-        //プレビューが5個あったらラベルを隠す
-        if (count == 5) {
-          $('.label-content').hide();
-        }
-
-        //ラベルのwidth操作
-        setLabel();
-        //ラベルのidとforの値を変更
-        if(count < 5){
-          //プレビューの数でラベルのオプションを更新する
-          $('.label-box').attr({id: `label-box--${count}`,for: `post_images_attributes_${count}_image`});
-        }
-      }
-    });
-
-    // 画像の削除
-    $(document).on('click', '.delete-box', function() {
-      var count = $('.preview-box').length;
-      setLabel(count);
-      //post_images_attributes_${id}_image から${id}に入った数字のみを抽出
-      var id = $(this).attr('id').replace(/[^0-9]/g, '');
-      //取得したidに該当するプレビューを削除
-      $(`#preview-box__${id}`).remove();
-      console.log("new")
-      //フォームの中身を削除
-      $(`#post_images_attributes_${id}_image`).val("");
-
-      //削除時のラベル操作
-      var count = $('.preview-box').length;
-      //5個めが消されたらラベルを表示
-      if (count == 4) {
-        $('.label-content').show();
-      }
-      setLabel(count);
-
-      if(id < 5){
-        //削除された際に、空っぽになったfile_fieldをもう一度入力可能にする
-        $('.label-box').attr({id: `label-box--${id}`,for: `post_images_attributes_${id}_image`});
-      }
-    });
-  });
-})
-    </script>
-
-    <div class="form-group mx-3">
-      <%= f.label "本文" %><span>必須</span>
-      <%= f.text_area :text, size: "20x10", class: "form-control" %>
+    <div class="form-group mx-3 mb-3">
+      <%= f.label "本文", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1">必須</span>
+      <%= f.text_area :text, size: "20x10", placeholder: "140字まで投稿できます。",class: "form-control" %>
     </div>
 
 
     <div class="form-group mx-3">
-      <%= f.label "カテゴリー" %><span>必須</span>
+      <%= f.label "カテゴリ", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1">必須</span>
       <div class="radio_button">
         <%= f.radio_button :situation, Post.situations.key(0) %>
         <%= f.label :situation_working, "Working", class: "mr-5" %>
@@ -135,13 +35,13 @@
     </div>
 
     <div class="form-group mx-3">
-      <%= f.label "タグ" %>
-      <%= f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control" %>
+      <%= f.label "タグ", class: "h4 mr-2" %>
+      <%= f.text_field :tag_list, value: @post.tag_list.join(','), placeholder: "（例）ゲーム好き,カラフル,logicool", class: "form-control" %>
       <span class="text-secondary">カンマ（,）で区切ることができます</span>
     </div>
 
     <div class="actions d-flex justify-content-end">
-      <%= f.submit "投稿する",class: "btn btn-primary" %>
+      <%= f.submit "変更する",class: "btn btn-success" %>
     </div>
   </div>
 <% end %>

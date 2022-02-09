@@ -2,15 +2,69 @@
   <div class="form-wrapper">
     <div class="form-signin w-100">
       <div class="form-logo">
-        <img src="/assets/Logo_white.png" alt="" class="mb-4 form-logo-img mx-auto d-flex">
+        <img src="/assets/Logo_white.png" alt="" class="mb-3 form-logo-img mx-auto d-flex">
       </div>
       <%= render 'layouts/errors', obj: @user %>
       <%= form_with model: @user, local: true do |f| %>
 
-        <div class="form-group d-flex flex-column">
-          <%= f.label :avatar, "プロフィール画像" %>
-          <%= f.file_field :avatar %>
+        <div class="form-group mb-0">
+          <div class="avatar-form text-center">
+            <%= f.label :avatar, class: 'avatar_label mb-0' do %>
+              <div class="prev-box">
+                <% if @user.avatar.present? %>
+                  <div class="prev-target">
+                    <%= image_tag @user.avatar.url, alt: "preview", class: "prev-avatar rounded-circle border", size: "100x100" %>
+                  </div>
+                <% else %>
+                  <%= image_tag "no_image_avatar.png", class: "no-avatar rounded-circle border", size: "100x100" %>
+                <% end %>
+              </div>
+              <%= f.file_field :avatar, class: 'avatar-hidden-file hidden_file' %>
+            <% end %>
+          </div>
+
+          <script>
+            $(document).on('turbolinks:load', function () {
+              $(function () {
+                // 画像をプレビュー表示させる場所(.prev-target)を作成
+                function buildHTML(avatar) {
+                  var html = `<div class="prev-target">
+                                <img src="${avatar}", alt="preview" class="prev-avatar rounded-circle" width="100" height="100">
+                              </div>`
+                  return html;
+                }
+
+                // file_fieldから画像が指定された時に発火
+                $(document).on('change', '.hidden_file', function () {
+                  // .file_filedからデータを取得して変数fileに代入
+                  var file = this.files[0];
+                  // FileReaderオブジェクトを作成
+                  var reader = new FileReader();
+                  // readAsDataURLで変数fileを読み込む
+                  reader.readAsDataURL(file);
+                  // 読み込みが完了したら処理が実行
+                  reader.onload = function () {
+                    // 読み込んだファイルの内容を取得して変数avatarに代入
+                    var avatar = this.result;
+                    // プレビュー画像がなければ処理を実行
+                    if ($('.prev-target').length == 0) {
+                      // 読み込んだ画像ファイル(変数avatar)をbuildHTMLに渡す
+                      var html = buildHTML(avatar)
+                      // 作成した.prev-targetをno-avatarの代わりに表示
+                      $('.prev-box').prepend(html);
+                      // 画像が表示されるのでiconを隠す
+                      $('.no-avatar').hide();
+                    } else {
+                      // もし既に画像がプレビューされていれば画像データのみを入れ替る
+                      $('.prev-target .prev-avatar').attr({ src: avatar });
+                    }
+                  }
+                });
+              });
+            });
+          </script>
         </div>
+
 
         <div class="form-group d-flex flex-column">
           <%= f.label :name, "ユーザー名" %>

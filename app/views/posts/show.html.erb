@@ -5,9 +5,9 @@
       <div class="user-info d-flex align-items-end">
         <%= link_to user_path(@post.user) do %>
           <% if @post.user.avatar? %>
-            <%= image_tag @post.user.avatar.url, class: "rounded-circle", size: "60x60" %>
+            <%= image_tag @post.user.avatar.url, class: "rounded-circle border", size: "60x60" %>
           <% else %>
-            <%= image_tag "no_image_avatar.png", class: "rounded-circle", size: "60x60" %>
+            <%= image_tag "no_image_avatar.png", class: "rounded-circle border", size: "60x60" %>
           <% end %>
         <% end %>
         <h4 class="m-0 ml-1"><%= @post.user.name %></h4>
@@ -33,6 +33,7 @@
             </div>
           <% end %>
         </div>
+        
         <script>
           $(function(){
             // subImgをクリックすると発火
@@ -50,6 +51,7 @@
             });
           });
         </script>
+        
       </div>
       <div class="post-action d-flex">
         <h5 class="favorite-btn mr-3"><%= render 'favorites/favorite_btn', post: @post %></h5>
