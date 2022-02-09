@@ -6,7 +6,7 @@ ja:
         password: パスワード
         email: メールアドレス
       post:
-        images: 画像
+        post_images: 画像
         text: 本文
         situation: 使用状況
   devise:
