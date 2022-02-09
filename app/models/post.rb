@@ -4,7 +4,9 @@ class Post < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :post_images, dependent: :destroy
-  accepts_nested_attributes_for :post_images
+
+  validates :post_images, presence: true
+  accepts_nested_attributes_for :post_images, allow_destroy: true
 
   acts_as_taggable
 
