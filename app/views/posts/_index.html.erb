@@ -1,12 +1,17 @@
-<div class="d-flex flex-wrap justify-content-center">
+<div>
   <% if posts.present? %>
+  <div class="d-flex flex-wrap justify-content-center">
     <% posts.each do |post| %>
-      <%= link_to post_path(post) do %>
-        <div class="post-image m-2">
-          <%= image_tag post.images[0].to_s, size: "360x240" %>
-        </div>
-      <% end %>
+      <div class="indexImg m-2">
+        <%= link_to post_path(post) do %>
+          <% post.post_images.each do |post_image| %>
+            <%= image_tag post_image.image.url, class: "img-fluid" %>
+            <% break %>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
+  </div>
   <% else %>
     <div class="mt-5 mx-auto">
       <div class="d-flex justify-content-center">

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row mt-2">
-      <h5><%= link_to "", :back, class: "fas fa-arrow-left mr-4 text-dark mx-2" %></h5>
+    <h5><%= link_to "", :back, class: "fas fa-arrow-left mr-4 text-dark mx-2" %></h5>
     <div class="col-12 d-flex mb-3">
       <div class="user-info d-flex align-items-end">
         <%= link_to user_path(@post.user) do %>
@@ -24,12 +24,12 @@
     <div class="col-lg-8">
       <div class="images mb-2">
         <div class="mainImg mb-1">
-          <%= image_tag @first_image.to_s, class: "img-fluid" %>
+          <%= image_tag @first_image.image.to_s, class: "img-fluid" %>
         </div>
         <div class="d-flex">
-          <% @post.images.each do |image| %>
+          <% @post.post_images.each do |post_image| %>
             <div class="subImg pr-1">
-              <%= image_tag image.to_s, class: "img-fluid" %>
+              <%= image_tag post_image.image.url, class: "img-fluid" %>
             </div>
           <% end %>
         </div>

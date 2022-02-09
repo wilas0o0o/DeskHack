@@ -13,9 +13,9 @@
         <div class="hidden-content">
           <%= f.fields_for :post_images do |i| %>
             <%= i.file_field :image, class: "hidden-field" %>
-            <input class="hidden-field" id="post_images_attributes_1_image" name="post[images_attributes][1][image]" type="file"></input>
-            <input class="hidden-field" id="post_images_attributes_2_image" name="post[images_attributes][2][image]" type="file"></input>
-            <input class="hidden-field" id="post_images_attributes_3_image" name="post[images_attributes][3][image]" type="file"></input>
+            <input class="hidden-field" type="file" name="post[post_images_attributes][1][image]" id="post_post_images_attributes_1_image"></input>
+            <input class="hidden-field" type="file" name="post[post_images_attributes][2][image]" id="post_post_images_attributes_2_image"></input>
+            <input class="hidden-field" type="file" name="post[post_images_attributes][3][image]" id="post_post_images_attributes_3_image"></input>
           <% end %>
         </div>
       </div>

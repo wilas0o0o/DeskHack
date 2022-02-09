@@ -1,9 +1,10 @@
-<div class="post-form-container w-100 d-flex justify-content-center">
-  <div class="container">
-    <h2 class="text-center mt-5 mb-5">新規投稿を作成</h2>
-    <div class="row d-flex flex-column col-8 offset-2">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <h2 class="text-center mt-5 mb-5">新規投稿を作成</h2>
       <%= render 'layouts/errors', obj: @post %>
       <%= render 'posts/new-form', post: @post %>
     </div>
   </div>
 </div>
+

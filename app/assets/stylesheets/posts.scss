@@ -3,8 +3,14 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .subImg img {
-  height: 110px;
-  width: 184px;
+  max-height: 110px;
+}
+.mainImg img {
+  max-height: 700px;
+}
+.indexImg img {
+  max-height: 240px;
+  max-width: 360px;
 }
 
 .subImg:nth-child(4) {
