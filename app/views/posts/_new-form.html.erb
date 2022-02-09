@@ -3,9 +3,9 @@
     <%= f.label "画像", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1 mr-1">必須</span>
     <span>※最大４枚まで</span>
     <div class="d-flex flex-wrap">
-      <div class="preview-content d-flex"></div>
+      <div class="prev-content d-flex"></div>
       <div class="label-content mt-2">
-        <label class="label-btn btn btn-success" for="post_post_images_attributes_0_image" id="label-btn--0">
+        <label class="label-btn btn btn-primary" for="post_post_images_attributes_0_image" id="label-btn--0">
           画像を追加
         </label>
       </div>
@@ -24,13 +24,13 @@
     $(document).on('turbolinks:load', function(){
     $(function(){
 
-      //プレビューのhtmlを定義
+      //画像をプレビュー表示させる場所(.prev-box)を作成
       function buildHTML(count) {
-        var html = `<div class="preview-box" id="preview-box_${count}">
-                      <div class="upper-box w-100">
+        var html = `<div class="prev-box" id="prev-box_${count}">
+                      <div class="prev-img w-100">
                         <img src="" alt="preview">
                       </div>
-                      <div class="lower-box d-flex text-center">
+                      <div class="prev-menu d-flex text-center">
                         <div class="update-box bg-white w-50 border">
                           <label class="edit_btn text-success" for="post_post_images_attributes_${count}_image">編集</label>
                         </div>
@@ -42,7 +42,7 @@
         return html;
       }
 
-      // プレビューの追加
+      //
       $(document).on('change', '.hidden-field', function() {
         //hidden-fieldのidの数値のみ取得
         var id = $(this).attr('id').replace(/[^0-9]/g, '');
@@ -57,16 +57,16 @@
         reader.onload = function() {
           var image = this.result;
           //プレビューが元々なかった場合はhtmlを追加
-          if ($(`#preview-box_${id}`).length == 0) {
-            var count = $('.preview-box').length;
+          if ($(`#prev-box_${id}`).length == 0) {
+            var count = $('.prev-box').length;
             var html = buildHTML(id);
             //ラベルの直前のプレビュー群にプレビューを追加
             var prevContent = $('.label-content').prev();
             $(prevContent).append(html);
           }
           //イメージを追加
-          $(`#preview-box_${id} img`).attr('src', `${image}`);
-          var count = $('.preview-box').length;
+          $(`#prev-box_${id} img`).attr('src', `${image}`);
+          var count = $('.prev-box').length;
           //プレビューが5個あったらラベルを隠す
           if (count == 4) {
             $('.label-content').hide();
@@ -82,16 +82,16 @@
 
       // 画像の削除
       $(document).on('click', '.delete-box', function() {
-        var count = $('.preview-box').length;
+        var count = $('.prev-box').length;
         //post_post_images_attributes_${id}_image から${id}に入った数字のみを抽出
         var id = $(this).attr('id').replace(/[^0-9]/g, '');
         //取得したidに該当するプレビューを削除
-        $(`#preview-box_${id}`).remove();
+        $(`#prev-box_${id}`).remove();
         //フォームの中身を削除
         $(`#post_images_attributes_${id}_image`).val("");
 
         //削除時のラベル操作
-        var count = $('.preview-box').length;
+        var count = $('.prev-box').length;
         //4個めが消されたらラベルを表示
         if (count < 4) {
           $('.label-content').show();

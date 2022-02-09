@@ -22,60 +22,28 @@
 //---------  投稿フォーム  -----------//
 
   //プレビュー表示欄のCSS
-  .preview-content {
-    .preview-box {
-      width: 160px;
-      height: 120px;
-      margin: 0 15px 10px 0;
-      .upper-box {
-        img{
-          width: 160px;
-          height: 120px;
-        }
+  .prev-box {
+    margin: 0 15px 10px 0;
+    .prev-img {
+      img{
+        width: 160px;
+        height: 120px;
       }
-      .lower-box {
-        .update-box {
-          height: 50px;
-          line-height: 50px;
-          cursor: pointer;
-        }
-        .delete-box {
-          height: 50px;
-          line-height: 50px;
-          cursor: pointer;
-        }
+    }
+    .prev-menu {
+      .update-box {
+        height: 50px;
+        line-height: 50px;
+        cursor: pointer;
+      }
+      .delete-box {
+        height: 50px;
+        line-height: 50px;
+        cursor: pointer;
       }
     }
   }
 
-  //投稿クリックエリアのCSS
-  // .label-content{
-  //   width: 100%;
-  //   .label-box {
-  //     display: block;
-  //     border: 1px dashed #ccc;
-  //     position: relative;
-  //     background: #fafafa;
-  //     width: 100%;
-  //     height: 162px;
-  //     cursor: pointer;
-  //     &-text {
-  //       position: absolute;
-  //       top: 50%;
-  //       left: 16px;
-  //       right: 16px;
-  //       text-align: center;
-  //       font-size: 14px;
-  //       line-height: 1.5;
-  //       font-weight: bold;
-  //       -webkit-transform: translate(0, -50%);
-  //       transform: translate(0, -50%);
-  //       pointer-events: none;
-  //       white-space: pre-wrap;
-  //       word-wrap: break-word;
-  //     }
-  //   }
-  // }
 
   // file_fieldのcss
   .hidden-field {
