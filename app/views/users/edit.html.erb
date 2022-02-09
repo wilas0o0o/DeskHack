@@ -9,7 +9,7 @@
 
         <div class="form-group mb-0">
           <div class="avatar-form text-center">
-            <%= f.label :avatar, class: 'avatar_label mb-0' do %>
+            <%= f.label :avatar, class: "avatar-label mb-0" do %>
               <div class="prev-box">
                 <% if @user.avatar.present? %>
                   <div class="prev-target">
@@ -19,7 +19,7 @@
                   <%= image_tag "no_image_avatar.png", class: "no-avatar rounded-circle border", size: "100x100" %>
                 <% end %>
               </div>
-              <%= f.file_field :avatar, class: 'avatar-hidden-file hidden_file' %>
+              <%= f.file_field :avatar, class: "avatar-hidden-file hidden-file" %>
             <% end %>
           </div>
 
@@ -35,7 +35,7 @@
                 }
 
                 // file_fieldから画像が指定された時に発火
-                $(document).on('change', '.hidden_file', function () {
+                $(document).on('change', '.hidden-file', function () {
                   // .file_filedからデータを取得して変数fileに代入
                   var file = this.files[0];
                   // FileReaderオブジェクトを作成
@@ -63,6 +63,7 @@
               });
             });
           </script>
+
         </div>
 
 

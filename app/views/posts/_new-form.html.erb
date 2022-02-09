@@ -1,44 +1,134 @@
 <%= form_with model:@post, local:true do |f| %>
-  <div class="sell__block__form">
-    <div class="sell__block__form__upload form-group mx-3">
-      <%= f.label "画像", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1 mr-1">必須</span>
-      <span>※最大４枚まで</span>
-      <div class="d-flex flex-wrap">
-        <div class="hidden-content mb-3">
-          <%= f.fields_for :post_images do |i| %>
-            <%= i.file_field :image, class: "hidden-field" %>
-            <input class="hidden-field mt-1" type="file" name="post[post_images_attributes][1][image]" id="post_post_images_attributes_1_image"></input>
-            <input class="hidden-field mt-1" type="file" name="post[post_images_attributes][2][image]" id="post_post_images_attributes_2_image"></input>
-            <input class="hidden-field mt-1" type="file" name="post[post_images_attributes][3][image]" id="post_post_images_attributes_3_image"></input>
-          <% end %>
-        </div>
+  <div class="form-group mx-3">
+    <%= f.label "画像", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1 mr-1">必須</span>
+    <span>※最大４枚まで</span>
+    <div class="d-flex flex-wrap">
+      <div class="preview-content d-flex"></div>
+      <div class="label-content mt-2">
+        <label class="label-btn btn btn-success" for="post_post_images_attributes_0_image" id="label-btn--0">
+          画像を追加
+        </label>
+      </div>
+      <div class="hidden-content mb-3">
+        <%= f.fields_for :post_images do |i| %>
+          <%= i.file_field :image, class: "hidden-field" %>
+          <input class="hidden-field mt-1" type="file" name="post[post_images_attributes][1][image]" id="post_post_images_attributes_1_image"></input>
+          <input class="hidden-field mt-1" type="file" name="post[post_images_attributes][2][image]" id="post_post_images_attributes_2_image"></input>
+          <input class="hidden-field mt-1" type="file" name="post[post_images_attributes][3][image]" id="post_post_images_attributes_3_image"></input>
+        <% end %>
       </div>
     </div>
+  </div>
 
-    <div class="form-group mx-3 mb-3">
-      <%= f.label "本文", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1">必須</span>
-      <%= f.text_area :text, size: "20x10", placeholder: "140字まで投稿できます。",class: "form-control" %>
+  <script>
+    $(document).on('turbolinks:load', function(){
+    $(function(){
+
+      //プレビューのhtmlを定義
+      function buildHTML(count) {
+        var html = `<div class="preview-box" id="preview-box_${count}">
+                      <div class="upper-box w-100">
+                        <img src="" alt="preview">
+                      </div>
+                      <div class="lower-box d-flex text-center">
+                        <div class="update-box bg-white w-50 border">
+                          <label class="edit_btn text-success" for="post_post_images_attributes_${count}_image">編集</label>
+                        </div>
+                        <div class="delete-box bg-white text-danger w-50 border" id="delete_btn_${count}">
+                          <span>削除</span>
+                        </div>
+                      </div>
+                    </div>`
+        return html;
+      }
+
+      // プレビューの追加
+      $(document).on('change', '.hidden-field', function() {
+        //hidden-fieldのidの数値のみ取得
+        var id = $(this).attr('id').replace(/[^0-9]/g, '');
+        //labelボックスのidとforを更新
+        $('.label-btn').attr({id: `label-btn-${id}`,for: `post_images_attributes_${id}_image`});
+        //選択したfileのオブジェクトを取得
+        var file = this.files[0];
+        var reader = new FileReader();
+        //readAsDataURLで指定したFileオブジェクトを読み込む
+        reader.readAsDataURL(file);
+        //読み込み時に発火するイベント
+        reader.onload = function() {
+          var image = this.result;
+          //プレビューが元々なかった場合はhtmlを追加
+          if ($(`#preview-box_${id}`).length == 0) {
+            var count = $('.preview-box').length;
+            var html = buildHTML(id);
+            //ラベルの直前のプレビュー群にプレビューを追加
+            var prevContent = $('.label-content').prev();
+            $(prevContent).append(html);
+          }
+          //イメージを追加
+          $(`#preview-box_${id} img`).attr('src', `${image}`);
+          var count = $('.preview-box').length;
+          //プレビューが5個あったらラベルを隠す
+          if (count == 4) {
+            $('.label-content').hide();
+          }
+
+          //ラベルのidとforの値を変更
+          if(count < 4){
+            //プレビューの数でラベルのオプションを更新する
+            $('.label-btn').attr({id: `label-btn-${count}`,for: `post_post_images_attributes_${count}_image`});
+          }
+        }
+      });
+
+      // 画像の削除
+      $(document).on('click', '.delete-box', function() {
+        var count = $('.preview-box').length;
+        //post_post_images_attributes_${id}_image から${id}に入った数字のみを抽出
+        var id = $(this).attr('id').replace(/[^0-9]/g, '');
+        //取得したidに該当するプレビューを削除
+        $(`#preview-box_${id}`).remove();
+        //フォームの中身を削除
+        $(`#post_images_attributes_${id}_image`).val("");
+
+        //削除時のラベル操作
+        var count = $('.preview-box').length;
+        //4個めが消されたらラベルを表示
+        if (count < 4) {
+          $('.label-content').show();
+        }
+
+        if(id < 4){
+          //削除された際に、空っぽになったfile_fieldをもう一度入力可能にする
+          $('.label-btn').attr({id: `label-btn-${id}`,for: `post_post_images_attributes_${id}_image`});
+        }
+      });
+    });
+  })
+  </script>
+
+  <div class="form-group mx-3 mb-3">
+    <%= f.label "本文", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1">必須</span>
+    <%= f.text_area :text, size: "20x10", placeholder: "140字まで投稿できます。",class: "form-control" %>
+  </div>
+
+
+  <div class="form-group mx-3">
+    <%= f.label "カテゴリ", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1">必須</span>
+    <div class="radio_button">
+      <%= f.radio_button :situation, Post.situations.key(0) %>
+      <%= f.label :situation_working, "Working", class: "mr-5" %>
+      <%= f.radio_button :situation, Post.situations.key(1) %>
+      <%= f.label :situation_gaming, "Gaming" %>
     </div>
+  </div>
 
+  <div class="form-group mx-3">
+    <%= f.label "タグ", class: "h4 mr-2" %>
+    <%= f.text_field :tag_list, value: @post.tag_list.join(','), placeholder: "（例）ゲーム好き,カラフル,logicool", class: "form-control" %>
+    <span class="text-secondary">カンマ（,）で区切ることができます</span>
+  </div>
 
-    <div class="form-group mx-3">
-      <%= f.label "カテゴリ", class: "h4 mr-2" %><span class="bg-danger text-light rounded px-1">必須</span>
-      <div class="radio_button">
-        <%= f.radio_button :situation, Post.situations.key(0) %>
-        <%= f.label :situation_working, "Working", class: "mr-5" %>
-        <%= f.radio_button :situation, Post.situations.key(1) %>
-        <%= f.label :situation_gaming, "Gaming" %>
-      </div>
-    </div>
-
-    <div class="form-group mx-3">
-      <%= f.label "タグ", class: "h4 mr-2" %>
-      <%= f.text_field :tag_list, value: @post.tag_list.join(','), placeholder: "（例）ゲーム好き,カラフル,logicool", class: "form-control" %>
-      <span class="text-secondary">カンマ（,）で区切ることができます</span>
-    </div>
-
-    <div class="actions d-flex justify-content-end">
-      <%= f.submit "投稿する",class: "btn btn-primary" %>
-    </div>
+  <div class="actions d-flex justify-content-end">
+    <%= f.submit "投稿する",class: "btn btn-primary" %>
   </div>
 <% end %>
