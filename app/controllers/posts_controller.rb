@@ -19,13 +19,13 @@ class PostsController < ApplicationController
 
   def index
     if params[:sort_working]
-      @posts = Post.working
+      @posts = Post.working.page(params[:page]).per(15)
     elsif params[:sort_gaming]
-      @posts = Post.gaming
+      @posts = Post.gaming.page(params[:page]).per(15)
     elsif @tag = params[:tag]
-      @posts = Post.tagged_with(params[:tag])
+      @posts = Post.tagged_with(params[:tag]).page(params[:page]).per(15)
     else
-      @posts = Post.all
+      @posts = Post.all.page(params[:page]).per(15)
     end
   end
 

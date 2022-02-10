@@ -20,6 +20,7 @@
 body {
   min-height: 100vh;
   position: relative;
+  background-color: #f5f5f5;
 }
 
 a {
@@ -47,6 +48,11 @@ a:hover {
 .nav-icon {
   list-style: none;
 }
+
+nav.pagination {
+  display: none;
+}
+
 //---------- header ---------//
 header {
   background-color: #1B1B1B;

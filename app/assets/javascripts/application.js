@@ -11,11 +11,22 @@
 // about supported directives.
 //
 //= require jquery3
+//= require jquery.jscroll.min.js
 //= require popper
 //= require bootstrap-sprockets
-//
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+/* global $*/
 
+$(window).on('scroll', function() {
+  var scrollHeight = $(document).height();
+  var scrollPosition = $(window).height() + $(window).scrollTop();
+  if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
+    $('.jscroll').jscroll({
+      contentSelector: '.jscroll',
+      nextSelector: 'span.next a'
+    });
+  }
+});
