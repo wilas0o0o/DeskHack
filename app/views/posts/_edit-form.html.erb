@@ -41,7 +41,7 @@
   <script>
     $(document).on('turbolinks:load', function(){
       $(function(){
-  
+
         // 画像をプレビュー表示させる場所(.prev-box)を作成
         function buildHTML(count) {
           var html = `<div class="prev-box" id="prev-box__${count}">
@@ -59,7 +59,7 @@
                       </div>`
           return html;
         }
-  
+
         // 編集ページの場合
         if (window.location.href.match(/\/posts\/[0-9]+\/edit/)){
           //プレビューにidを追加
@@ -76,11 +76,13 @@
             $('.label-content').hide();
           }
         }
-  
+
         // .file_fieldから画像が指定されたら発火
         $(document).on('change', '.hidden-field', function() {
           // .hidden-fieldのidの数値のみ取得
           var id = $(this).attr('id').replace(/[^0-9]/g, '');
+          // .check-boxのチェックマークを外す
+          $(`#post_post_images_attributes_${id}__destroy`).prop('checked',false);
           // .label-btnのidとforを更新
           $('.label-btn').attr({id: `label-btn-${id}`,for: `post_images_attributes_${id}_image`});
           // .file_filedからデータを取得して変数fileに代入
@@ -116,7 +118,7 @@
             }
           }
         });
-  
+
         // .delete-boxがクリックされたら発火
         $(document).on('click', '.delete-box', function() {
           // post_post_images_attributes_${id}_image から${id}に入った数字のみ取得
@@ -125,13 +127,15 @@
           $(`#prev-box__${id}`).remove();
           // .check-boxにチェックマークを入れる
           $(`#post_post_images_attributes_${id}__destroy`).prop('checked',true);
+           // 取得したidに該当する.file_fieldの中身を削除
+          $(`#post_images_attributes_${id}_image`).val("");
           // 削除後の.prev-boxの数を数える
           var count = $('.prev-box').length;
           // 4個目の.prev-boxが削除されたら.label-contentを表示
           if (count < 4) {
             $('.label-content').show();
           }
-          // 削除された際に空になった.file_fieldをもう一度入力可能にする
+          // 削除された際に空になった.file_fieldのidとforを.labe.-btnに割り振る
           if(id < 4){
             $('.label-btn').attr({id: `label-btn-${id}`,for: `post_post_images_attributes_${id}_image`});
           }
