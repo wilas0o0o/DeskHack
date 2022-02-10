@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+// 画像サイズの指定
 .subImg img {
   max-height: 110px;
 }
@@ -19,9 +20,8 @@
   padding-right: 0 !important;
 }
 
-//---------  投稿フォーム  -----------//
 
-//プレビュー表示欄のCSS
+// 投稿フォーム
 .prev-box {
   margin: 0 10px 10px 0;
   :last-child {
@@ -29,7 +29,6 @@
   }
   .prev-img {
     img{
-      width: 160px;
       height: 120px;
     }
   }
@@ -47,11 +46,6 @@
   }
 }
 
-
-// file_fieldのcss
 .hidden-field {
-  display: none;
-}
-.hidden-checkbox {
   display: none;
 }
