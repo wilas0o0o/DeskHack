@@ -1,29 +1,7 @@
 <div class="container mt-3">
   <div class="row d-flex flex-column">
     <div class="profile text-center mx-auto">
-      <% if @user.avatar? %>
-        <%= image_tag @user.avatar.url, class: "rounded-circle", size: "150x150" %>
-      <% else %>
-        <%= image_tag "no_image_avatar.png", class: "rounded-circle", size: "150x150" %>
-      <% end %>
-      <h3 class="text-center"><%= @user.name %></h3>
-      <% if @user == current_user %>
-        <h5 class="text-center"><%= @user.email %></h5>
-        <%= link_to "編集", edit_user_path(@user), class: "btn btn-success btn-sm" %>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-sm" %>
-      <% else %>
-        <p class="follow-btn"><%= render 'relationships/follow_btn', user: @user %></p>
-      <% end %>
-      <div class="d-flex justify-content-center mt-2">
-        <div>
-          <h5 class="mx-5"><%= link_to "フォロー中", user_followings_path(@user.id), class: "text-dark font-weight-bold" %></h5>
-          <h5 class="mx-5"><%= link_to @user.followings.count, user_followings_path(@user.id), class: "text-dark font-weight-bold" %></h5>
-        </div>
-        <div>
-          <h5 class="mx-5"><%= link_to "フォロワー", user_followers_path(@user.id), class: "text-dark font-weight-bold" %></h5>
-          <h5 class="mx-5"><%= link_to @user.followers.count, user_followers_path(@user.id), class: "text-dark font-weight-bold" %></h5>
-        </div>
-      </div>
+      <%= render 'users/profile', user: @user %>
     </div>
     <div class="post-box mt-5">
       <div class="post-menu d-flex justify-content-around border-bottom mb-3">
@@ -33,7 +11,9 @@
         <% end %>
       </div>
       <% if @posts.present? %>
-        <%= render 'posts/index', posts: @posts %>
+        <div class="row justify-content-center jscroll">
+          <%= render 'posts/index', posts: @posts %>
+        </div>
       <% else %>
         <div class="mt-5 mx-auto">
           <div class="d-flex justify-content-center">
