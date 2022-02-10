@@ -21,34 +21,37 @@
 
 //---------  投稿フォーム  -----------//
 
-  //プレビュー表示欄のCSS
-  .prev-box {
-    margin: 0 15px 10px 0;
-    .prev-img {
-      img{
-        width: 160px;
-        height: 120px;
-      }
-    }
-    .prev-menu {
-      .update-box {
-        height: 50px;
-        line-height: 50px;
-        cursor: pointer;
-      }
-      .delete-box {
-        height: 50px;
-        line-height: 50px;
-        cursor: pointer;
-      }
+//プレビュー表示欄のCSS
+.prev-box {
+  margin: 0 10px 10px 0;
+  :last-child {
+    margin-right: 0;
+  }
+  .prev-img {
+    img{
+      width: 160px;
+      height: 120px;
     }
   }
+  .prev-menu {
+    .update-box {
+      height: 50px;
+      line-height: 50px;
+      cursor: pointer;
+    }
+    .delete-box {
+      height: 50px;
+      line-height: 50px;
+      cursor: pointer;
+    }
+  }
+}
 
 
-  // file_fieldのcss
-  .hidden-field {
-    display: none;
-  }
-  .hidden-checkbox {
-    display: none;
-  }
+// file_fieldのcss
+.hidden-field {
+  display: none;
+}
+.hidden-checkbox {
+  display: none;
+}
