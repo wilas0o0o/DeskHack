@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     elsif @tag = params[:tag]
       @posts = Post.tagged_with(params[:tag])
     else
-      @posts = Post.all
+      @posts = Post.all.page(params[:page]).per(20)
     end
   end
 
