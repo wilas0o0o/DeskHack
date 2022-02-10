@@ -29,8 +29,9 @@
       <div class="hidden-content mb-3">
         <%= f.fields_for :post_images do |i| %>
           <%= i.file_field :image, class: "hidden-field" %>
-          <% @post.post_images.length.upto(3) do |i| %>
-            <input class="hidden-field" type="file" name="post[post_images_attributes][<%= i %>][image]" id="post_post_images_attributes_<%= i %>_image"></input>
+          <%= i.check_box :_destroy, class: "hidden-checkbox" %>
+          <% @post.post_images.length.upto(3) do |num| %>
+            <input class="hidden-field" type="file" name="post[post_images_attributes][<%= num %>][image]" id="post_post_images_attributes_<%= num %>_image"></input>
           <% end %>
         <% end %>
       </div>
@@ -43,7 +44,7 @@
 
       // 画像をプレビュー表示させる場所(.prev-box)を作成
       function buildHTML(count) {
-        var html = `<div class="prev-box" id="prev-box_${count}">
+        var html = `<div class="prev-box" id="prev-box__${count}">
                       <div class="prev-img w-100">
                         <img src="" alt="preview" class="img-fluid">
                       </div>
@@ -57,6 +58,23 @@
                       </div>
                     </div>`
         return html;
+      }
+
+      // 編集ページの場合
+      if (window.location.href.match(/\/posts\/[0-9]+\/edit/)){
+        //プレビューにidを追加
+        $('.prev-box').each(function(index, box){
+          $(box).attr('id', `prev-box__${index}`);
+        })
+        //削除ボタンにidを追加
+        $('.delete-box').each(function(index, box){
+          $(box).attr('id', `delete_btn_${index}`);
+        })
+        var count = $('.prev-box').length;
+        //プレビューが5あるときは、投稿ボックスを消しておく
+        if (count == 4) {
+          $('.label-content').hide();
+        }
       }
 
       // .file_fieldから画像が指定されたら発火
@@ -76,7 +94,7 @@
           // 読み込んだファイルの内容を取得して変数imageに代入
           var image = this.result;
           // プレビューが元々なかった場合のみ実行
-          if ($(`#prev-box_${id}`).length == 0) {
+          if ($(`#prev-box__${id}`).length == 0) {
             // 変数htmlに.prev-boxを代入
             var html = buildHTML(id);
             // .label-contentの直前に変数htmlを追加
@@ -84,7 +102,7 @@
             $(prevContent).append(html);
           }
           // 変数imageを表示する
-          $(`#prev-box_${id} img`).attr('src', `${image}`);
+          $(`#prev-box__${id} img`).attr('src', `${image}`);
           // .prev-boxの数を数える
           var count = $('.prev-box').length;
           // .prev-boxが4個あったら.label-contentを隠す
@@ -104,19 +122,17 @@
         // post_post_images_attributes_${id}_image から${id}に入った数字のみ取得
         var id = $(this).attr('id').replace(/[^0-9]/g, '');
         // 取得したidに該当する.prev-boxを削除
-        $(`#prev-box_${id}`).remove();
-        // 取得したidに該当する.file_fieldの中身を削除
-        $(`#post_images_attributes_${id}_image`).val("");
-
+        $(`#prev-box__${id}`).remove();
+        // .check-boxにチェックマークを入れる
+        $(`#post_post_images_attributes_${id}__destroy`).prop('checked',true);
         // 削除後の.prev-boxの数を数える
         var count = $('.prev-box').length;
         // 4個目の.prev-boxが削除されたら.label-contentを表示
         if (count < 4) {
           $('.label-content').show();
         }
-
+        // 削除された際に空になった.file_fieldをもう一度入力可能にする
         if(id < 4){
-          // 削除された際に空になった.file_fieldをもう一度入力可能にする
           $('.label-btn').attr({id: `label-btn-${id}`,for: `post_post_images_attributes_${id}_image`});
         }
       });
