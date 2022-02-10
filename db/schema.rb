@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_023545) do
+ActiveRecord::Schema.define(version: 2022_02_08_103741) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -42,11 +42,18 @@ ActiveRecord::Schema.define(version: 2022_02_07_023545) do
     t.index ["user_id"], name: "index_post_comments_on_user_id"
   end
 
+  create_table "post_images", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.string "image", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_images_on_post_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "situation", limit: 2, default: 0, null: false
     t.text "text", null: false
-    t.json "images", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"

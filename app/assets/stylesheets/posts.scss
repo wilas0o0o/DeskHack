@@ -2,7 +2,50 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+// 画像サイズの指定
 .subImg img {
-  height: 120px;
-  width: 184px;
+  max-height: 110px;
+}
+
+.mainImg img {
+  max-height: 700px;
+}
+
+.indexImg img {
+  max-height: 240px;
+  max-width: 360px;
+}
+
+.subImg:nth-child(4) {
+  padding-right: 0 !important;
+}
+
+
+// 投稿フォーム
+.prev-box {
+  margin: 0 10px 10px 0;
+  :last-child {
+    margin-right: 0;
+  }
+  .prev-img {
+    img{
+      height: 120px;
+    }
+  }
+  .prev-menu {
+    .update-box {
+      height: 50px;
+      line-height: 50px;
+      cursor: pointer;
+    }
+    .delete-box {
+      height: 50px;
+      line-height: 50px;
+      cursor: pointer;
+    }
+  }
+}
+
+.hidden-field {
+  display: none;
 }

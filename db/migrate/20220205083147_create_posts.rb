@@ -4,7 +4,6 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.references :user,   null: false, foreign_key: true
       t.integer :situation, null: false, default: 0, limit: 2
       t.text :text,         null: false
-      t.json :images,       null: false
 
       t.timestamps
     end

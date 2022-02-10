@@ -1,45 +1,9 @@
-<div class="post-form-container w-100 d-flex justify-content-center">
-  <div class="container">
-    <h2 class="text-center mt-5 mb-5">投稿を編集</h2>
-    <div class="row d-flex flex-column col-8 offset-2">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <h2 class="text-center mt-5 mb-5">投稿を編集</h2>
       <%= render 'layouts/errors', obj: @post %>
-        <%= form_with model: @post, local: true do |f| %>
-          <table class="table table-borderless d-flex justify-content-center">
-
-            <tr class="form-group mx-3">
-              <td class="col-md-3">画像</td>
-              <td class="col-md-8 offset-md-1"><%= f.file_field :images, multiple: true %></td>
-            </tr>
-
-            <tr class="form-group mx-3">
-              <td class="col-md-3">本文</td>
-              <td class="col-md-8 offset-md-1"><%= f.text_area :text, size: "20x10", class: "form-control" %></td>
-            </tr>
-
-            <tr class="form-group mx-3">
-              <td class="col-md-3">カテゴリー</td>
-              <td class="col-md-8 offset-md-1">
-                <%= f.radio_button :situation, Post.situations.key(0) %>
-                <%= f.label :situation_working, "Working", class: "mr-5" %>
-
-                <%= f.radio_button :situation, Post.situations.key(1) %>
-                <%= f.label :situation_gaming, "Gaming" %>
-              </td>
-            </tr>
-
-            <tr class="form-group mx-3">
-              <td class="col-md-3">タグ</td>
-              <td class="col-md-8 offset-md-1">
-                <%= f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control" %>
-                <span class="text-secondary">カンマ（,）で区切ることができます</span>
-              </td>
-            </tr>
-
-          </table>
-          <div class="actions d-flex justify-content-end">
-            <%= f.submit "変更を保存", class: "btn btn-primary" %>
-          </div>
-        <% end %>
+      <%= render 'posts/edit-form', post: @post %>
     </div>
   </div>
 </div>
