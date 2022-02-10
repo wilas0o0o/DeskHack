@@ -13,6 +13,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post)
     else
+      @post.post_images.build
       render :new
     end
   end
