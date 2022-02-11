@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'homes#top'
+  get 'search' => 'searches#search'
   resources :users, only: [:show, :edit, :update] do
     member do
       get :bookmarked
@@ -14,5 +15,5 @@ Rails.application.routes.draw do
     resource :bookmarks, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
-  get 'search' => 'searches#search'
+  resources :notifications, only: [:index]
 end
