@@ -73,18 +73,4 @@ class Post < ApplicationRecord
     # 不備がなければ保存
     notification.save if notification.valid?
   end
-  
-  def create_notification_follow!(current_user)
-    # 同じユーザーが同じユーザーに連続でフォローしても通知が行かないように通知済みか検索
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ?", current_user.id, id, "follow"])
-    # 既にフォローされてない場合、通知レコードを作成
-    if temp.blank?
-      notification = current_user.active_notifications.new(
-        visited_id: id,
-        action: "follow"
-      )
-      # 不備がなければ保存する
-      notification.save if notification.valid?
-    end
-  end
 end
