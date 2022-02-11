@@ -109,3 +109,26 @@ footer {
     }
   }
 }
+
+//オーバーレイ
+
+
+.mypage-menu {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  opacity: 0;
+  border-radius: 5px;
+  transition: all 0.5s;
+  display: none;
+}
+
+.active {
+  opacity: 1;
+  width: 220px;
+  padding: 20px;
+  top: 60px;
+  background-color: #fff;
+  transition: all 0.5s;
+  display: block;
+}
