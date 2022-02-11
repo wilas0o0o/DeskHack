@@ -5,7 +5,7 @@
   <div class="col-sm-8">
     <div class="row h-100 align-items-center">
       <div class="home col-md-2 justify-content-end d-flex nav-icon">
-        <%= link_to "", posts_path, class: "fas fa-home fa-lg text-light" %>
+        <%= link_to "", posts_path, class: "fas fa-home fa-2x text-light" %>
       </div>
       <div class="col-md-8">
         <%= form_with url: search_path, method: :get, local: true do |f| %>
@@ -19,20 +19,18 @@
   </div>
   <div class="col-2 d-flex align-items-center justify-content-center">
     <ul class="header-nav d-flex p-0 mb-0 w-100 justify-content-around">
-      <li class="nav-icon"><%= link_to "", new_post_path, class: "far fa-plus-square fa-lg text-light" %></li>
-      <li class="nav-icon">
+      <li class="nav-icon"><%= link_to "", new_post_path, class: "far fa-plus-square fa-2x text-light" %></li>
+      <li class="nav-icon pt-1">
         <%= link_to notifications_path do %>
-          <%# if un_is_checked_notifications.any? %>
-            <span class="fa-stack">
-              <i class="fas fa-bell fa-lg  fa-stack-2x text-light"></i>
-              <i class="fas fa-circle n-circle fa-stack-1x"></i>
-            </span>
-          <%# else %>
-            <!--<i class="fas fa-bell fa-lg text-light"></i>-->
-          <% end %>
-        <%# end %>
+          <span class="fa-stack">
+            <i class="fas fa-bell fa-lg fa-stack-2x text-light"></i>
+            <% if unchecked_notifications.any? %>
+              <i class="fas fa-circle notice-icon fa-stack-1x"></i>
+            <% end %>
+          </span>
+        <% end %>
       </li>
-      <li class="nav-icon"><%= link_to "", user_path(current_user), class: "fas fa-user fa-lg text-light" %></li>
+      <li class="nav-icon"><%= link_to "", user_path(current_user), class: "fas fa-user fa-2x text-light" %></li>
     </ul>
   </div>
 </header>

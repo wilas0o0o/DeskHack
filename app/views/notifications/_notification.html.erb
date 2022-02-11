@@ -1,13 +1,13 @@
 <% visitor = notification.visitor %>
 <% visited = notification.visited %>
-<div class="col-md-6 mx-auto">
+<div class="col-md-6 border-bottom py-2">
   <div class="form-inline">
     <span>
       <%= link_to user_path(visitor) do %>
         <% if visitor.avatar? %>
-          <%= image_tag visitor.avatar.url, class: "rounded-circle", size: "80x80" %>
+          <%= image_tag visitor.avatar.url, class: "rounded-circle", size: "40x40" %>
         <% else %>
-          <%= image_tag "no_image_avatar.png", class: "rounded-circle border", size: "80x80" %>
+          <%= image_tag "no_image_avatar.png", class: "rounded-circle border", size: "40x40" %>
         <% end %>
         <strong><%= visitor.name%></strong>
       <% end %>
@@ -19,7 +19,7 @@
           <%= link_to "あなたの投稿", notification.post, class: "font-weight-bold " %>にいいねしました
         <% when "comment" then %>
           <% if notification.post.user_id == visited.id %>
-            <%= link_to "あなたの投稿", notigication.post, class: "font-weifht-bold" %>
+            <%= link_to "あなたの投稿", notification.post, class: "font-weight-bold" %>
           <% else %>
             <%= link_to post_path(notification.post) do %>
               <%= image_tag avatar_url(notification.post.user).to_s, size: "80x80" %>
@@ -28,7 +28,7 @@
           <% end %>
           にコメントしました
           <p class="text-muted mb-0">
-            <%= Comment.find_by(id: notification.comment_id)&.comment %>
+            <%= PostComment.find_by(id: notification.comment_id)&.comment %>
           </p>
       <% end %>
     </span>
