@@ -5,9 +5,11 @@
     <div class="d-flex flex-wrap">
       <div class="prev-content flex-wrap d-flex mt-2"></div>
       <div class="label-content mt-2">
-        <label class="label-btn btn btn-secondary" for="post_post_images_attributes_0_image" id="label-btn-0">
-          画像を追加
-        </label>
+        <div class="h-100 d-flex align-items-center">
+          <label class="label-btn btn btn-secondary" for="post_post_images_attributes_0_image" id="label-btn-0">
+            画像を追加
+          </label>
+        </div>
       </div>
       <div class="hidden-content mb-3">
         <%= f.fields_for :post_images do |i| %>
@@ -32,7 +34,7 @@
                         </div>
                         <div class="prev-menu d-flex text-center">
                           <div class="update-box bg-white text-success w-50 border">
-                            <label for="post_post_images_attributes_${count}_image">編集</label>
+                            <label for="post_post_images_attributes_${count}_image">変更</label>
                           </div>
                           <div class="delete-box bg-white text-danger w-50 border" id="delete_btn_${count}">
                             <span>削除</span>

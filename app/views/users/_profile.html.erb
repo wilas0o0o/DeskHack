@@ -7,7 +7,6 @@
 <% if user == current_user %>
   <h5 class="text-center"><%= user.email %></h5>
   <%= link_to "編集", edit_user_path(user), class: "btn btn-success btn-sm" %>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-sm" %>
 <% else %>
   <p class="follow-btn"><%= render 'relationships/follow_btn', user: user %></p>
 <% end %>
