@@ -5,14 +5,17 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :post_images, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :items, dependent: :destroy
 
   accepts_nested_attributes_for :post_images, allow_destroy: true
+  accepts_nested_attributes_for :items, allow_destroy: true
   acts_as_taggable
   enum situation: { Working: 0, Gaming: 1 }
 
   validates :post_images, presence: true, length: { maximum: 4 }
   validates :text, presence: true, length: { maximum: 140 }
   validates :situation, presence: true
+  validates_associated :items
 
   default_scope -> { order(created_at: :desc) }
   scope :working, -> { where(situation: 0) }
@@ -37,7 +40,7 @@ class Post < ApplicationRecord
         visited_id: user_id,
         action: "favorite"
       )
-      # 自分の投稿に対するいいねの場合は通知済みにする  
+      # 自分の投稿に対するいいねの場合は通知済みにする
       if notification.visitor_id == notification.visited_id
         notification.is_checked = true
       end
@@ -56,7 +59,7 @@ class Post < ApplicationRecord
     # まだ誰もコメントしていない場合は投稿者のみに通知を送る
     save_notification_post_comment!(current_user, comment_id, user_id) if temp_ids.blank?
   end
-  
+
   # 作成したコメントの通知を保存
   def save_notification_post_comment!(current_user, comment_id, visited_id)
     # 同じ投稿に複数コメントすることがあるので、1つの投稿に複数回通知する
