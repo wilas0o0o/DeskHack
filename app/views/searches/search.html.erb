@@ -1,34 +1,39 @@
-<div class="container">
-  <%= link_to "タグで検索", search_path(content: @tag) %>
-  <div class="row mt-3">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-      <% if @model == "user" %>
-        <% if @records.present? %>
-          <%= render 'relationships/users_list', users: @records %>
-        <% else %>
-          <div class="d-flex justify-content-center mt-5">
-            <span class="fa-stack fa-3x">
-              <i class="fas fa-user fa-stack-1x"></i>
-              <i class="fas fa-ban fa-stack-2x"></i>
-            </span>
-          </div>
-          <h4 class="text-center mt-3"><%= @username %>さんはいません</h4>
+<div class="w-100">
+  <div class="d-flex justify-content-center bg-white pt-2">
+    <h5 class="text-center mx-4"><%= link_to "タグで検索", search_path(model: "tag", content: @content), class: "text-success" %></h5>
+    <h5 class="text-center mx-4"><%= link_to "ユーザーで検索", search_path(model: "user", content: @content) %></h5>
+  </div>
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <% if @model == "user" %>
+          <% if @records.present? %>
+            <%= render 'relationships/users_list', users: @records %>
+          <% else %>
+            <div class="d-flex justify-content-center mt-5">
+              <span class="fa-stack fa-3x">
+                <i class="fas fa-user fa-stack-1x"></i>
+                <i class="fas fa-ban fa-stack-2x"></i>
+              </span>
+            </div>
+            <h4 class="text-center mt-3"><%= @content %>さんはいません</h4>
+          <% end %>
+        <% elsif @model == "tag" %>
+          <% if @records.present? %>
+            <%= render 'posts/index', posts: @records %>
+          <% else %>
+            <div class="d-flex justify-content-center mt-5">
+              <span class="fa-stack fa-3x">
+                <i class="fas fa-hashtag fa-stack-1x"></i>
+                <i class="fas fa-ban fa-stack-2x"></i>
+              </span>
+            </div>
+            <h4 class="text-center mt-3">#<%= @content %>の投稿はありません</h4>
+          <% end %>
         <% end %>
-      <% elsif @model == "tag" %>
-        <% if @records.present? %>
-          <%= render 'posts/index', posts: @records %>
-        <% else %>
-          <div class="d-flex justify-content-center mt-5">
-            <span class="fa-stack fa-3x">
-              <i class="fas fa-hashtag fa-stack-1x"></i>
-              <i class="fas fa-ban fa-stack-2x"></i>
-            </span>
-          </div>
-          <h4 class="text-center mt-3">#<%= @tag %>の投稿はありません</h4>
-        <% end %>
-      <% end %>
+      </div>
+      <div class="col-md-2"></div>
     </div>
-    <div class="col-md-2"></div>
   </div>
 </div>
