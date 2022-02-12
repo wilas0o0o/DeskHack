@@ -4,10 +4,7 @@
       <% posts.each do |post| %>
         <div class="indexImg">
           <%= link_to post_path(post) do %>
-            <% post.post_images.each do |post_image| %>
-              <%= image_tag post_image.image.url, class: "m-1" %>
-              <% break %>
-            <% end %>
+            <%= image_tag post.post_image.image.url, class: "m-1" %>
           <% end %>
         </div>
       <% end %>

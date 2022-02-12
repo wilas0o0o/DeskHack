@@ -40,117 +40,10 @@
     </div>
   </div>
 
-  <script>
-    $(document).on('turbolinks:load', function(){
-      $(function(){
-
-        // 画像をプレビュー表示させる場所(.prev-box)を作成
-        function buildHTML(count) {
-          var html = `<div class="prev-box" id="prev-box__${count}">
-                        <div class="prev-img w-100">
-                          <img src="" alt="preview" class="img-fluid">
-                        </div>
-                        <div class="prev-menu d-flex text-center">
-                          <div class="update-box bg-white text-success w-50 border">
-                            <label for="post_post_images_attributes_${count}_image">変更</label>
-                          </div>
-                          <div class="delete-box bg-white text-danger w-50 border" id="delete_btn_${count}">
-                            <span>削除</span>
-                          </div>
-                        </div>
-                      </div>`
-          return html;
-        }
-
-        // 編集ページの場合
-        if (window.location.href.match(/\/posts\/[0-9]+\/edit/)){
-          //プレビューにidを追加
-          $('.prev-box').each(function(index, box){
-            $(box).attr('id', `prev-box__${index}`);
-          })
-          //削除ボタンにidを追加
-          $('.delete-box').each(function(index, box){
-            $(box).attr('id', `delete_btn_${index}`);
-          })
-          var count = $('.prev-box').length;
-          //プレビューが5あるときは、投稿ボックスを消しておく
-          if (count == 4) {
-            $('.label-content').hide();
-          }
-        }
-
-        // .file_fieldから画像が指定されたら発火
-        $(document).on('change', '.hidden-field', function() {
-          // .hidden-fieldのidの数値のみ取得
-          var id = $(this).attr('id').replace(/[^0-9]/g, '');
-          // .check-boxのチェックマークを外す
-          $(`#post_post_images_attributes_${id}__destroy`).prop('checked',false);
-          // .label-btnのidとforを更新
-          $('.label-btn').attr({id: `label-btn-${id}`,for: `post_images_attributes_${id}_image`});
-          // .file_filedからデータを取得して変数fileに代入
-          var file = this.files[0];
-          // FileReaderオブジェクトを作成
-          var reader = new FileReader();
-          // readAsDataURLで変数fileを読み込む
-          reader.readAsDataURL(file);
-          // 読み込みが完了したら処理を実行
-          reader.onload = function() {
-            // 読み込んだファイルの内容を取得して変数imageに代入
-            var image = this.result;
-            // プレビューが元々なかった場合のみ実行
-            if ($(`#prev-box__${id}`).length == 0) {
-              // 変数htmlに.prev-boxを代入
-              var html = buildHTML(id);
-              // .label-contentの直前に変数htmlを追加
-              var prevContent = $('.label-content').prev();
-              $(prevContent).append(html);
-            }
-            // 変数imageを表示する
-            $(`#prev-box__${id} img`).attr('src', `${image}`);
-            // .prev-boxの数を数える
-            var count = $('.prev-box').length;
-            // .prev-boxが4個あったら.label-contentを隠す
-            if (count == 4) {
-              $('.label-content').hide();
-            }
-            // .label-btnのidとforの値を変更
-            if(count < 4){
-              // .prev-boxの数に応じて.label-btnのforを更新する
-              $('.label-btn').attr({id: `label-btn-${count}`,for: `post_post_images_attributes_${count}_image`});
-            }
-          }
-        });
-
-        // .delete-boxがクリックされたら発火
-        $(document).on('click', '.delete-box', function() {
-          // post_post_images_attributes_${id}_image から${id}に入った数字のみ取得
-          var id = $(this).attr('id').replace(/[^0-9]/g, '');
-          // 取得したidに該当する.prev-boxを削除
-          $(`#prev-box__${id}`).remove();
-          // .check-boxにチェックマークを入れる
-          $(`#post_post_images_attributes_${id}__destroy`).prop('checked',true);
-           // 取得したidに該当する.file_fieldの中身を削除
-          $(`#post_images_attributes_${id}_image`).val("");
-          // 削除後の.prev-boxの数を数える
-          var count = $('.prev-box').length;
-          // 4個目の.prev-boxが削除されたら.label-contentを表示
-          if (count < 4) {
-            $('.label-content').show();
-          }
-          // 削除された際に空になった.file_fieldのidとforを.labe.-btnに割り振る
-          if(id < 4){
-            $('.label-btn').attr({id: `label-btn-${id}`,for: `post_post_images_attributes_${id}_image`});
-          }
-        });
-      });
-    })
-  </script>
-
   <div class="form-group mx-3 mb-3">
     <h4 class="mr-2 d-inline">本文</h4><span class="bg-danger text-light rounded px-1">必須</span>
     <%= f.text_area :text, size: "20x10", placeholder: "140字まで投稿できます。",class: "form-control mt-2" %>
   </div>
-
 
   <div class="form-group mx-3">
     <h4 class="mr-2 d-inline">カテゴリー</h4><span class="bg-danger text-light rounded px-1">必須</span>
@@ -168,7 +61,123 @@
     <span class="text-secondary">カンマ（,）で区切ることができます</span>
   </div>
 
+  <div class="form-group mx-3">
+    <h4 class"mr-2 d-inline">アイテム</h4>
+    <%= f.fields_for :items, id: "item-field" do |item| %>
+      <%= render 'item_fields', f: item %>
+    <% end %>
+      <div class="links">
+        <%= link_to_add_association "アイテムを追加", f, :items, class: "add-item-btn" %>
+      </div>
+  </div>
+
   <div class="actions d-flex justify-content-end">
     <%= f.submit "変更する",class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script>
+  $(document).on('turbolinks:load', function(){
+    $(function(){
+
+      // 画像をプレビュー表示させる場所(.prev-box)を作成
+      function buildHTML(count) {
+        var html = `<div class="prev-box" id="prev-box__${count}">
+                      <div class="prev-img w-100">
+                        <img src="" alt="preview" class="img-fluid">
+                      </div>
+                      <div class="prev-menu d-flex text-center">
+                        <div class="update-box bg-white text-success w-50 border">
+                          <label for="post_post_images_attributes_${count}_image">変更</label>
+                        </div>
+                        <div class="delete-box bg-white text-danger w-50 border" id="delete_btn_${count}">
+                          <span>削除</span>
+                        </div>
+                      </div>
+                    </div>`
+        return html;
+      }
+
+      // 編集ページの場合
+      if (window.location.href.match(/\/posts\/[0-9]+\/edit/)){
+        //プレビューにidを追加
+        $('.prev-box').each(function(index, box){
+          $(box).attr('id', `prev-box__${index}`);
+        })
+        //削除ボタンにidを追加
+        $('.delete-box').each(function(index, box){
+          $(box).attr('id', `delete_btn_${index}`);
+        })
+        var count = $('.prev-box').length;
+        //プレビューが5あるときは、投稿ボックスを消しておく
+        if (count == 4) {
+          $('.label-content').hide();
+        }
+      }
+
+      // .file_fieldから画像が指定されたら発火
+      $(document).on('change', '.hidden-field', function() {
+        // .hidden-fieldのidの数値のみ取得
+        var id = $(this).attr('id').replace(/[^0-9]/g, '');
+        // .check-boxのチェックマークを外す
+        $(`#post_post_images_attributes_${id}__destroy`).prop('checked',false);
+        // .label-btnのidとforを更新
+        $('.label-btn').attr({id: `label-btn-${id}`,for: `post_images_attributes_${id}_image`});
+        // .file_filedからデータを取得して変数fileに代入
+        var file = this.files[0];
+        // FileReaderオブジェクトを作成
+        var reader = new FileReader();
+        // readAsDataURLで変数fileを読み込む
+        reader.readAsDataURL(file);
+        // 読み込みが完了したら処理を実行
+        reader.onload = function() {
+          // 読み込んだファイルの内容を取得して変数imageに代入
+          var image = this.result;
+          // プレビューが元々なかった場合のみ実行
+          if ($(`#prev-box__${id}`).length == 0) {
+            // 変数htmlに.prev-boxを代入
+            var html = buildHTML(id);
+            // .label-contentの直前に変数htmlを追加
+            var prevContent = $('.label-content').prev();
+            $(prevContent).append(html);
+          }
+          // 変数imageを表示する
+          $(`#prev-box__${id} img`).attr('src', `${image}`);
+          // .prev-boxの数を数える
+          var count = $('.prev-box').length;
+          // .prev-boxが4個あったら.label-contentを隠す
+          if (count == 4) {
+            $('.label-content').hide();
+          }
+          // .label-btnのidとforの値を変更
+          if(count < 4){
+            // .prev-boxの数に応じて.label-btnのforを更新する
+            $('.label-btn').attr({id: `label-btn-${count}`,for: `post_post_images_attributes_${count}_image`});
+          }
+        }
+      });
+
+      // .delete-boxがクリックされたら発火
+      $(document).on('click', '.delete-box', function() {
+        // post_post_images_attributes_${id}_image から${id}に入った数字のみ取得
+        var id = $(this).attr('id').replace(/[^0-9]/g, '');
+        // 取得したidに該当する.prev-boxを削除
+        $(`#prev-box__${id}`).remove();
+        // .check-boxにチェックマークを入れる
+        $(`#post_post_images_attributes_${id}__destroy`).prop('checked',true);
+         // 取得したidに該当する.file_fieldの中身を削除
+        $(`#post_images_attributes_${id}_image`).val("");
+        // 削除後の.prev-boxの数を数える
+        var count = $('.prev-box').length;
+        // 4個目の.prev-boxが削除されたら.label-contentを表示
+        if (count < 4) {
+          $('.label-content').show();
+        }
+        // 削除された際に空になった.file_fieldのidとforを.labe.-btnに割り振る
+        if(id < 4){
+          $('.label-btn').attr({id: `label-btn-${id}`,for: `post_post_images_attributes_${id}_image`});
+        }
+      });
+    });
+  })
+</script>

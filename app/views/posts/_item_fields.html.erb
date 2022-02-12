@@ -8,14 +8,14 @@
     <%= f.text_field :name %>
   </div>
   <div class="form-group">
-    <%= f.label :name, "カテゴリ" %>
+    <%= f.label :category_id, "カテゴリ" %>
     <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "選択してください", class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :name, "メーカー" %>
+    <%= f.label :manufacturer, "メーカー" %>
     <%= f.text_field :manufacturer %>
   </div>
   <div class="actions">
-    <%= link_to_remove_association "#{icon 'fas', 'trash-alt'}".html_safe, f, class: "item-delete-btn" %>
+    <%= link_to_remove_association "#{ icon 'fas', 'trash-alt' }".html_safe, f, class: "item-delete-btn fa-lg" %>
   </div>
 </div>

@@ -32,7 +32,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     post_images = @post.post_images
-    @first_image = post_images.first
+    @first_image = post_images.to_a.first
+    @items = @post.items
     @post_comment = PostComment.new
     @tags = @post.tag_counts_on(:tags)
   end
@@ -56,7 +57,8 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:user_id, :situation, :text, :tag_list, post_images_attributes:[:image, :id, :_destroy], item_attributes: [:post_id, :category_id, :image, :name, :manufacturer, :_destroy])
+      params.require(:post).permit(:user_id, :situation, :text, :tag_list, post_images_attributes:[:image, :id, :_destroy],
+                                                                           items_attributes: [:post_id, :category_id, :image, :name, :manufacturer, :_destroy])
     end
 
     def ensure_correct_user

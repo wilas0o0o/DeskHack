@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :post_images, dependent: :destroy
+  has_one  :post_image, -> {order(:id).limit(1)}, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :items, dependent: :destroy
 
@@ -15,7 +16,7 @@ class Post < ApplicationRecord
   validates :post_images, presence: true, length: { maximum: 4 }
   validates :text, presence: true, length: { maximum: 140 }
   validates :situation, presence: true
-  validates_associated :items
+  # validates_associated :items
 
   default_scope -> { order(created_at: :desc) }
   scope :working, -> { where(situation: 0) }

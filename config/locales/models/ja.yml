@@ -9,6 +9,8 @@ ja:
         post_images: 画像
         text: 本文
         situation: 使用状況
+      items:
+        category: アイテムのカテゴリ
   devise:
     failure:
       user:
