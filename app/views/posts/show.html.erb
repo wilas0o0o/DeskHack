@@ -23,13 +23,13 @@
     </div>
     <div class="col-lg-8">
       <div class="images mb-2">
-        <div class="mainImg mb-1 border">
-          <%= image_tag @first_image.image.url, class: "img-fluid" %>
+        <div class="mainImg mb-1">
+          <%= image_tag @first_image.image.url, class: "img-thumbnail" %>
         </div>
         <div class="d-flex">
           <% @post.post_images.each do |post_image| %>
-            <div class="subImg pr-1 border">
-              <%= image_tag post_image.image.url, class: "img-fluid" %>
+            <div class="subImg pr-1">
+              <%= image_tag post_image.image.url, class: "img-thumbnail" %>
             </div>
           <% end %>
         </div>
@@ -66,19 +66,37 @@
         </div>
       </div>
     </div>
-  </div>
-  <% if @items.present? %>
-    <% @items.each do |item| %>
-      <% if item.image.present? %>
-        <%= image_tag item.image.url, size: "200x150", class: "border" %>
-      <% else %>
-        <%= image_tag "no_image_item.jpg", size: "200x150", class: "border" %>
+    <div class="col-lg-8">
+      <h4><strong>使用アイテム</strong></h4>
+      <% if @items.present? %>
+        <% @items.each do |item| %>
+          <div class="d-flex my-3 bg-white">
+            <div class="itemImg my-auto mx-1">
+              <% if item.image.present? %>
+                <%= image_tag item.image.url, class: "img-fluid rounded" %>
+              <% else %>
+                <%= image_tag "no_image_item.jpg", class: "img-fluid rounded border" %>
+              <% end %>
+            </div>
+            <table class="table table-borderless mb-0">
+              <tr>
+                <th>商品名</th>
+                <td><%= item.name %></td>
+              </tr>
+              <tr>
+                <th class="col-3">カテゴリー</th>
+                <td><%= item.category.name %></td>
+              </tr>
+              <tr>
+                <th>ブランド</th>
+                <td><%= item.manufacturer %></td>
+              </tr>
+            </table>
+          </div>
+        <% end %>
       <% end %>
-      <%= item.name %>
-      <%= item.category.name %>
-      <%= item.manufacturer %>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
 </div>
 
 <script>
