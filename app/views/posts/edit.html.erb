@@ -118,7 +118,7 @@
           $(box).attr('id', `delete_btn_${index}`);
         })
         var count = $('.prev-box').length;
-        //プレビューが5あるときは、投稿ボックスを消しておく
+        //プレビューが4個あるときは.label-contentを隠す
         if (count == 4) {
           $('.label-content').hide();
         }
@@ -186,6 +186,35 @@
         if(id < 4){
           $('.label-btn').attr({id: `label-btn-${id}`,for: `post_post_images_attributes_${id}_image`});
         }
+      });
+
+      // cocoonのjQuery
+      $(document).ready(function(){
+        var count = $('.nested-fields').length
+        if (count == 10) {
+          $('.links').hide();
+        }
+        // フォームが追加された時に発火
+        $(document).on('cocoon:after-insert', function(){
+          // フォームの個数を数える
+          count++;
+          // 10個になったら.linksを隠す
+          if (count == 10) {
+            $('.links').hide();
+          }
+        });
+
+        // フォームが削除された時に発火
+        $(document).on('cocoon:after-remove', function(){
+          count--;
+          var item_id = $(this).attr('id').replace(/[^0-9]/g, '');
+          // 3個以下になったら.linksを表示
+          if (count < 10) {
+            $('.links').show();
+          }
+          // 削除ボタンにチェックをつける
+          $(`#post_post_images_attributes_${id}__destroy`).prop('checked',true);
+        });
       });
     });
   })

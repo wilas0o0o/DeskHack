@@ -19,10 +19,10 @@
             </div>
             <div class="hidden-content mb-3">
               <%= f.fields_for :post_images do |i| %>
-                <%= i.file_field :image, class: "hidden-field" %>
-                <input class="hidden-field" type="file" name="post[post_images_attributes][1][image]" id="post_post_images_attributes_1_image"></input>
-                <input class="hidden-field" type="file" name="post[post_images_attributes][2][image]" id="post_post_images_attributes_2_image"></input>
-                <input class="hidden-field" type="file" name="post[post_images_attributes][3][image]" id="post_post_images_attributes_3_image"></input>
+                <%= i.file_field :image, class: "hidden-field post-hidden-field" %>
+                <input class="hidden-field post-hidden-field" type="file" name="post[post_images_attributes][1][image]" id="post_post_images_attributes_1_image"></input>
+                <input class="hidden-field post-hidden-field" type="file" name="post[post_images_attributes][2][image]" id="post_post_images_attributes_2_image"></input>
+                <input class="hidden-field post-hidden-field" type="file" name="post[post_images_attributes][3][image]" id="post_post_images_attributes_3_image"></input>
               <% end %>
             </div>
           </div>
@@ -49,11 +49,11 @@
           <span class="text-secondary">カンマ（,）で区切ることができます</span>
         </div>
 
-        <div class="form-group mx-3">
+        <div class="form-group item-form mx-3">
           <h4 class="mr-2 d-inline">アイテム</h4><span>※最大10個まで</span>
           <%= f.fields_for :items, id: "item-field" do |item| %>
             <div class="d-flex flex-wrap">
-              <%= render 'item_fields', f: item %>
+              <%= render 'item_fields', f: item, count: count %>
             </div>
           <% end %>
             <div class="links">
@@ -92,7 +92,7 @@
       }
 
       // .file_fieldから画像が指定された時に発火
-      $(document).on('change', '.hidden-field', function() {
+      $(document).on('change', '.post-hidden-field', function() {
         // .hidden-fieldのidの数値のみ取得
         var id = $(this).attr('id').replace(/[^0-9]/g, '');
         // .label-btnのidとforを更新
@@ -151,6 +151,42 @@
           $('.label-btn').attr({id: `label-btn-${id}`,for: `post_post_images_attributes_${id}_image`});
         }
       });
+
+      // cocoonのjQuery
+      $(document).ready(function(){
+        var count = 0
+        // フォームが追加された時に発火
+        $(document).on('cocoon:after-insert', function(){
+          // フォームの個数を数える
+          count++;
+          // 10個になったら.linksを隠す
+          if (count == 10) {
+            $('.links').hide();
+          }
+        });
+
+        // フォームが削除された時に発火
+        $(document).on('cocoon:after-remove', function(){
+          count--;
+          // 3個以下になったら.linksを表示
+          if (count < 10) {
+            $('.links').show();
+          }
+        });
+      });
     });
+
+    // $(function() {
+    //   $(document).on('change', '.item-hidden-field', function() {
+    //     var item_id = $(this).attr('id').replace(/[^0-9]/g, '');
+    //     var file = this.files[0];
+    //     var reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onload = function() {
+    //       var item_image = this.result;
+    //       $('#post_images_attributes_').attr({ src: item_image });
+    //     }
+    //   })
+    // })
   })
 </script>

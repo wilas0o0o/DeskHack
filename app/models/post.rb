@@ -16,7 +16,7 @@ class Post < ApplicationRecord
   validates :post_images, presence: true, length: { maximum: 4 }
   validates :text, presence: true, length: { maximum: 140 }
   validates :situation, presence: true
-  # validates_associated :items
+  validates :items, length: { maximum: 10}
 
   default_scope -> { order(created_at: :desc) }
   scope :working, -> { where(situation: 0) }

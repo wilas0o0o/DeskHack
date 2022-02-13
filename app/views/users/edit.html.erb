@@ -24,8 +24,8 @@
           </div>
 
           <script>
-            $(document).on('turbolinks:load', function () {
-              $(function () {
+            $(document).on('turbolinks:load', function() {
+              $(function() {
                 // 画像をプレビュー表示させる場所(.prev-target)を作成
                 function buildHTML(avatar) {
                   var html = `<div class="prev-target">
@@ -35,7 +35,7 @@
                 }
 
                 // file_fieldから画像が指定された時に発火
-                $(document).on('change', '.hidden-file', function () {
+                $(document).on('change', '.hidden-file', function() {
                   // .file_filedからデータを取得して変数fileに代入
                   var file = this.files[0];
                   // FileReaderオブジェクトを作成
@@ -43,7 +43,7 @@
                   // readAsDataURLで変数fileを読み込む
                   reader.readAsDataURL(file);
                   // 読み込みが完了したら処理が実行
-                  reader.onload = function () {
+                  reader.onload = function() {
                     // 読み込んだファイルの内容を取得して変数avatarに代入
                     var avatar = this.result;
                     // プレビュー画像がなければ処理を実行

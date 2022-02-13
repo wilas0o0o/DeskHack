@@ -1,17 +1,17 @@
-<div class="nested-fields my-2 py-2 d-flex justify-content-between border-bottom">
+<div class="nested-fields my-2 p-2 border bg-light">
   <div>
     <div class="form-group d-flex">
-      <div class="prev-target">
-        <%= image_tag "no_image_item.jpg", size: "240x135", class: "prev-item-image rounded" %>
-      </div>
+      <!--<div class="prev-target">-->
+      <!--  <%#= image_tag "no_image_item.jpg", size: "180x120", class: "prev-item-image rounded"%>-->
+      <!--</div>-->
       <div class="add-item-image-btn">
-        <%= f.label :image, "商品画像を変更", class: "btn btn-secondary" %>
-        <%= f.file_field :image, class: "hidden-field" %>
+        <%#= f.label :image, "商品画像を変更", class: "item-label" %>
+        <%= f.file_field :image, class: "hidden-field item-hidden-field" %>
       </div>
     </div>
     <div class="form-group">
       <%= f.label :name, "商品名" %>
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.text_field :name, class: "form-control w-50" %>
     </div>
     <div class="form-group">
       <%= f.label :category_id, "カテゴリー" %></br>
@@ -19,22 +19,11 @@
     </div>
     <div class="form-group">
       <%= f.label :manufacturer, "ブランド" %>
-      <%= f.text_field :manufacturer, class: "form-control" %>
+      <%= f.text_field :manufacturer, class: "form-control w-50" %>
     </div>
   </div>
   <div class="actions d-flex align-items-end">
+    <%= f.check_box :_destroy, class: "hidden-checkbox" %>
     <%= link_to_remove_association "#{ icon 'fas', 'trash-alt' }".html_safe, f, class: "item-delete-btn fa-2x text-danger" %>
   </div>
 </div>
-
-<script>
-  $(document).on('turbolinks:load', function () {
-    $(function () {
-      function buildHTML(item_image) {
-        var html = `<div class="prev-target">
-                      <img src="${item_image}", alt="preview" class="prev-item_image rounded" width="240" height="135">
-                    </div>`
-      }
-    })
-  })
-</script>
