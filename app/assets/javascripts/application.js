@@ -31,3 +31,11 @@ $(window).on('scroll', function() {
     });
   }
 });
+
+
+$(document).ready(function() {
+  $(".item-edit-delete-btn").on("click", function(){
+   $(this).parent().parent().remove()
+   // $("#parent").remove();
+  });
+});

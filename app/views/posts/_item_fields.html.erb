@@ -1,17 +1,21 @@
-<div class="nested-fields my-2 p-2 border bg-light">
-  <div>
+<div class="row w-100 nested-fields my-2 p-2 border bg-light">
+  <div class="col-10">
     <div class="form-group d-flex">
       <!--<div class="prev-target">-->
       <!--  <%#= image_tag "no_image_item.jpg", size: "180x120", class: "prev-item-image rounded" %>-->
       <!--</div>-->
       <div class="add-item-image-btn">
-        <%= f.label :image, "商品画像を変更", class: "item-label" %>
+        <%= f.label :image, class: "item-label" do %>
+          <!--<div class="prev-target">-->
+            <%= image_tag "no_image_item.jpg", size: "180x120", class: "prev-item-image rounded" %>
+          <!--</div>-->
+        <% end %>
         <%= f.file_field :image, class: "hidden-field item-hidden-field" %>
       </div>
     </div>
     <div class="form-group">
       <%= f.label :name, "商品名" %>
-      <%= f.text_field :name, class: "form-control w-50" %>
+      <%= f.text_field :name, class: "form-control" %>
     </div>
     <div class="form-group">
       <%= f.label :category_id, "カテゴリー" %></br>
@@ -19,11 +23,10 @@
     </div>
     <div class="form-group">
       <%= f.label :manufacturer, "ブランド" %>
-      <%= f.text_field :manufacturer, class: "form-control w-50" %>
+      <%= f.text_field :manufacturer, class: "form-control" %>
     </div>
   </div>
-  <div class="actions d-flex align-items-end">
-    <%= f.check_box :_destroy, class: "hidden-checkbox" %>
+  <div class="actions col-2 d-flex justify-content-end align-items-end">
     <%= link_to_remove_association "#{ icon 'fas', 'trash-alt' }".html_safe, f, class: "item-delete-btn fa-2x text-danger" %>
   </div>
 </div>

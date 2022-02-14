@@ -29,14 +29,14 @@
             </div>
             <div class="label-content mt-2">
               <div class="h-100 d-flex align-items-center">
-                <label class="label-btn btn btn-secondary" for="post_post_images_attributes_0_image" id="label-btn-0">
+                <label class="label-btn btn btn-secondary" for="post_post_images_attributes_3_image" id="label-btn-0">
                   画像を追加
                 </label>
               </div>
             </div>
             <div class="hidden-content mb-3">
               <%= f.fields_for :post_images do |i| %>
-                <%= i.file_field :image, class: "hidden-field" %>
+                <%= i.file_field :image, class: "hidden-field " %>
                 <%= i.check_box :_destroy, class: "hidden-checkbox" %>
                 <% @post.post_images.length.upto(3) do |num| %>
                   <input class="hidden-field" type="file" name="post[post_images_attributes][<%= num %>][image]" id="post_post_images_attributes_<%= num %>_image"></input>
@@ -69,12 +69,13 @@
 
         <div class="form-group mx-3">
           <h4 class"mr-2 d-inline">アイテム</h4>
-          <%= f.fields_for :items, id: "item-field" do |item| %>
-            <%= render 'item_fields_edit', f: item %>
-          <% end %>
-            <div class="links">
-              <%= link_to_add_association "アイテムを追加", f, :items, class: "add-item-btn" %>
-            </div>
+          <p class="text-danger">アイテムの変更はできません</p>
+          <!--<%#= f.fields_for :items, id: "item-field" do |item| %>-->
+          <!--  <%#= render 'item_fields_edit', f: item %>-->
+          <!--<%# end %>-->
+          <!--  <div class="links">-->
+          <!--    <%#= link_to_add_association "アイテムを追加", f, :items, class: "add-item-btn" %>-->
+          <!--  </div>-->
         </div>
 
         <div class="actions d-flex justify-content-end">
@@ -211,19 +212,7 @@
           if (count < 10) {
             $('.links').show();
           }
-          var selectForms = [];
-          var $nestedFields = $(document).find('.nested-fields');
-          selectForms = filterVisibleField($nestedFields, selectForms)
         });
-        function filterVisibleField($nestedFields, selectForms) {
-          $nestedFields.each(function(i, field){
-            if ($(field).css('display') !== 'none'){
-              var $selectForm = $($(this).find('select'))
-              selectForms.push($selectForm)
-            }
-          })
-          return selectForms
-        }
       });
     });
   })
