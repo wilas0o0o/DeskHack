@@ -53,7 +53,7 @@
           <h4 class="mr-2 d-inline">アイテム</h4><span>※最大10個まで</span>
           <%= f.fields_for :items, id: "item-field" do |item| %>
             <div class="d-flex flex-wrap">
-              <%= render 'item_fields', f: item, count: count %>
+              <%= render 'item_fields', f: item %>
             </div>
           <% end %>
             <div class="links">

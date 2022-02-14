@@ -70,7 +70,7 @@
         <div class="form-group mx-3">
           <h4 class"mr-2 d-inline">アイテム</h4>
           <%= f.fields_for :items, id: "item-field" do |item| %>
-            <%= render 'item_fields', f: item %>
+            <%= render 'item_fields_edit', f: item %>
           <% end %>
             <div class="links">
               <%= link_to_add_association "アイテムを追加", f, :items, class: "add-item-btn" %>
@@ -207,14 +207,23 @@
         // フォームが削除された時に発火
         $(document).on('cocoon:after-remove', function(){
           count--;
-          var item_id = $(this).attr('id').replace(/[^0-9]/g, '');
           // 3個以下になったら.linksを表示
           if (count < 10) {
             $('.links').show();
           }
-          // 削除ボタンにチェックをつける
-          $(`#post_post_images_attributes_${id}__destroy`).prop('checked',true);
+          var selectForms = [];
+          var $nestedFields = $(document).find('.nested-fields');
+          selectForms = filterVisibleField($nestedFields, selectForms)
         });
+        function filterVisibleField($nestedFields, selectForms) {
+          $nestedFields.each(function(i, field){
+            if ($(field).css('display') !== 'none'){
+              var $selectForm = $($(this).find('select'))
+              selectForms.push($selectForm)
+            }
+          })
+          return selectForms
+        }
       });
     });
   })

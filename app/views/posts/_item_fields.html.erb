@@ -2,10 +2,10 @@
   <div>
     <div class="form-group d-flex">
       <!--<div class="prev-target">-->
-      <!--  <%#= image_tag "no_image_item.jpg", size: "180x120", class: "prev-item-image rounded"%>-->
+      <!--  <%#= image_tag "no_image_item.jpg", size: "180x120", class: "prev-item-image rounded" %>-->
       <!--</div>-->
       <div class="add-item-image-btn">
-        <%#= f.label :image, "商品画像を変更", class: "item-label" %>
+        <%= f.label :image, "商品画像を変更", class: "item-label" %>
         <%= f.file_field :image, class: "hidden-field item-hidden-field" %>
       </div>
     </div>
