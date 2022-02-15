@@ -24,34 +24,15 @@
     <div class="col-lg-8">
       <div class="images mb-2">
         <div class="mainImg mb-1">
-          <%= image_tag @first_image.image.to_s, class: "img-fluid" %>
+          <%= image_tag @first_image.image.url, class: "img-thumbnail" %>
         </div>
         <div class="d-flex">
           <% @post.post_images.each do |post_image| %>
             <div class="subImg pr-1">
-              <%= image_tag post_image.image.url, class: "img-fluid" %>
+              <%= image_tag post_image.image.url, class: "img-thumbnail" %>
             </div>
           <% end %>
         </div>
-        
-        <script>
-          $(function(){
-            // subImgをクリックすると発火
-            $('.subImg img').on('click',function(){
-              // クリックした画像のurlを取得
-              subimg = $(this).attr('src');
-              // 元のmainImgの画像を取得
-              mainimg = $('mainImg img').attr('src')
-              // mainImgをフェードアウト後、クリックしたsubImgと入れ替える
-              $('.mainImg img').fadeOut(100, function() {
-                $('.mainImg img').attr('src', subimg).on('load', function() {
-                  $(this).fadeIn(100);
-                })
-              })
-            });
-          });
-        </script>
-        
       </div>
       <div class="post-action d-flex">
         <h5 class="favorite-btn mr-3"><%= render 'favorites/favorite_btn', post: @post %></h5>
@@ -61,6 +42,36 @@
           <p><%= @post.created_at.to_s(:date_jp) %></p>
         </div>
       </div>
+      <% if @items.present? %>
+        <div>
+          <h4><strong>使用アイテム</strong></h4>
+          <% @items.each do |item| %>
+            <div class="d-flex my-3 bg-white">
+              <div class="itemImg my-auto mx-1">
+                <% if item.image.present? %>
+                  <%= image_tag item.image.url, class: "img-fluid rounded" %>
+                <% else %>
+                  <%= image_tag "no_image_item.jpg", class: "img-fluid rounded border" %>
+                <% end %>
+              </div>
+              <table class="table table-borderless mb-0">
+                <tr>
+                  <th>商品名</th>
+                  <td><%= item.name %></td>
+                </tr>
+                <tr>
+                  <th class="col-3">カテゴリー</th>
+                  <td><%= item.category.name %></td>
+                </tr>
+                <tr>
+                  <th>メーカー</th>
+                  <td><%= item.manufacturer %></td>
+                </tr>
+              </table>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <div class="col-lg-4 pr-md-0">
       <div class="text-box bg-white p-3">
@@ -87,3 +98,21 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(function(){
+    // subImgをクリックすると発火
+    $('.subImg img').on('click',function(){
+      // クリックした画像のurlを取得
+      subimg = $(this).attr('src');
+      // 元のmainImgの画像を取得
+      mainimg = $('mainImg img').attr('src')
+      // mainImgをフェードアウト後、クリックしたsubImgと入れ替える
+      $('.mainImg img').fadeOut(100, function() {
+        $('.mainImg img').attr('src', subimg).on('load', function() {
+          $(this).fadeIn(100);
+        })
+      })
+    });
+  });
+</script>

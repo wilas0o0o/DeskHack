@@ -14,6 +14,7 @@
 //= require jquery.jscroll.min.js
 //= require popper
 //= require bootstrap-sprockets
+//= require cocoon
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
@@ -29,4 +30,12 @@ $(window).on('scroll', function() {
       nextSelector: 'span.next a'
     });
   }
+});
+
+
+$(document).ready(function() {
+  $(".item-edit-delete-btn").on("click", function(){
+   $(this).parent().parent().remove()
+   // $("#parent").remove();
+  });
 });

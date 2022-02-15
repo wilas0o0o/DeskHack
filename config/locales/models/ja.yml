@@ -6,9 +6,14 @@ ja:
         password: パスワード
         email: メールアドレス
       post:
-        post_images: 画像
+        post_images: 投稿画像
         text: 本文
         situation: 使用状況
+        items: アイテム欄
+      items:
+        category: アイテムのカテゴリ
+        name: アイテムの商品名
+        manufacturer: アイテムのメーカー
   devise:
     failure:
       user:
