@@ -12,7 +12,7 @@
         </td>
       <td class="col-8"><%= simple_format(post_comment.comment) %></td>
       <% if post_comment.user == current_user %>
-        <td class="col-3"><%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class: "btn btn-danger btn-sm"%></td>
+        <td class="col-3"><%= link_to "", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class: "far fa-trash-alt text-danger", data: { confirm: 'コメントを削除しますか？' } %></td>
       <% end %>
     </tr>
   <% end %>
