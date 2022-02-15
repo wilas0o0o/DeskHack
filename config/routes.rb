@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, skip: [:passwords, :registrations, :sessions]
+  devise_scope :user do
+    get 'sign_up', to: 'devise/registrations#new', as: :new_user_registration
+    post 'sign_up', to: 'devise/registrations#create', as: :user_registration
+    get 'sign_in', to: 'devise/sessions#new', as: :new_user_session
+    post 'sign_in', to: 'devise/sessions#create', as: :user_session
+    delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+  end
   root 'homes#top'
   get 'search' => 'searches#search'
   resources :users, only: [:show, :edit, :update] do
