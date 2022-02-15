@@ -9,4 +9,5 @@ class SearchesController < ApplicationController
       @records = Post.tagged_with(params[:content]).page(params[:page]).per(15)
     end
   end
+
 end
