@@ -21,6 +21,7 @@
 //= require_tree .
 /* global $*/
 
+// 無限スクロール
 $(window).on('scroll', function() {
   var scrollHeight = $(document).height();
   var scrollPosition = $(window).height() + $(window).scrollTop();
@@ -30,12 +31,4 @@ $(window).on('scroll', function() {
       nextSelector: 'span.next a'
     });
   }
-});
-
-
-$(document).ready(function() {
-  $(".item-edit-delete-btn").on("click", function(){
-   $(this).parent().parent().remove()
-   // $("#parent").remove();
-  });
 });

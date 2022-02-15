@@ -51,7 +51,7 @@
 
         <div class="form-group item-form mx-3">
           <h4 class="mr-2 d-inline">アイテム</h4><span>※最大10個まで</span>
-          <p class="text-danger">アイテムは一度投稿すると編集できません</p>
+          <p class="text-dark">アイテムはなくても投稿できます。</p>
           <%= f.fields_for :items, id: "item-field" do |item| %>
             <div class="d-flex">
               <%= render 'item_fields', f: item %>
@@ -175,9 +175,7 @@
           }
         });
       });
-    });
 
-    $(function() {
       // アイテムの画像が指定されたら発火
       $(document).on('change', '.item-hidden-field', function() {
         // 選択されたfile-fieldのidの数字の部分を取得
@@ -193,8 +191,8 @@
           var item_image = this.result;
           // 上で与えられたidを持つprev-targetの画像を変更
           $(`#prev-target-${item_id} img`).attr({src: `${item_image}`});
-        }
-      })
-    })
-  })
+        };
+      });
+    });
+  });
 </script>

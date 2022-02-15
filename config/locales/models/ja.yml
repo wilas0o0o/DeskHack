@@ -11,13 +11,11 @@ ja:
         text: 本文
         situation: 使用用途
         items: アイテム欄
-        Comment: コメント
       items:
+        image: アイテムの画像
         category: アイテムのカテゴリ
         name: アイテムの商品名
         manufacturer: アイテムのメーカー
-      post_comment:
-        Comment: コメント
   devise:
     failure:
       user:
