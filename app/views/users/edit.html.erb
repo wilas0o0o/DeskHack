@@ -73,6 +73,11 @@
         </div>
 
         <div class="form-group d-flex flex-column">
+          <%= f.label :username, "ユーザーID" %>
+          <%= f.text_field :username, class: "form-control" %>
+        </div>
+
+        <div class="form-group d-flex flex-column">
           <%= f.label :email, "メールアドレス" %>
           <%= f.email_field :email, class: "form-control" %>
         </div>

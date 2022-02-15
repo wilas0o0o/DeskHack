@@ -10,7 +10,10 @@
             <%= image_tag "no_image_avatar.png", class: "rounded-circle border", size: "60x60" %>
           <% end %>
         <% end %>
-        <h4 class="m-0 ml-1"><%= @post.user.name %></h4>
+        <div class="ml-2">
+          <h4 class="m-0"><%= @post.user.name %></h4>
+          <p class="text-muted m-0">@<%= @post.user.username %></p>
+        </div>
       </div>
       <div class="post-option follow-btn ml-auto d-flex align-items-end">
         <% if @post.user == current_user %>
