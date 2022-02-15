@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  # ログイン用の疑似カラム
+  attr_accessor :login
   mount_uploader :avatar, AvatarUploader
 
   has_many :posts, dependent: :destroy
@@ -18,8 +20,23 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 
+  validates :name,
+    presence: true,
+    length: { maximum: 30 }
+  validates :username,
+    uniqueness: true,
+    length: { minimum: 5, maximum: 15 },
+    format: { with: /\A[a-z0-9]+\z/, message: "は半角英数字で入力してください" }
 
-  validates :name, presence: true
+  # ログイン時、username or email でログインできるようにする
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if  login = conditions.delete(:login)
+      where(conditions).where(["username = :value OR lower(email) = lower(:value)", { :value => login }]).first
+    else
+      where(conditions).first
+    end
+  end
 
   # すでにフォローしているかどうか
   def followings?(user)

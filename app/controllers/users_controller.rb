@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    # @user = User.find_by(username: params[:username])
+
     @posts = @user.posts.page(params[:page]).per(15)
   end
 
@@ -19,6 +21,7 @@ class UsersController < ApplicationController
 
   def bookmarked
     @user = User.find(params[:id])
+    # @user = User.find_by(username: params[:username])
     bookmarked_post_ids = @user.bookmarks.pluck(:post_id)
     @posts = Post.where(id: bookmarked_post_ids).page(params[:page]).per(15)
   end
@@ -26,11 +29,12 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :avatar)
+      params.require(:user).permit(:name, :username, :email, :avatar)
     end
 
     def ensure_correct_user
     @user = User.find(params[:id])
+    # @user = User.find_by(username: params[:username])
       unless @user == current_user
         redirect_to user_path(current_user)
       end
