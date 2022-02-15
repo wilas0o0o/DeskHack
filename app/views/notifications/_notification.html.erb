@@ -28,7 +28,7 @@
           <% end %>
           にコメントしました
           <p class="text-muted mb-0">
-            <%= PostComment.find_by(id: notification.comment_id)&.comment %>
+            <%= PostComment.find_by(id: notification.post_comment_id)&.comment %>
           </p>
       <% end %>
     </span>
