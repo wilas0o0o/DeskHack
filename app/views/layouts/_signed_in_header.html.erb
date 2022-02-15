@@ -1,39 +1,41 @@
-<header class="row mx-0">
-  <div class="col-md-3 d-flex justify-content-center header-logo">
-    <%= link_to image_tag("Logo_black.png"), root_path %>
-  </div>
-  <div class="col-md-6">
-    <div class="row h-100 align-items-center justify-content-between">
-      <div class="home col-md-2 col-sm-1 justify-content-end d-flex nav-icon">
-        <%= link_to "", posts_path, class: "fas fa-home fa-2x text-light" %>
+<header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 d-flex justify-content-center header-logo">
+        <%= link_to image_tag("Logo_black.png"), root_path %>
       </div>
-      <div class="col-md-10 col-sm-11 search-box">
-        <%= form_with url: search_path, method: :get, local: true do |f| %>
-          <i class="fas fa-search text-light fa-lg"></i>
-          <%= f.select :model, options_for_select({ "＃で検索" => "tag", "ユーザー検索" => "user" }), class: "search-select" %>
-          <%= f.text_field :content, placeholder: "タグ名かユーザー名で検索できます", class: "search-content col-md-8 col-sm-6" %>
-          <%= f.submit "検索" %>
-        <% end %>
+      <div class="col-md-4 offset-md-2 offset-sm-1 offset-1 my-md-0 my-2">
+        <div class="row h-100 align-items-center justify-content-between">
+          <div class="w-100 search-box">
+            <%= form_with url: search_path, method: :get, local: true do |f| %>
+              <i class="fas fa-search text-light fa-lg"></i>
+              <%= f.select :model, options_for_select({ "＃で検索" => "tag", "ユーザー検索" => "user" }), class: "search-select" %>
+              <%= f.text_field :content, placeholder: "タグ名かユーザー名で検索できます", class: "search-content col-10" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <ul class="header-nav d-flex p-0 mb-0 w-100 justify-content-around">
+          <li class="nav-icon"><%= link_to "", posts_path, class: "fas fa-home fa-2x text-light" %></li>
+          <li class="nav-icon"><%= link_to "", new_post_path, class: "far fa-plus-square fa-2x text-light" %></li>
+          <li class="nav-icon mynotice pt-1">
+            <span class="fa-stack">
+              <i class="fas fa-bell fa-lg fa-stack-2x text-light"></i>
+              <% if unchecked_notifications.any? %>
+                <i class="fas fa-circle notice-icon fa-stack-1x"></i>
+              <% end %>
+            </span>
+          </li>
+          <li class="nav-icon mypage">
+            <i class="fas fa-user fa-2x text-light"></i>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-  <div class="col-md-3 d-flex align-items-center justify-content-center">
-    <ul class="header-nav d-flex p-0 mb-0 w-100 justify-content-around">
-      <li class="nav-icon"><%= link_to "", new_post_path, class: "far fa-plus-square fa-2x text-light" %></li>
-      <li class="nav-icon mynotice pt-1">
-        <span class="fa-stack">
-          <i class="fas fa-bell fa-lg fa-stack-2x text-light"></i>
-          <% if unchecked_notifications.any? %>
-            <i class="fas fa-circle notice-icon fa-stack-1x"></i>
-          <% end %>
-        </span>
-      </li>
-      <li class="nav-icon mypage">
-        <i class="fas fa-user fa-2x text-light"></i>
-      </li>
-    </ul>
-  </div>
 </header>
+
 <div class="mypage-menu border">
   <div class="user-info d-flex border-bottom pb-2">
     <div>
