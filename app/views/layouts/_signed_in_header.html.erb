@@ -71,6 +71,7 @@
     $(".mypage-menu").toggleClass("mypage-active");
   })
 </script>
+
 <div class="mynotice-menu">
   <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
   <% if notifications.exists? %>
@@ -85,7 +86,6 @@
 <script>
   $(".mynotice").click(function(){
     $(".mynotice-menu").toggleClass("mynotice-active");
-    $(".notice-icon").hide();
   })
 </script>
 

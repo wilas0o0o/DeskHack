@@ -9,12 +9,15 @@ ja:
       post:
         post_images: 投稿画像
         text: 本文
-        situation: 使用状況
+        situation: 使用用途
         items: アイテム欄
+        Comment: コメント
       items:
         category: アイテムのカテゴリ
         name: アイテムの商品名
         manufacturer: アイテムのメーカー
+      post_comment:
+        Comment: コメント
   devise:
     failure:
       user:
