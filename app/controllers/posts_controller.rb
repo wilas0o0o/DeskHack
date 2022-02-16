@@ -33,33 +33,16 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     post_images = @post.post_images
     @first_image = post_images.to_a.first
-    @items = @post.items
     @post_comment = PostComment.new
+    @item = Item.new
     @tags = @post.tag_counts_on(:tags)
   end
 
   def edit
-    # @post.items.each do |item|
-    #   item.image.cache! unless item.image.blank?
-    # end
-
   end
 
   def update
-
-    pre_count  = @post.items.count
-    if @post.update(post_update_params)
-
-    # @post.items.each.with_index(1) do |item, index|
-    #   if index <= pre_count
-    #     item.destroy
-    #   end
-    # end
-
-      # @post.items.destroy_all
-      # params[:post][:items_attributes].each do |item|
-      #   @post.items.create(category_id: item[1][:category_id], image: item[1][:image], name: item[1][:name], manufacturer: item[1][:manufacturer])
-      # end
+    if @post.update(post_params)
       redirect_to post_path(@post)
     else
       render :edit
@@ -78,14 +61,11 @@ class PostsController < ApplicationController
                                                                            items_attributes: [:post_id, :category_id, :image, :name, :manufacturer])
     end
 
-    def post_update_params
-      params.require(:post).permit(:user_id, :situation, :text, :tag_list, post_images_attributes:[:image, :id, :_destroy])
-    end
-
     def ensure_correct_user
       @post = Post.find(params[:id])
       unless @post.user_id == current_user.id
         redirect_to post_path(@post)
       end
     end
+
 end

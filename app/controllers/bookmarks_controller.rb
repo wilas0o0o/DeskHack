@@ -11,4 +11,5 @@ class BookmarksController < ApplicationController
     bookmark = @post.bookmarks.find_by(user_id: current_user.id)
     bookmark.destroy
   end
+
 end

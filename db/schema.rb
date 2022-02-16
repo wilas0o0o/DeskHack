@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 2022_02_12_080716) do
     t.integer "post_id", null: false
     t.integer "category_id", null: false
     t.string "image"
-    t.string "name", default: "不明", null: false
-    t.string "manufacturer", default: "不明", null: false
+    t.string "name", null: false
+    t.string "manufacturer", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_items_on_category_id"

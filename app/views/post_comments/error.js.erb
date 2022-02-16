@@ -1,2 +1,2 @@
-$("#error_explanation").html("");
+$("#error_explanation").remove();
 $(".comment-form").prepend("<%= j(render 'layouts/errors', obj: @post_comment) %>");

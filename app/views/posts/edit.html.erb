@@ -36,10 +36,10 @@
             </div>
             <div class="hidden-content mb-3">
               <%= f.fields_for :post_images do |i| %>
-                <%= i.file_field :image, class: "hidden-field " %>
+                <%= i.file_field :image, class: "hidden-field post-hidden-field" %>
                 <%= i.check_box :_destroy, class: "hidden-checkbox" %>
                 <% @post.post_images.length.upto(3) do |num| %>
-                  <input class="hidden-field" type="file" name="post[post_images_attributes][<%= num %>][image]" id="post_post_images_attributes_<%= num %>_image"></input>
+                  <input class="hidden-field post-hidden-field" type="file" name="post[post_images_attributes][<%= num %>][image]" id="post_post_images_attributes_<%= num %>_image"></input>
                 <% end %>
               <% end %>
             </div>
@@ -65,17 +65,6 @@
           <h4 class="mr-2 d-inline">タグ</h4>
           <%= f.text_field :tag_list, value: @post.tag_list.join(','), placeholder: "（例）ゲーム好き,カラフル,logicool", class: "form-control mt-2" %>
           <span class="text-secondary">カンマ（,）で区切ることができます</span>
-        </div>
-
-        <div class="form-group mx-3">
-          <h4 class"mr-2 d-inline">アイテム</h4>
-          <p class="text-danger">アイテムの変更はできません</p>
-          <!--<%#= f.fields_for :items, id: "item-field" do |item| %>-->
-          <!--  <%#= render 'item_fields_edit', f: item %>-->
-          <!--<%# end %>-->
-          <!--  <div class="links">-->
-          <!--    <%#= link_to_add_association "アイテムを追加", f, :items, class: "add-item-btn" %>-->
-          <!--  </div>-->
         </div>
 
         <div class="actions d-flex justify-content-end">
@@ -106,7 +95,7 @@
                       </div>
                     </div>`
         return html;
-      }
+      };
 
       // 編集ページの場合
       if (window.location.href.match(/\/posts\/[0-9]+\/edit/)){
@@ -123,10 +112,10 @@
         if (count == 4) {
           $('.label-content').hide();
         }
-      }
+      };
 
       // .file_fieldから画像が指定されたら発火
-      $(document).on('change', '.hidden-field', function() {
+      $(document).on('change', '.post-hidden-field', function() {
         // .hidden-fieldのidの数値のみ取得
         var id = $(this).attr('id').replace(/[^0-9]/g, '');
         // .check-boxのチェックマークを外す
@@ -188,32 +177,6 @@
           $('.label-btn').attr({id: `label-btn-${id}`,for: `post_post_images_attributes_${id}_image`});
         }
       });
-
-      // cocoonのjQuery
-      $(document).ready(function(){
-        var count = $('.nested-fields').length
-        if (count == 10) {
-          $('.links').hide();
-        }
-        // フォームが追加された時に発火
-        $(document).on('cocoon:after-insert', function(){
-          // フォームの個数を数える
-          count++;
-          // 10個になったら.linksを隠す
-          if (count == 10) {
-            $('.links').hide();
-          }
-        });
-
-        // フォームが削除された時に発火
-        $(document).on('cocoon:after-remove', function(){
-          count--;
-          // 3個以下になったら.linksを表示
-          if (count < 10) {
-            $('.links').show();
-          }
-        });
-      });
     });
-  })
+  });
 </script>
