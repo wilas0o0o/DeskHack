@@ -14,7 +14,7 @@ class Post < ApplicationRecord
   enum situation: { Working: 0, Gaming: 1 }
 
   validates :post_images, presence: true, length: { maximum: 4 }
-  validates :text, presence: true, length: { maximum: 140 }
+  validates :text, presence: true, length: { maximum: 200 }
   validates :situation, presence: true
   validates :items, length: { maximum: 10}
 

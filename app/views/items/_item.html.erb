@@ -11,20 +11,20 @@
       <table class="table table-borderless mb-0">
         <tr>
           <th>商品名</th>
-          <td><%= item.name %></td>
+          <td class="text-break"><%= item.name %></td>
         </tr>
         <tr>
           <th class="col-3">カテゴリー</th>
-          <td><%= item.category.name %></td>
+          <td class="text-break"><%= item.category.name %></td>
         </tr>
         <tr>
           <th>メーカー</th>
-          <td><%= item.manufacturer %></td>
+          <td class="text-break"><%= item.manufacturer %></td>
         </tr>
       </table>
-      <div class="item-delete d-flex justify-content-end align-items-end m-2">
+      <div class="item-delete d-flex justify-content-end align-items-end m-2 mr-4">
         <% if post.user == current_user %>
-          <%= link_to "", post_item_path(item.post, item), method: :delete, remote: true, class: "fas fa-trash-alt fa-lg text-danger"%>
+          <%= link_to "", post_item_path(item.post, item), method: :delete, remote: true, class: "fa fa-trash-alt fa-lg text-muted"%>
         <% end %>
       </div>
     </div>

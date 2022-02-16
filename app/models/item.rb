@@ -3,6 +3,6 @@ class Item < ApplicationRecord
   belongs_to :post
   belongs_to :category
 
-  validates :name, presence: true
-  validates :manufacturer, presence: true
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :manufacturer, presence: true, length: { maximum: 30 }
 end
