@@ -2,4 +2,3 @@ $(".comments-count").html("<%= @post.post_comments.count %> 件のコメント�
 $(".comments-index").html("<%= j(render 'post_comments/comment', post: @post, post_comments: @post_comments) %>")
 $("#post_comment_comment").val("");
 $("#error_explanation").html("");
-$("#error_explanation").css("background-color", "");

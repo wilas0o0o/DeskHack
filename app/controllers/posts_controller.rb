@@ -33,7 +33,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     post_images = @post.post_images
     @first_image = post_images.to_a.first
-    @items = @post.items
     @post_comment = PostComment.new
     @item = Item.new
     @tags = @post.tag_counts_on(:tags)

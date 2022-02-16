@@ -4,17 +4,15 @@ class ItemsController < ApplicationController
     @post = Post.find(params[:post_id])
     @item = @post.items.new(item_params)
     if @item.save
-      redirect_to request.referer
     else
-      @post = Post.find(params[:id])
-      render 'posts/show'
+      @post = Post.find(params[:post_id])
+      render :error
     end
   end
 
   def destroy
     @post = Post.find(params[:post_id])
     @item = @post.items.find(params[:id]).destroy
-      redirect_to request.referer
   end
 
   private
