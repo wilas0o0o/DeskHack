@@ -35,6 +35,7 @@ class PostsController < ApplicationController
     @first_image = post_images.to_a.first
     @items = @post.items
     @post_comment = PostComment.new
+    @item = Item.new
     @tags = @post.tag_counts_on(:tags)
   end
 
