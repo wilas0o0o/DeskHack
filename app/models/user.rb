@@ -20,13 +20,8 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 
-  validates :name,
-    presence: true,
-    length: { maximum: 20 }
-  validates :username,
-    uniqueness: true,
-    length: { minimum: 5, maximum: 15 },
-    format: { with: /\A[a-z0-9]+\z/, message: "は半角英数字で入力してください" }
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :username, uniqueness: true, length: { minimum: 5, maximum: 15 }, format: { with: /\A[a-z0-9]+\z/, message: "は半角英数字で入力してください" }
 
   # ログイン時、username or email でログインできるようにする
   def self.find_first_by_auth_conditions(warden_conditions)
@@ -54,7 +49,7 @@ class User < ApplicationRecord
   def unfollow(user)
     active_relationships.find_by(followed_id: user.id).destroy
   end
-  
+
   # 検索メソッド
   def self.search_for(content)
     User.where('name LIKE ?', '%' + content + '%')

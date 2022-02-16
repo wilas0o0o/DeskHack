@@ -7,10 +7,11 @@ class Post < ApplicationRecord
   has_one  :post_image, -> {order(:id).limit(1)}, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :items, dependent: :destroy
+  has_many :post_hashtags
+  has_many :hashtags, through: :post_hashtags
 
   accepts_nested_attributes_for :post_images, allow_destroy: true
   accepts_nested_attributes_for :items, allow_destroy: true
-  acts_as_taggable
   enum situation: { Working: 0, Gaming: 1 }
 
   validates :post_images, presence: true, length: { maximum: 4 }
@@ -28,6 +29,29 @@ class Post < ApplicationRecord
 
   def bookmarked_by(user)
     bookmarks.where(user_id: user.id).exists?
+  end
+
+  # create時に#を外して保存する
+  after_create do
+    post = Post.find_by(id: self.id)
+    hashtags = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    post.hashtags = []
+    hashtags.uniq.map do |hashtag|
+      # ハッシュタグは先頭の#を外して保存
+      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
+      post.hashtags << tag
+    end
+  end
+
+  # update時に#を外して保存する
+  before_update do
+    post = Post.find_by(id: self.id)
+    post.hashtags.clear
+    hashtags = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    hashtags.uniq.map do |hashtag|
+      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
+      post.hashtags << tag
+    end
   end
 
   # いいねの通知を作成して保存

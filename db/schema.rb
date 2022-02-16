@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_12_080716) do
+ActiveRecord::Schema.define(version: 2022_02_16_074628) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 2022_02_12_080716) do
     t.index ["post_id"], name: "index_favorites_on_post_id"
     t.index ["user_id", "post_id"], name: "index_favorites_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
@@ -71,6 +77,15 @@ ActiveRecord::Schema.define(version: 2022_02_12_080716) do
     t.index ["user_id"], name: "index_post_comments_on_user_id"
   end
 
+  create_table "post_hashtags", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "hashtag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hashtag_id"], name: "index_post_hashtags_on_hashtag_id"
+    t.index ["post_id"], name: "index_post_hashtags_on_post_id"
+  end
+
   create_table "post_images", force: :cascade do |t|
     t.integer "post_id", null: false
     t.string "image", null: false
@@ -83,6 +98,7 @@ ActiveRecord::Schema.define(version: 2022_02_12_080716) do
     t.integer "user_id", null: false
     t.integer "situation", limit: 2, default: 0, null: false
     t.text "text", null: false
+    t.string "caption"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
