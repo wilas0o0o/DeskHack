@@ -25,4 +25,5 @@ Rails.application.routes.draw do
     resources :items, only: [:create, :destroy]
   end
   get '/post/hashtag/:name' => 'posts#hashtag'
+  patch 'check' => 'notifications#check'
 end

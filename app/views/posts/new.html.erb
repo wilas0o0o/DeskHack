@@ -92,7 +92,7 @@
       }
 
       // .file_fieldから画像が指定された時に発火
-      $(document).on('change', '.post-hidden-field', function() {
+      $(document).on('change', '.post-hidden-field,', function() {
         // .hidden-fieldのidの数値のみ取得
         var id = $(this).attr('id').replace(/[^0-9]/g, '');
         // .label-btnのidとforを更新

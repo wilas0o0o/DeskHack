@@ -8,7 +8,6 @@
         <div class="row h-100 align-items-center justify-content-between">
           <div class="w-100 search-box">
             <%= form_with url: search_path, method: :get, class: "d-flex", local: true do |f| %>
-              <!--<i class="fas fa-search text-light fa-lg"></i>-->
               <%= f.submit "\uF002", class: "search-btn text-light" %>
               <%= f.select :model, options_for_select({ "＃で検索" => "post", "ユーザー検索" => "user" }), class: "search-select" %>
               <%= f.search_field :content, placeholder: "タグ名かユーザー名で検索できます", class: "search-content col-10" %>
@@ -20,13 +19,17 @@
         <ul class="header-nav d-flex p-0 mb-0 w-100 justify-content-around">
           <li class="nav-icon"><%= link_to "", posts_path, class: "fas fa-home fa-2x text-light" %></li>
           <li class="nav-icon"><%= link_to "", new_post_path, class: "far fa-plus-square fa-2x text-light" %></li>
-          <li class="nav-icon mynotice pt-1">
-            <span class="fa-stack">
-              <i class="fas fa-bell fa-lg fa-stack-2x text-light"></i>
-              <% if unchecked_notifications.any? %>
-                <i class="fas fa-circle notice-icon fa-stack-1x"></i>
+          <li class="nav-icon mynotice">
+            <% if unchecked_notifications.any? %>
+              <%= link_to check_path, method: :patch, remote: true do %>
+                <span class="fa-stack pt-1">
+                  <i class="fas fa-bell fa-lg fa-stack-2x text-light"></i>
+                  <i class="fas fa-circle notice-icon fa-stack-1x"></i>
+                </span>
               <% end %>
-            </span>
+            <% else %>
+              <i class="fas fa-bell fa-2x text-light"></i>
+            <% end %>
           </li>
           <li class="nav-icon mypage">
             <i class="fas fa-user fa-2x text-light"></i>
