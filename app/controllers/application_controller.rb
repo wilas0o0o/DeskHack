@@ -19,11 +19,11 @@ class ApplicationController < ActionController::Base
 
     def set_notifications
       if user_signed_in?
+        # @is_unchecked = current_user.passive_notifications.where(is_checked: false).present?
         @notifications = current_user.passive_notifications.page(params[:page]).per(5)
-        # @notifications.where(is_checked: false).each do |notification|
+        # current_user.passive_notifications.where(is_checked: false).each do |notification|
         #   notification.update_attributes(is_checked: true)
         # end
       end
     end
-
 end
