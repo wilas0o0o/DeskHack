@@ -8,7 +8,7 @@
 
 Category.create!([
   {
-    name: "机"
+    name: "デスク"
   },
   {
     name: "椅子"
