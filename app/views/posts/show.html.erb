@@ -86,11 +86,7 @@
       <div class="text-box bg-white p-3 text-break">
         <%= simple_format(@post.text) %>
         <div class="border-top pt-2">
-          <% if @tags.present? %>
-            <% @tags.each do |tag| %>
-              <%= link_to "##{tag.name}", posts_path(tag: tag.name) %>
-            <% end %>
-          <% end %>
+          <%= render_with_hashtags(@post.caption) %>
         </div>
       </div>
       <div class="comment-box bg-white p-3 mt-3">

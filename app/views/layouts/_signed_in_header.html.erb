@@ -10,7 +10,7 @@
             <%= form_with url: search_path, method: :get, class: "d-flex", local: true do |f| %>
               <!--<i class="fas fa-search text-light fa-lg"></i>-->
               <%= f.submit "\uF002", class: "search-btn text-light" %>
-              <%= f.select :model, options_for_select({ "＃で検索" => "tag", "ユーザー検索" => "user" }), class: "search-select" %>
+              <%= f.select :model, options_for_select({ "＃で検索" => "post", "ユーザー検索" => "user" }), class: "search-select" %>
               <%= f.search_field :content, placeholder: "タグ名かユーザー名で検索できます", class: "search-content col-10" %>
             <% end %>
           </div>

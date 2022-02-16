@@ -35,7 +35,6 @@ class PostsController < ApplicationController
     @first_image = post_images.to_a.first
     @post_comment = PostComment.new
     @item = Item.new
-    @tags = @post.tag_counts_on(:tags)
   end
 
   def edit
@@ -54,10 +53,16 @@ class PostsController < ApplicationController
     redirect_to user_path(@post.user)
   end
 
+  def hashtag
+    @user = current_user
+    @tag = Hashtag.find_by(name: params[:name])
+    @posts = @tag.posts.page(params[:page]).per(15)
+  end
+
   private
 
     def post_params
-      params.require(:post).permit(:user_id, :situation, :text, :tag_list, post_images_attributes:[:image, :id, :_destroy],
+      params.require(:post).permit(:user_id, :situation, :text, :caption, post_images_attributes:[:image, :id, :_destroy],
                                                                            items_attributes: [:post_id, :category_id, :image, :name, :manufacturer])
     end
 
