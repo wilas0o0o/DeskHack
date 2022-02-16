@@ -5,8 +5,8 @@ class SearchesController < ApplicationController
     @model = params[:model]
     if @model == "user"
       @records = User.search_for(@content).page(params[:page]).per(30)
-    elsif @model == "tag"
-      @records = Post.tagged_with(params[:content]).page(params[:page]).per(15)
+    elsif @model == "post"
+      @records = Post.search_for(@content).page(params[:page]).per(15)
     end
   end
 

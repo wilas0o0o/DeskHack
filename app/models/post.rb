@@ -30,6 +30,10 @@ class Post < ApplicationRecord
   def bookmarked_by(user)
     bookmarks.where(user_id: user.id).exists?
   end
+  
+  def self.search_for(content)
+    Post.where('caption LIKE ?', '%' + content + '%' )
+  end
 
   # create時に#を外して保存する
   after_create do
