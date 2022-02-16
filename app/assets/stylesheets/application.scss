@@ -66,11 +66,17 @@ header {
   height: 60px;
 }
 
-
 .notice-icon {
   position: absolute;
   padding-left: 1em;
   color: #efa04c;
+}
+
+.search-btn {
+  font-family: FontAwesome;
+  border: none;
+  background: none;
+  font-size: 25px;
 }
 
 //---------- footer ---------//

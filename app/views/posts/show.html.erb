@@ -50,40 +50,40 @@
       <% if @post.items.count < 10 %>
         <% if @post.user == current_user %>
           <h6 class="text-primary"><strong>アイテムはいつでも追加できます</strong></h6>
-          <div class="item-form bg-white py-2 my-2 border rounded">
+          <div class="item-form bg-white py-1 my-2 rounded">
             <%= render 'layouts/errors', obj: @item %>
             <%= form_with model: [@post, @item], remote: true do |f| %>
               <div class="d-flex">
-                  <div class="add-item-image-btn prev-itemImg mx-1">
-                    <%= f.label :image, class: "item-label" do %>
-                      <%= image_tag "no_image_item.jpg", class: "prev-item-image img-fluid rounded border" %>
-                    <% end %>
-                    <%= f.file_field :image, class: "hidden-field item-hidden-field" %>
-                    <p class="text-center font-weight-bold text-muted">画像クリックで変更</p>
-                  </div>
-                  <table class="table table-borderless mb-0">
-                    <tr class="form-group">
-                      <th>商品名</th>
-                      <td><%= f.text_field :name, class: "form-control" %></td>
-                    </tr>
-                    <tr class="form-group">
-                      <th class="col-3">カテゴリー</th>
-                      <td><%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "選択してください" %></td>
-                    </tr>
-                    <tr class="form-group">
-                      <th>メーカー</th>
-                      <td><%= f.text_field :manufacturer, class: "form-control" %></td>
-                      <td><%= f.submit "追加する", class: "btn btn-primary" %></td>
-                    </tr>
-                  </table>
+                <div class="add-item-image-btn mx-1">
+                  <%= f.label :image, class: "item-label prev-itemImg" do %>
+                    <%= image_tag "no_image_item.jpg", class: "img-fluid rounded border" %>
+                  <% end %>
+                  <%= f.file_field :image, class: "hidden-field item-hidden-field" %>
+                  <p class="text-center font-weight-bold text-muted">画像クリックで変更</p>
                 </div>
+                <table class="table table-borderless mb-0">
+                  <tr class="form-group">
+                    <th class="align-middle">商品名</th>
+                    <td><%= f.text_field :name, class: "form-control" %></td>
+                  </tr>
+                  <tr class="form-group">
+                    <th>カテゴリー</th>
+                    <td><%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "選択してください" %></td>
+                  </tr>
+                  <tr class="form-group">
+                    <th class="align-middle">メーカー</th>
+                    <td><%= f.text_field :manufacturer, class: "form-control" %></td>
+                    <td><%= f.submit "追加する", class: "btn btn-primary" %></td>
+                  </tr>
+                </table>
+              </div>
             <% end %>
           </div>
         <% end %>
       <% end %>
     </div>
     <div class="col-lg-4 pr-md-0">
-      <div class="text-box bg-white p-3">
+      <div class="text-box bg-white p-3 text-break">
         <%= simple_format(@post.text) %>
         <div class="border-top pt-2">
           <% if @tags.present? %>
@@ -101,7 +101,7 @@
           <%= form_with model: [@post, @post_comment], remote: true do |f| %>
             <%= f.text_area :comment, class: "form-control" %>
             <div class="action d-flex justify-content-end">
-              <%= f.submit "送信", class: "btn btn-secondary btn-sm mt-1"%>
+              <%= f.submit "送信", class: "btn btn-primary btn-sm mt-1"%>
             </div>
           <% end %>
         </div>

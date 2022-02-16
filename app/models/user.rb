@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   validates :name,
     presence: true,
-    length: { maximum: 30 }
+    length: { maximum: 20 }
   validates :username,
     uniqueness: true,
     length: { minimum: 5, maximum: 15 },
@@ -50,11 +50,12 @@ class User < ApplicationRecord
     end
   end
 
-  #フォローを外すメソッド
+  # フォローを外すメソッド
   def unfollow(user)
     active_relationships.find_by(followed_id: user.id).destroy
   end
-
+  
+  # 検索メソッド
   def self.search_for(content)
     User.where('name LIKE ?', '%' + content + '%')
   end
