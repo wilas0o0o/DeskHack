@@ -63,7 +63,8 @@
 
         <div class="form-group mx-3">
           <h4 class="mr-2 d-inline">タグ</h4>
-          <%= f.text_field :caption, placeholder: "（例）ゲーム好き,カラフル,logicool", class: "form-control mt-2" %>
+          <%= f.text_field :caption, placeholder: "（例）#ゲーム好き #カラフル #logicool", class: "form-control mt-2" %>
+          <p class="text-muted">#をつけるとハッシュタグになります</p>
         </div>
 
         <div class="actions d-flex justify-content-end">
