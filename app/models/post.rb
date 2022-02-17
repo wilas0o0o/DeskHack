@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :post_images, dependent: :destroy
-  has_one  :post_image, -> {order(:id).limit(1)}, dependent: :destroy
+  has_one  :post_image, -> { order(:id).limit(1) }, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :items, dependent: :destroy
   has_many :post_hashtags
@@ -17,7 +17,7 @@ class Post < ApplicationRecord
   validates :post_images, presence: true, length: { maximum: 4 }
   validates :text, presence: true, length: { maximum: 200 }
   validates :situation, presence: true
-  validates :items, length: { maximum: 10}
+  validates :items, length: { maximum: 10 }
 
   default_scope -> { order(created_at: :desc) }
   scope :working, -> { where(situation: 0) }
@@ -30,15 +30,15 @@ class Post < ApplicationRecord
   def bookmarked_by(user)
     bookmarks.where(user_id: user.id).exists?
   end
-  
+
   def self.search_for(content)
-    Post.where('caption LIKE ?', '%' + content + '%' )
+    Post.where('caption LIKE ?', '%' + content + '%')
   end
 
   # create時に#を外して保存する
   after_create do
-    post = Post.find_by(id: self.id)
-    hashtags = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    post = Post.find_by(id: id)
+    hashtags = caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     post.hashtags = []
     hashtags.uniq.map do |hashtag|
       # ハッシュタグは先頭の#を外して保存
@@ -49,9 +49,9 @@ class Post < ApplicationRecord
 
   # update時に#を外して保存する
   before_update do
-    post = Post.find_by(id: self.id)
+    post = Post.find_by(id: id)
     post.hashtags.clear
-    hashtags = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    hashtags = caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     hashtags.uniq.map do |hashtag|
       tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
       post.hashtags << tag

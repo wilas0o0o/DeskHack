@@ -28,16 +28,15 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:name, :username, :email, :avatar)
-    end
+  def user_params
+    params.require(:user).permit(:name, :username, :email, :avatar)
+  end
 
-    def ensure_correct_user
+  def ensure_correct_user
     @user = User.find(params[:id])
     # @user = User.find_by(username: params[:username])
-      unless @user == current_user
-        redirect_to user_path(current_user)
-      end
+    unless @user == current_user
+      redirect_to user_path(current_user)
     end
-
+  end
 end

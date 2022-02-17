@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-
   def create
     @post = Post.find(params[:post_id])
     @item = @post.items.new(item_params)
@@ -16,8 +15,8 @@ class ItemsController < ApplicationController
   end
 
   private
-    def item_params
-      params.require(:item).permit(:category_id, :name, :manufacturer, :image)
-    end
 
+  def item_params
+    params.require(:item).permit(:category_id, :name, :manufacturer, :image)
+  end
 end
