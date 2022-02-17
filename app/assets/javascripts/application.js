@@ -32,3 +32,28 @@ $(window).on('scroll', function() {
     });
   }
 });
+
+$(function(){
+  $(".mynotice").click(function(){
+  $(".mynotice-menu").toggleClass("mynotice-active");
+  });
+
+  $(".mypage").click(function(){
+  $(".mypage-menu").toggleClass("mypage-active");
+  });
+
+});
+
+$(document).on('click', function(e) {
+  if (!$(e.target).closest('.mynotice').length) {
+    $('.mynotice-menu').removeClass('mynotice-active');
+  }
+});
+
+$(document).on('click', function(e) {
+  if (!$(e.target).closest('.mypage').length) {
+    $('.mypage-menu').removeClass('mypage-active');
+  }
+});
+
+
