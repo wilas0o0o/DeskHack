@@ -4,8 +4,6 @@ class Notification < ApplicationRecord
   belongs_to :visitor, class_name: "User", optional: true
   belongs_to :visited, class_name: "User", optional: true
 
-  default_scope -> { order(created_at: :desc) }
-
   def checked_notification
     passive_notifications.where(is_checked: false).each do |notification|
       notification.update_attributes(is_checked: true)

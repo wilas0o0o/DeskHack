@@ -19,11 +19,11 @@ class PostsController < ApplicationController
 
   def index
     if params[:sort_working]
-      @posts = Post.working.page(params[:page]).per(15)
+      @posts = Post.working.order(created_at: :desc).page(params[:page]).per(15)
     elsif params[:sort_gaming]
-      @posts = Post.gaming.page(params[:page]).per(15)
+      @posts = Post.gaming.order(created_at: :desc).page(params[:page]).per(15)
     else
-      @posts = Post.all.page(params[:page]).per(15)
+      @posts = Post.all.order(created_at: :desc).page(params[:page]).per(15)
     end
   end
 
@@ -60,9 +60,15 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :situation, :text, :caption,
-                                  post_images_attributes: [:image, :id, :_destroy],
-                                  items_attributes: [:post_id, :category_id, :image, :name, :manufacturer])
+    params.require(:post).
+      permit(
+        :user_id,
+            :situation,
+            :text,
+            :caption,
+            post_images_attributes: [:image, :id, :_destroy],
+            items_attributes: [:post_id, :category_id, :image, :name, :manufacturer]
+      )
   end
 
   def ensure_correct_user
