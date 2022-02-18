@@ -11,11 +11,49 @@
 // about supported directives.
 //
 //= require jquery3
+//= require jquery.jscroll.min.js
 //= require popper
 //= require bootstrap-sprockets
-//= require jquery_ujs
-//
+//= require cocoon
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+/* global $*/
+
+// 無限スクロール
+$(window).on('scroll', function() {
+  var scrollHeight = $(document).height();
+  var scrollPosition = $(window).height() + $(window).scrollTop();
+  if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05) {
+    $('.jscroll').jscroll({
+      contentSelector: '.jscroll',
+      nextSelector: 'span.next a'
+    });
+  }
+});
+
+$(function(){
+  $(".mynotice").click(function(){
+  $(".mynotice-menu").toggleClass("mynotice-active");
+  });
+
+  $(".mypage").click(function(){
+  $(".mypage-menu").toggleClass("mypage-active");
+  });
+
+});
+
+$(document).on('click', function(e) {
+  if (!$(e.target).closest('.mynotice').length) {
+    $('.mynotice-menu').removeClass('mynotice-active');
+  }
+});
+
+$(document).on('click', function(e) {
+  if (!$(e.target).closest('.mypage').length) {
+    $('.mypage-menu').removeClass('mypage-active');
+  }
+});
+
+

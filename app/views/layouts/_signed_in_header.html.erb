@@ -1,0 +1,93 @@
+<header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 d-flex justify-content-center header-logo">
+        <%= link_to image_tag("Logo_black.png"), root_path %>
+      </div>
+      <div class="col-md-4 offset-md-2 offset-sm-1 offset-1 my-md-0 my-2">
+        <div class="row h-100 align-items-center justify-content-between">
+          <div class="w-100 search-box">
+            <%= form_with url: search_path, method: :get, class: "d-flex", local: true do |f| %>
+              <%= f.submit "\uF002", class: "search-btn text-light" %>
+              <%= f.select :model, options_for_select({ "＃で検索" => "post", "ユーザー検索" => "user" }), class: "search-select" %>
+              <%= f.search_field :content, placeholder: "タグ名かユーザー名で検索できます", class: "search-content col-10" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex align-items-center justify-content-center my-md-0 my-2">
+        <ul class="header-nav d-flex p-0 mb-0 w-100 justify-content-around">
+          <li class="nav-icon"><%= link_to "", posts_path, class: "fas fa-home fa-2x text-light" %></li>
+          <li class="nav-icon"><%= link_to "", new_post_path, class: "far fa-plus-square fa-2x text-light" %></li>
+          <li class="nav-icon mynotice">
+            <% if unchecked_notifications.any? %>
+              <%= link_to check_path, method: :patch, remote: true do %>
+                <span class="fa-stack pt-1">
+                  <i class="fas fa-bell fa-lg fa-stack-2x text-light"></i>
+                  <i class="fas fa-circle notice-icon fa-stack-1x"></i>
+                </span>
+              <% end %>
+            <% else %>
+              <i class="fas fa-bell fa-2x text-light"></i>
+            <% end %>
+          </li>
+          <li class="nav-icon mypage">
+            <i class="fas fa-user fa-2x text-light"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<% if current_page?(posts_path) %>
+  <div class="d-flex justify-content-center border-bottom bg-white">
+    <ul class="container nav d-flex justify-content-center mb-2 mb-sm-0 align-items-center">
+      <li class="unsigned-nav"><%= link_to "Working", posts_path(sort_working: true), class: "nav-link px-5 text-dark h4 m-0" %></li>
+      <li class="unsigned-nav"><%= link_to "All Posts", posts_path, class: "nav-link px-5 text-dark h3 m-0" %></li>
+      <li class="unsigned-nav"><%= link_to "Gaming", posts_path(sort_gaming: true), class: "nav-link px-5 text-dark h4 m-0" %></li>
+    </ul>
+  </div>
+<% end %>
+
+<div class="mypage-menu border">
+  <div class="user-info d-flex border-bottom pb-2">
+    <div>
+      <%= link_to user_path(current_user) do %>
+        <% if current_user.avatar? %>
+          <%= image_tag current_user.avatar.url, class: "rounded-circle border", size: "60x60" %>
+        <% else %>
+          <%= image_tag "no_image_avatar.png", class: "rounded-circle border", size: "60x60" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="ml-3 d-flex flex-column justify-content-center">
+      <span><%= current_user.name %></span>
+    </div>
+  </div>
+  <table class="table table-borderless mb-0">
+    <tr>
+      <td class="text-center"><%= link_to "", user_path(current_user), class: "fas fa-user fa-lg text-dark" %></td>
+      <td><%= link_to "マイページ", user_path(current_user), class: "text-dark" %></td>
+    </tr>
+    <tr>
+      <td class="text-center"><%= link_to "", bookmarked_user_path(current_user), class: "fas fa-tags fa-lg text-dark" %></td>
+      <td><%= link_to "保存済み", bookmarked_user_path(current_user), class: "text-dark" %></td>
+    </tr>
+    <tr>
+      <td class="text-center"><%= link_to "", destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt fa-lg text-dark" %></td>
+      <td><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-dark" %></td>
+    </tr>
+  </table>
+</div>
+
+<div class="mynotice-menu">
+  <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+  <% if notifications.exists? %>
+    <div>
+      <%= render notifications %>
+      <%= paginate notifications %>
+    </div>
+  <% else %>
+    <p class="mt-3">通知はありません</p>
+  <% end %>
+</div>

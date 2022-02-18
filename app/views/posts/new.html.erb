@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <h2 class="text-center mt-5 mb-5">新規投稿を作成</h2>
+      <%= render 'layouts/errors', obj: @post %>
+
+      <%= form_with model:@post, local:true do |f| %>
+        <div class="form-group mx-3">
+          <h4 class="mr-2 d-inline">画像</h4><span class="bg-danger text-light rounded px-1 mr-1">必須</span>
+          <span>※最大４枚まで</span>
+          <div class="d-flex flex-wrap">
+            <div class="prev-content flex-wrap d-flex mt-2"></div>
+            <div class="label-content mt-2">
+              <div class="h-100 d-flex align-items-center">
+                <label class="label-btn btn btn-secondary" for="post_post_images_attributes_0_image" id="label-btn-0">
+                  画像を追加
+                </label>
+              </div>
+            </div>
+            <div class="hidden-content mb-3">
+              <%= f.fields_for :post_images do |i| %>
+                <%= i.file_field :image, class: "hidden-field post-hidden-field" %>
+                <input class="hidden-field post-hidden-field" type="file" name="post[post_images_attributes][1][image]" id="post_post_images_attributes_1_image"></input>
+                <input class="hidden-field post-hidden-field" type="file" name="post[post_images_attributes][2][image]" id="post_post_images_attributes_2_image"></input>
+                <input class="hidden-field post-hidden-field" type="file" name="post[post_images_attributes][3][image]" id="post_post_images_attributes_3_image"></input>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mx-3 mb-3">
+          <h4 class="mr-2 d-inline">本文</h4><span class="bg-danger text-light rounded px-1">必須</span>
+          <%= f.text_area :text, size: "20x10", placeholder: "200字まで投稿できます。",class: "form-control mt-2" %>
+        </div>
+
+        <div class="form-group mx-3">
+          <h4 class="mr-2 d-inline">使用用途</h4><span class="bg-danger text-light rounded px-1">必須</span>
+          <div class="radio_button mt-2">
+            <%= f.radio_button :situation, Post.situations.key(0) %>
+            <%= f.label :situation_working, "Working", class: "mr-5" %>
+            <%= f.radio_button :situation, Post.situations.key(1) %>
+            <%= f.label :situation_gaming, "Gaming" %>
+          </div>
+        </div>
+
+        <div class="form-group mx-3">
+          <h4 class="mr-2 d-inline">タグ</h4>
+          <%= f.text_field :caption, placeholder: "（例）#ゲーム好き #カラフル #logicool", class: "form-control mt-2" %>
+          <p class="text-muted">#をつけるとハッシュタグになります</p>
+        </div>
+
+        <div class="form-group item-form mx-3">
+          <h4 class="mr-2 d-inline">アイテム</h4><span>※最大10個まで</span>
+          <p class="text-muted">アイテムはなくても投稿できます。</p>
+          <%= f.fields_for :items, id: "item-field" do |item| %>
+            <div class="d-flex">
+              <%= render 'item_fields', f: item %>
+            </div>
+          <% end %>
+            <div class="links">
+              <%= link_to_add_association "アイテムを追加", f, :items, class: "add-item-btn text-white btn btn-secondary" %>
+            </div>
+        </div>
+
+        <div class="actions d-flex justify-content-end mb-5">
+          <%= f.submit "投稿する",class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on('turbolinks:load', function(){
+    $(function(){
+
+      // 画像をプレビュー表示させる場所(.prev-box)を作成
+      function buildHTML(count) {
+        var html = `<div class="prev-box" id="prev-box_${count}">
+                      <div class="prev-img w-100">
+                        <img src="" alt="preview">
+                      </div>
+                      <div class="prev-menu d-flex text-center">
+                        <div class="update-box bg-white text-success w-50 border">
+                          <label for="post_post_images_attributes_${count}_image">変更</label>
+                        </div>
+                        <div class="delete-box bg-white text-danger w-50 border" id="delete_btn_${count}">
+                          <span>削除</span>
+                        </div>
+                      </div>
+                    </div>`
+        return html;
+      }
+
+      // .file_fieldから画像が指定された時に発火
+      $(document).on('change', '.post-hidden-field,', function() {
+        // .hidden-fieldのidの数値のみ取得
+        var id = $(this).attr('id').replace(/[^0-9]/g, '');
+        // .label-btnのidとforを更新
+        $('.label-btn').attr({id: `label-btn-${id}`,for: `post_images_attributes_${id}_image`});
+        // .file_filedからデータを取得して変数fileに代入
+        var file = this.files[0];
+        // FileReaderオブジェクトを作成
+        var reader = new FileReader();
+        // readAsDataURLで変数fileを読み込む
+        reader.readAsDataURL(file);
+        // 読み込みが完了したら処理を実行
+        reader.onload = function() {
+          // 読み込んだファイルの内容を取得して変数imageに代入
+          var image = this.result;
+          // プレビューが元々なかった場合のみ実行
+          if ($(`#prev-box_${id}`).length == 0) {
+            // 変数htmlに.prev-boxを代入
+            var html = buildHTML(id);
+            // .label-contentの直前に変数htmlを追加
+            var prevContent = $('.label-content').prev();
+            $(prevContent).append(html);
+          }
+          // 変数imageを表示する
+          $(`#prev-box_${id} img`).attr('src', `${image}`);
+          // .prev-boxの数を数える
+          var count = $('.prev-box').length;
+          // .prev-boxが4個あったら.label-contentを隠す
+          if (count == 4) {
+            $('.label-content').hide();
+          }
+          // .label-btnのidとforの値を変更
+          if(count < 4){
+            // .prev-boxの数に応じて.label-btnのforを更新する
+            $('.label-btn').attr({id: `label-btn-${count}`,for: `post_post_images_attributes_${count}_image`});
+          }
+        }
+      });
+
+      // .delete-boxがクリックされたら発火
+      $(document).on('click', '.delete-box', function() {
+        // post_post_images_attributes_${id}_image から${id}に入った数字のみ取得
+        var id = $(this).attr('id').replace(/[^0-9]/g, '');
+        // 取得したidに該当する.prev-boxを削除
+        $(`#prev-box_${id}`).remove();
+        // 取得したidに該当する.file_fieldの中身を削除
+        $(`#post_images_attributes_${id}_image`).val("");
+        // 削除後の.prev-boxの数を数える
+        var count = $('.prev-box').length;
+        // 4個目の.prev-boxが削除されたら.label-contentを表示
+        if (count < 4) {
+          $('.label-content').show();
+        }
+
+        if(id < 4){
+          // 削除された際に空になった.file_fieldをもう一度入力可能にする
+          $('.label-btn').attr({id: `label-btn-${id}`,for: `post_post_images_attributes_${id}_image`});
+        }
+      });
+
+      // cocoonのjQuery
+      $(document).ready(function(){
+        var count = 0
+        // フォームが追加された時に発火
+        $(document).on('cocoon:after-insert', function(){
+          // フォームの個数を数える
+          count++;
+          // 10個になったら.linksを隠す
+          if (count == 10) {
+            $('.links').hide();
+          }
+        });
+
+        // フォームが削除された時に発火
+        $(document).on('cocoon:after-remove', function(){
+          count--;
+          // 3個以下になったら.linksを表示
+          if (count < 10) {
+            $('.links').show();
+          }
+        });
+      });
+
+      // アイテムの画像が指定されたら発火
+      $(document).on('change', '.item-hidden-field', function() {
+        // 選択されたfile-fieldのidの数字の部分を取得
+        var item_id = $(this).attr('id').replace(/[^0-9]/g, '');
+        // 選択した部分のみの.add-item-image-btnにidを与える
+        $(this).parent().last().attr({id: `prev-target-${item_id}`})
+        // 選択された画像データを取得
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function() {
+          // 選択された画像データを.item_imageに代入
+          var item_image = this.result;
+          // 上で与えられたidを持つprev-targetの画像を変更
+          $(`#prev-target-${item_id} img`).attr({src: `${item_image}`});
+        };
+      });
+    });
+  });
+</script>

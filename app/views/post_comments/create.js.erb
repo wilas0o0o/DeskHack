@@ -1,0 +1,4 @@
+$(".comments-count").html("<%= @post.post_comments.count %> 件のコメントがあります。");
+$(".comments-index").html("<%= j(render 'post_comments/comment', post: @post, post_comments: @post_comments) %>")
+$("#post_comment_comment").val("");
+$("#error_explanation").remove();

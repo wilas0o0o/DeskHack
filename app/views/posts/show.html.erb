@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="row mt-2">
+    <h5><%= link_to "", :back, class: "fas fa-arrow-left mr-4 text-dark mx-2" %></h5>
+    <div class="col-12 d-flex mb-3">
+      <div class="user-info d-flex align-items-end">
+        <%= link_to user_path(@post.user) do %>
+          <% if @post.user.avatar? %>
+            <%= image_tag @post.user.avatar.url, class: "rounded-circle border", size: "60x60" %>
+          <% else %>
+            <%= image_tag "no_image_avatar.png", class: "rounded-circle border", size: "60x60" %>
+          <% end %>
+        <% end %>
+        <div class="ml-2">
+          <h4 class="m-0"><%= @post.user.name %></h4>
+          <p class="text-muted m-0">@<%= @post.user.username %></p>
+        </div>
+      </div>
+      <div class="post-option follow-btn ml-auto d-flex align-items-end">
+        <% if @post.user == current_user %>
+          <%= link_to "", edit_post_path(@post), class: "fas fa-edit fa-2x text-dark mr-3" %>
+          <%= link_to "", post_path(@post), method: :delete, class: "fas fa-trash-alt fa-2x text-danger", data: { confirm: '投稿を削除しますか？' } %>
+        <% else %>
+          <%= render 'relationships/follow_btn', user: @post.user %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="images mb-2">
+        <div class="mainImg mb-1">
+          <%= image_tag @first_image.image.url, class: "img-thumbnail" %>
+        </div>
+        <div class="d-flex">
+          <% @post.post_images.each do |post_image| %>
+            <div class="subImg pr-1">
+              <%= image_tag post_image.image.url, class: "img-thumbnail" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="post-action d-flex">
+        <h5 class="favorite-btn mr-3"><%= render 'favorites/favorite_btn', post: @post %></h5>
+        <h5 class="bookmark-btn"><%= render 'bookmarks/bookmark_btn', post: @post %></h5>
+        <div class="post-detail ml-auto">
+          <p class="text-light bg-dark text-center m-0"><%= @post.situation%></p>
+          <p><%= @post.created_at.to_s(:date_jp) %></p>
+        </div>
+      </div>
+      <h4><strong>使用アイテム</strong><span class="item-count">（<%= @post.items.count %>）</span></h4>
+      <%= render 'items/item', post: @post, items: @items %>
+      <% if @post.items.count < 10 %>
+        <% if @post.user == current_user %>
+          <h6 class="text-primary"><strong>アイテムはいつでも追加できます</strong></h6>
+          <div class="item-form bg-white py-1 my-2 rounded">
+            <%= render 'layouts/errors', obj: @item %>
+            <%= form_with model: [@post, @item], remote: true do |f| %>
+              <div class="d-flex">
+                <div class="add-item-image-btn mx-1">
+                  <%= f.label :image, class: "item-label prev-itemImg" do %>
+                    <%= image_tag "no_image_item.jpg", class: "img-fluid rounded border" %>
+                  <% end %>
+                  <%= f.file_field :image, class: "hidden-field item-hidden-field" %>
+                  <p class="text-center font-weight-bold text-muted">画像クリックで変更</p>
+                </div>
+                <table class="table table-borderless mb-0">
+                  <tr class="form-group">
+                    <th class="align-middle">商品名</th>
+                    <td><%= f.text_field :name, class: "form-control" %></td>
+                  </tr>
+                  <tr class="form-group">
+                    <th>カテゴリー</th>
+                    <td><%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "選択してください" %></td>
+                  </tr>
+                  <tr class="form-group">
+                    <th class="align-middle">メーカー</th>
+                    <td><%= f.text_field :manufacturer, class: "form-control" %></td>
+                    <td><%= f.submit "追加する", class: "btn btn-primary" %></td>
+                  </tr>
+                </table>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-lg-4 pr-md-0">
+      <div class="text-box bg-white p-3 text-break">
+        <%= simple_format(@post.text) %>
+        <div class="border-top pt-2">
+          <%= render_with_hashtags(@post.caption) %>
+        </div>
+      </div>
+      <div class="comment-box bg-white p-3 mt-3">
+        <p class="comments-count border-bottom"><%= @post.post_comments.count %>件のコメントがあります。</p>
+        <%= render 'post_comments/comment', post: @post, post_comments: @post_comments %>
+        <div class="comment-form">
+          <%= render 'layouts/errors', obj: @post_comment %>
+          <%= form_with model: [@post, @post_comment], remote: true do |f| %>
+            <%= f.text_area :comment, class: "form-control" %>
+            <div class="action d-flex justify-content-end">
+              <%= f.submit "送信", class: "btn btn-primary btn-sm mt-1"%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function(){
+    // subImgをクリックすると発火
+    $('.subImg img').on('click',function(){
+      // クリックした画像のurlを取得
+      subimg = $(this).attr('src');
+      // 元のmainImgの画像を取得
+      mainimg = $('mainImg img').attr('src')
+      // mainImgをフェードアウト後、クリックしたsubImgと入れ替える
+      $('.mainImg img').fadeOut(100, function() {
+        $('.mainImg img').attr('src', subimg).on('load', function() {
+          $(this).fadeIn(100);
+        })
+      })
+    });
+  });
+
+   $(document).on('change', '.item-hidden-field', function() {
+      // 選択されたfile-fieldのidの数字の部分を取得
+      var item_id = $(this).attr('id').replace(/[^0-9]/g, '');
+      // 選択した部分のみの.add-item-image-btnにidを与える
+      $(this).parent().last().attr({id: `prev-target-${item_id}`})
+      // 選択された画像データを取得
+      var file = this.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function() {
+        // 選択された画像データを.item_imageに代入
+        var item_image = this.result;
+        // 上で与えられたidを持つprev-targetの画像を変更
+        $(`#prev-target-${item_id} img`).attr({src: `${item_image}`});
+      };
+    });
+</script>

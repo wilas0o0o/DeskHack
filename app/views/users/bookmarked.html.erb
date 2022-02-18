@@ -1,0 +1,31 @@
+<div class="container mt-3">
+  <div class="row d-flex flex-column">
+    <div class="profile text-center mx-auto">
+      <%= render 'users/profile', user: @user %>
+    </div>
+    <div class="post-box mt-3">
+      <div class="post-menu d-flex justify-content-around border-bottom mb-3">
+        <h5><%= link_to "投稿一覧", user_path(@user), class: "text-dark font-weight-bold" %></h5>
+        <% if @user == current_user %>
+          <h5><%= link_to "保存した投稿", bookmarked_user_path(@user), class: "text-dark font-weight-bold bookmarked-link current-link" %></h5>
+        <% end %>
+      </div>
+      <div class="row justify-content-center jscroll">
+        <% if @posts.present? %>
+          <%= render 'posts/index', posts: @posts %>
+        <% else %>
+          <div class="mt-5 mx-auto">
+            <div class="d-flex justify-content-center">
+              <span class="fa-stack fa-3x">
+                <i class="far fa-circle fa-stack-2x"></i>
+                <i class="fas fa-bookmark fa-stack-1x"></i>
+              </span>
+            </div>
+            <h4 class="text-center mt-3">保存済の投稿一覧</h4>
+            <p class="text-center">気に入った投稿を保存すると、何度でも見返せます。</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

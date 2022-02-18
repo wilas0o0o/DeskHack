@@ -1,0 +1,25 @@
+<div>
+  <% if posts.present? %>
+    <div class="d-flex flex-wrap justify-content-center">
+      <% posts.each do |post| %>
+        <div class="indexImg">
+          <%= link_to post_path(post) do %>
+            <%= image_tag post.post_image.image.url, class: "m-1 img-fluid" %>
+          <% end %>
+        </div>
+      <% end %>
+      <%= paginate posts %>
+    </div>
+  <% else %>
+    <div class="mt-5 mx-auto">
+      <div class="d-flex justify-content-center">
+        <span class="fa-stack fa-3x">
+          <i class="far fa-circle fa-stack-2x"></i>
+          <i class="fas fa-images fa-stack-1x"></i>
+        </span>
+      </div>
+      <h4 class="text-center mt-3">投稿一覧</h4>
+      <p class="text-center">すべての投稿がここに表示されます。</p>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,32 @@
+<div class="items-index">
+  <% post.items.each do |item| %>
+    <div class="item-list d-flex my-3 bg-white">
+      <div class="itemImg my-auto mx-1">
+        <% if item.image.present? %>
+          <%= image_tag item.image.url, class: "img-fluid rounded" %>
+        <% else %>
+          <%= image_tag "no_image_item.jpg", class: "img-fluid rounded border" %>
+        <% end %>
+      </div>
+      <table class="table table-borderless mb-0">
+        <tr>
+          <th>商品名</th>
+          <td class="text-break"><%= item.name %></td>
+        </tr>
+        <tr>
+          <th class="col-3">カテゴリー</th>
+          <td class="text-break"><%= item.category.name %></td>
+        </tr>
+        <tr>
+          <th>メーカー</th>
+          <td class="text-break"><%= item.manufacturer %></td>
+        </tr>
+      </table>
+      <div class="item-delete d-flex justify-content-end align-items-end m-2 mr-4">
+        <% if post.user == current_user %>
+          <%= link_to "", post_item_path(item.post, item), method: :delete, remote: true, class: "fa fa-trash-alt fa-lg text-muted"%>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

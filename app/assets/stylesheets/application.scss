@@ -16,3 +16,301 @@
 @import 'bootstrap';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+body {
+  min-height: 100vh;
+  position: relative;
+  background-color: #f5f5f5;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.application-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.application-main {
+  flex: 1;
+}
+
+.current-link {
+  border-bottom: 2px solid #1b1b1b;
+}
+
+.nav-icon {
+  list-style: none;
+}
+
+nav.pagination {
+  display: none;
+}
+
+//---------- header ---------//
+header {
+  background-color: #1B1B1B;
+}
+
+.header-logo img {
+  height: 60px;
+}
+
+.notice-icon {
+  position: absolute;
+  padding-left: 1em;
+  color: #efa04c;
+}
+
+.search-btn {
+  font-family: FontAwesome;
+  border: none;
+  background: none;
+  font-size: 25px;
+}
+
+
+.search-box {
+  position: relative;
+}
+
+.search-box{
+  form {
+    select{
+      display: none;
+    }
+  }
+}
+
+.search-content {
+  height: 35px;
+  border-radius: 20px;
+  border: 1px solid black;
+  font-size: 16px;
+  line-height: 1;
+}
+
+//---------- footer ---------//
+footer {
+  height: 60px;
+  background-color: #1B1B1B;
+  .footer-content {
+    line-height: 60px;
+  }
+}
+
+//---------- sign_form ----------//
+.form-wrapper {
+  .form-signin {
+    background-color: #fff;
+    min-width: 430px;
+    max-width: 430px;
+    padding: 15px 50px;
+    .form-logo-img {
+      height: 60px;
+    }
+  }
+}
+
+//---------- errors ----------//
+
+.field_with_errors {
+  input, textarea {
+  @extend .is-invalid;
+  }
+}
+
+.form-group {
+  .field_with_errors {
+    label {
+    font-size: 20px;
+    font-weight: 500;
+    }
+    input {
+    height: 50px;
+    }
+  }
+}
+
+//------------- オーバーレイ -------------//
+
+.mypage-menu {
+  position: absolute;
+  top: 62px;
+  right: 10px;
+  opacity: 0;
+  border-radius: 5px;
+  transition: all 0.5s;
+  display: none;
+}
+
+.mypage-active {
+  z-index: 99;
+  opacity: 1;
+  width: 220px;
+  padding: 20px;
+  top: 60px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.5s;
+  display: block;
+}
+
+.mynotice-menu {
+  position: absolute;
+  top: 62px;
+  right: 100px;
+  opacity: 0;
+  border-radius: 5px;
+  transition: all 0.5s;
+  display: none;
+}
+
+.mynotice-active {
+  z-index: 99;
+  opacity: 1;
+  width: 420px;
+  padding: 20px;
+  top: 60px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.5s;
+  display: block;
+}
+
+//---------- top/mv ----------//
+
+#mv {
+  background-image: image-url(mv.jpeg);
+  background-position: center;
+  background-size: cover;
+  height: 650px;
+  .mv-mask {
+    background-color: rgba( 0, 0, 0, 0.3);
+  }
+  .mv-title {
+    font-size: 90px;
+  }
+  .mv-content {
+    font-size: 20px;
+  }
+}
+
+//---------- tophow-to-use ----------//
+
+#how-to-use {
+  background-color: #202731;
+  .howto-content {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    .howto-box {
+      width: 360px;
+      .howto-icon {
+        font-size: 62px;
+        margin-bottom: 10px;
+      }
+      .howto-title {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .sign-in-link {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+//------------- favorites -------------//
+
+.heart-red {
+  color: #e54747;
+}
+
+.heart-blue {
+  color: #528fff;
+}
+
+//------------- post_comments -------------//
+
+.comment-body {
+  p {
+    margin: 0;
+  }
+}
+
+//------------- 画像サイズの指定 -------------//
+.subImg img {
+  max-height: 110px;
+}
+
+.subImg:nth-child(4) {
+  padding-right: 0 !important;
+}
+
+.mainImg img {
+  max-height: 700px;
+}
+
+.indexImg img {
+  height: 240px;
+  width: 360px;
+}
+
+.itemImg img {
+  height: 135px;
+  width: 240px;
+}
+
+.prev-itemImg img {
+  height: 135px;
+  width: 220px;
+}
+
+//------------- 投稿フォーム -------------//
+.prev-box {
+  margin: 0 10px 10px 0;
+  :last-child {
+    margin-right: 0;
+  }
+  .prev-img {
+    img{
+      height: 120px;
+    }
+  }
+  .prev-menu {
+    .update-box {
+      height: 50px;
+      line-height: 50px;
+      cursor: pointer;
+    }
+    .delete-box {
+      height: 50px;
+      line-height: 50px;
+      cursor: pointer;
+    }
+  }
+}
+
+.hidden-field {
+  display: none;
+}
+
+.hidden-checkbox {
+  display: none;
+}
+
+//------------- users -------------//
+
+.avatar-hidden-file {
+  display: none;
+}

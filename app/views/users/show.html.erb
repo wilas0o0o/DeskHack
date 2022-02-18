@@ -1,0 +1,18 @@
+<div class="container mt-3">
+  <div class="row d-flex flex-column">
+    <div class="profile text-center mx-auto">
+      <%= render 'users/profile', user: @user %>
+    </div>
+    <div class="post-box mt-3">
+      <div class="post-menu d-flex justify-content-around border-bottom mb-3">
+        <h5><%= link_to "投稿一覧", user_path(@user), class: "text-dark font-weight-bold current-link" %></h5>
+        <% if @user == current_user %>
+          <h5><%= link_to "保存した投稿", bookmarked_user_path(@user), class: "text-dark font-weight-bold" %></h5>
+        <% end %>
+      </div>
+      <div class="row justify-content-center jscroll">
+        <%= render 'posts/index', posts: @posts %>
+      </div>
+    </div>
+  </div>
+</div>

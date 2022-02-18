@@ -1,0 +1,26 @@
+<table class="table table-borderless">
+  <% users.each do |user| %>
+    <tr id="user_<%= user.id %>">
+      <td class="col-2">
+        <%= link_to user_path(user) do %>
+          <% if user.avatar? %>
+            <%= image_tag user.avatar.url, class: "rounded-circle border", size: "60x60" %>
+          <% else %>
+            <%= image_tag "no_image_avatar.png", class: "rounded-circle border", size: "60x60" %>
+          <% end %>
+        <% end %>
+      </td>
+      <td class="col-6 ">
+        <h4 class="m-0"><%= user.name %></h4>
+        <p class="text-muted m-0">@<%= user.username %></p>
+      </td>
+      <td class="col-4 follow-btn align-middle">
+        <% if user == current_user %>
+        <% else %>
+          <%= render 'relationships/follow_btn', user: user %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<%= paginate users %>
