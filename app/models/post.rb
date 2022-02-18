@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :post_images, dependent: :destroy
-  has_one  :post_image, -> {order(:id).limit(1)}, dependent: :destroy
+  has_one  :post_image, -> { order(:id).limit(1) }, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :items, dependent: :destroy
   has_many :post_hashtags
@@ -17,9 +17,8 @@ class Post < ApplicationRecord
   validates :post_images, presence: true, length: { maximum: 4 }
   validates :text, presence: true, length: { maximum: 200 }
   validates :situation, presence: true
-  validates :items, length: { maximum: 10}
+  validates :items, length: { maximum: 10 }
 
-  default_scope -> { order(created_at: :desc) }
   scope :working, -> { where(situation: 0) }
   scope :gaming, -> { where(situation: 1) }
 
@@ -30,15 +29,15 @@ class Post < ApplicationRecord
   def bookmarked_by(user)
     bookmarks.where(user_id: user.id).exists?
   end
-  
+
   def self.search_for(content)
-    Post.where('caption LIKE ?', '%' + content + '%' )
+    Post.where('caption LIKE ?', '%' + content + '%')
   end
 
   # create時に#を外して保存する
   after_create do
-    post = Post.find_by(id: self.id)
-    hashtags = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    post = Post.find_by(id: id)
+    hashtags = caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     post.hashtags = []
     hashtags.uniq.map do |hashtag|
       # ハッシュタグは先頭の#を外して保存
@@ -49,9 +48,9 @@ class Post < ApplicationRecord
 
   # update時に#を外して保存する
   before_update do
-    post = Post.find_by(id: self.id)
+    post = Post.find_by(id: id)
     post.hashtags.clear
-    hashtags = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    hashtags = caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     hashtags.uniq.map do |hashtag|
       tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
       post.hashtags << tag
@@ -61,7 +60,12 @@ class Post < ApplicationRecord
   # いいねの通知を作成して保存
   def create_notification_favorite!(current_user)
     # 同じユーザーが同じ投稿に連続でいいねしても通知が行かないように通知済みか検索
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, "favorite"])
+    temp = Notification.where(
+      [
+        "visitor_id = ? and visited_id = ? and post_id = ? and action = ?",
+        current_user.id, user_id, id, "favorite",
+      ]
+    )
     # 既にいいねされてない場合、通知レコードを作成
     if temp.blank?
       notification = current_user.active_notifications.new(
@@ -81,7 +85,9 @@ class Post < ApplicationRecord
   # コメントの通知を作成
   def create_notification_post_comment!(current_user, post_comment_id)
     # 自分以外にコメントしている人を全て取得し全員に通知を送る
-    temp_ids = PostComment.select(:user_id).where(post_id: id).where.not(user_id: current_user.id).distinct
+    temp_ids = PostComment.select(:user_id).
+      where(post_id: id).
+      where.not(user_id: current_user.id).distinct
     temp_ids.each do |temp_id|
       save_notification_post_comment!(current_user, post_comment_id, temp_id("user_id"))
     end

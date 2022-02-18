@@ -1,5 +1,4 @@
 class SearchesController < ApplicationController
-
   def search
     @content = params[:content]
     @model = params[:model]
@@ -9,5 +8,4 @@ class SearchesController < ApplicationController
       @records = Post.search_for(@content).page(params[:page]).per(15)
     end
   end
-
 end

@@ -1,5 +1,4 @@
 class BookmarksController < ApplicationController
-
   def create
     @post = Post.find(params[:post_id])
     bookmark = @post.bookmarks.new(user_id: current_user.id)
@@ -11,5 +10,4 @@ class BookmarksController < ApplicationController
     bookmark = @post.bookmarks.find_by(user_id: current_user.id)
     bookmark.destroy
   end
-
 end

@@ -39,6 +39,15 @@
     </div>
   </div>
 </header>
+<% if current_page?(posts_path) %>
+  <div class="d-flex justify-content-center border-bottom bg-white">
+    <ul class="container nav d-flex justify-content-center mb-2 mb-sm-0 align-items-center">
+      <li class="unsigned-nav"><%= link_to "Working", posts_path(sort_working: true), class: "nav-link px-5 text-dark h4 m-0" %></li>
+      <li class="unsigned-nav"><%= link_to "All Posts", posts_path, class: "nav-link px-5 text-dark h3 m-0" %></li>
+      <li class="unsigned-nav"><%= link_to "Gaming", posts_path(sort_gaming: true), class: "nav-link px-5 text-dark h4 m-0" %></li>
+    </ul>
+  </div>
+<% end %>
 
 <div class="mypage-menu border">
   <div class="user-info d-flex border-bottom pb-2">
@@ -70,11 +79,6 @@
     </tr>
   </table>
 </div>
-<script>
-  $(".mypage").click(function(){
-    $(".mypage-menu").toggleClass("mypage-active");
-  })
-</script>
 
 <div class="mynotice-menu">
   <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
@@ -87,18 +91,3 @@
     <p class="mt-3">通知はありません</p>
   <% end %>
 </div>
-<script>
-  $(".mynotice").click(function(){
-    $(".mynotice-menu").toggleClass("mynotice-active");
-  })
-</script>
-
-<% if current_page?(posts_path) %>
-  <div class="d-flex justify-content-center border-bottom bg-white">
-    <ul class="container nav d-flex justify-content-center mb-2 mb-sm-0 align-items-center">
-      <li class="unsigned-nav"><%= link_to "Working", posts_path(sort_working: true), class: "nav-link px-5 text-dark h4 m-0" %></li>
-      <li class="unsigned-nav"><%= link_to "All Posts", posts_path, class: "nav-link px-5 text-dark h3 m-0" %></li>
-      <li class="unsigned-nav"><%= link_to "Gaming", posts_path(sort_gaming: true), class: "nav-link px-5 text-dark h4 m-0" %></li>
-    </ul>
-  </div>
-<% end %>

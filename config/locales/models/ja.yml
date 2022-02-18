@@ -19,4 +19,4 @@ ja:
   devise:
     failure:
       user:
-      invalid: 登録情報と一致しません
+      invalid: IDもしくはパスワードが、一致しません

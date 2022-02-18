@@ -5,25 +5,23 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def after_sign_in_path_for(resource)
-      posts_path
-    end
+  def after_sign_in_path_for(resource)
+    posts_path
+  end
 
-    def after_sign_out_path_for(resource)
-      root_path
-    end
+  def after_sign_out_path_for(resource)
+    root_path
+  end
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :name, :username])
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :name, :username])
+  end
 
-    def set_notifications
-      if user_signed_in?
-        # @is_unchecked = current_user.passive_notifications.where(is_checked: false).present?
-        @notifications = current_user.passive_notifications.page(params[:page]).per(5)
-        # current_user.passive_notifications.where(is_checked: false).each do |notification|
-        #   notification.update_attributes(is_checked: true)
-        # end
-      end
+  def set_notifications
+    if user_signed_in?
+      @notifications = current_user.passive_notifications.
+        order(created_at: :desc).
+        page(params[:page]).per(5)
     end
+  end
 end
