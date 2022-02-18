@@ -169,7 +169,7 @@
         // フォームが削除された時に発火
         $(document).on('cocoon:after-remove', function(){
           count--;
-          // 3個以下になったら.linksを表示
+          // 10個以下になったら.linksを表示
           if (count < 10) {
             $('.links').show();
           }
