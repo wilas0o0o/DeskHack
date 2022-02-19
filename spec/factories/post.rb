@@ -4,5 +4,10 @@ FactoryBot.define do
     caption { '#test' }
     situation { 'Gaming' }
     user
+    post_images {
+      [
+        PostImage.new(image:  Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg')))
+      ]
+    }
   end
 end

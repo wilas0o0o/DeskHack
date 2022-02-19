@@ -7,9 +7,9 @@ RSpec.describe "Itemモデルのテスト", type: :model do
     subject { item.valid? }
 
     let(:user) { create(:user) }
+    let(:post_image) { create(:post_image) }
     let(:post) { create(:post) }
-    let(:category) { create(:category) }
-    let!(:item) { build(:item, post_id: post.id, item_id: item.id) }
+    let!(:item) { build(:item, post_id: post.id) }
 
     context 'nameカラム' do
       it '空欄でないこと' do
