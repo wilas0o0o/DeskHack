@@ -16,6 +16,13 @@ ja:
         category: アイテムのカテゴリ
         name: アイテムの商品名
         manufacturer: アイテムのメーカー
+      item:
+        image: アイテムの画像
+        category: アイテムのカテゴリ
+        name: アイテムの商品名
+        manufacturer: アイテムのメーカー
+      post_comment:
+        comment: コメント
   devise:
     failure:
       user:
