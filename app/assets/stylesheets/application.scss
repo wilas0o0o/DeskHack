@@ -191,7 +191,7 @@ footer {
 //---------- top/mv ----------//
 
 #mv {
-  background-image: image-url(mv.jpeg);
+  background-image: image-url("mv.jpeg");
   background-position: center;
   background-size: cover;
   height: 650px;
@@ -206,7 +206,36 @@ footer {
   }
 }
 
-//---------- tophow-to-use ----------//
+//---------- top/about ----------//
+#about {
+  background-color: #CECECF;
+}
+.about-box {
+  background-color: #fafafa;
+}
+.about-content-image {
+  background-position: top;
+  background-size: cover;
+  height: 400px;
+}
+
+.about-index-image {
+  background-image: image-url("index.png");
+}
+
+.about-show-image {
+  background-image: image-url("show.png");
+}
+
+.about-new-image {
+  background-image: image-url("new.png");
+}
+
+
+.about-content-text, .about-content-title {
+  color: #732F2F;
+}
+//---------- top/how-to-use ----------//
 
 #how-to-use {
   background-color: #202731;

@@ -19,4 +19,5 @@ ja:
   devise:
     failure:
       user:
-      invalid: IDもしくはパスワードが、一致しません
+      invalid: IDもしくはパスワードが一致しません。
+      not_found_in_database: ユーザー情報が見つかりません。
