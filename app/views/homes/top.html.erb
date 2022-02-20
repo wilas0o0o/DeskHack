@@ -21,7 +21,7 @@
             <i class="fas fa-bookmark howto-icon text-light"></i>
           </div>
           <h5 class="howto-title text-light font-weight-bold">ブックマーク</h5>
-          <p class="text-light mb-5">お気に入りは保存できる</p>
+          <p class="text-light mb-5">保存していつでも見返せる</p>
         </div>
         <div class="howto-box text-center">
           <div class="col">
@@ -35,21 +35,21 @@
             <i class="fas fa-bell howto-icon text-light"></i>
           </div>
           <h5 class="howto-title text-light font-weight-bold">通知</h5>
-          <p class="text-light">レスポンスはいち早く</p>
+          <p class="text-light">レスポンスをいち早く知れる</p>
         </div>
         <div class="howto-box text-center">
           <div class="col">
             <i class="fas fa-hashtag howto-icon text-light"></i>
           </div>
           <h5 class="howto-title text-light font-weight-bold">ハッシュタグ</h5>
-          <p class="text-light">共有はシンプルに</p>
+          <p class="text-light">共有はシンプルかつ直感的に</p>
         </div>
         <div class="howto-box text-center">
           <div class="col">
             <i class="fas fa-search howto-icon text-light"></i>
           </div>
           <h5 class="howto-title text-light font-weight-bold">検索</h5>
-          <p class="text-light">より多くの発見ができる</p>
+          <p class="text-light">発見は快適への近道</p>
         </div>
       </div>
       <div class="row mx-auto sign-up-link">
@@ -58,6 +58,40 @@
       <p class="sign-in-link text-light text-center">
         すでに登録済みの方は、<%= link_to "こちら ", new_user_session_path, class: "text-success" %>からログインをお願いします。
       </p>
+    </div>
+  </section>
+  <section id="about">
+    <div class="container py-4">
+      <h1 class="text-center text-dark mb-4">DeskHackとは</h1>
+      <div class="row justify-content-between">
+        <div class="about-box border rounded col-lg-6 col-md-12 p-2 mb-2">
+          <h3 class="about-content-title text-center"><span>Step1 </span>理想のデスクをイメージしよう</h4>
+          <div class="about-content-image about-index-image mx-auto my-3 border"></div>
+          <p class="text-center about-content-text font-weight-bold">
+            すべてのユーザーのデスクが閲覧できます<br>
+            理想のデスクを探してみてください。
+          </p>
+        </div>
+        <div class="about-box border rounded col-lg-6 col-md-12 p-2 mb-2">
+          <h3 class="about-content-title text-center"><span>Step2 </span>イメージを形にしよう</h4>
+          <div class="about-content-image about-show-image mx-auto my-3 border"></div>
+          <p class="text-center about-content-text font-weight-bold">
+            画像クリックでより詳細な情報を知ることができます。<br>
+            ユーザー同士のコミュニケーションもできます。
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="about-box border rounded col-lg-12 p-2 mb-2">
+          <h3 class="about-content-title text-center"><span>Step3 </span>作ったデスクを共有しよう</h4>
+          <div class="about-content-image about-new-image mx-auto my-3 border"></div>
+          <p class="text-center about-content-text font-weight-bold">
+            デスクが完成したら共有してみてください。<br>
+            アイテムやハッシュタグの追加はいつでも行えます。<br>
+            共有することで新たな発見があるかもしれません。
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 </div>
