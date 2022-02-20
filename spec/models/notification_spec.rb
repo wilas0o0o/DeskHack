@@ -17,7 +17,7 @@ RSpec.describe 'Notificationモデルのテスト', type: :model do
           visitor_id: user.id,
           visited_id: other_user.id,
           post_id: post.id,
-          ction: 'favorite'
+          action: 'favorite'
         )
         expect(notification).to be_valid
       end

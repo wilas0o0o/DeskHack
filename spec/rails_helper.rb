@@ -62,6 +62,7 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
+  # テスト実行後に画像を削除する
   config.after(:all) do
     if Rails.env.test?
       FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/tmp/"])
