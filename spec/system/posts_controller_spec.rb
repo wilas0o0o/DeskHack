@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'postsコントローラーのテスト' do
   let(:user) { create(:user) }
-  let!(:post_image) { create(:post_image) }
-  let!(:post) { create(:post) }
+  let(:post_image) { create(:post_image) }
+  let(:post) { create(:post) }
   before do
     visit new_user_session_path
     fill_in 'user[login]', with: user.username
