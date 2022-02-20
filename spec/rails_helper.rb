@@ -64,7 +64,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.after(:all) do
     if Rails.env.test?
-      FileUtils.rm_rf(Dir["#{Rails.root}/spec/uploads/tmp/"])
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/tmp/"])
     end
   end
 end
