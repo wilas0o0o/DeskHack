@@ -9,9 +9,11 @@ RSpec.describe "Itemモデルのテスト", type: :model do
     let(:user) { create(:user) }
     let(:post_image) { create(:post_image) }
     let(:post) { create(:post) }
-    let!(:item) { build(:item, post_id: post.id) }
+    let(:category) { create(:category)}
+    let!(:item) { build(:item, post_id: post.id, category_id: category.id) }
 
     context 'nameカラム' do
+
       it '空欄でないこと' do
         item.name = ''
         is_expected.to eq false
@@ -45,6 +47,19 @@ RSpec.describe "Itemモデルのテスト", type: :model do
       it '空欄でないこと' do
         item.category_id = ''
         is_expected.to eq false
+      end
+    end
+  end
+
+  describe 'アソシエーションのテスト' do
+    context 'Categoryモデルとの関係' do
+      it 'N:1となっている' do
+        expect(Item.reflect_on_association(:category).macro).to eq :belongs_to
+      end
+    end
+    context 'Postモデルとの関係' do
+      it 'N:1となっている' do
+        expect(Item.reflect_on_association(:post).macro).to eq :belongs_to
       end
     end
   end
