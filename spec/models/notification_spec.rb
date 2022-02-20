@@ -23,7 +23,6 @@ RSpec.describe 'Notificationモデルのテスト', type: :model do
     end
 
     context 'フォロー関連の通知のテスト' do
-
       it 'フォローされた時に保存できる' do
         notification = FactoryBot.create(:notification, visitor_id: user.id, visited_id: other_user.id, action: 'follow')
         expect(notification).to be_valid
