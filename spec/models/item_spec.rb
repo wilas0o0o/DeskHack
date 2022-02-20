@@ -1,5 +1,3 @@
-# froxen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe "Itemモデルのテスト", type: :model do
