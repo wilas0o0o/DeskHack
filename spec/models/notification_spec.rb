@@ -12,19 +12,37 @@ RSpec.describe 'Notificationモデルのテスト', type: :model do
       let(:post_comment) { create(:post_comment) }
 
       it 'いいねがついた時に保存できる' do
-        notification = FactoryBot.create(:notification, visitor_id: user.id, visited_id: other_user.id, post_id: post.id, action: 'favorite')
+        notification = FactoryBot.create(
+          :notification,
+          visitor_id: user.id,
+          visited_id: other_user.id,
+          post_id: post.id,
+          ction: 'favorite'
+        )
         expect(notification).to be_valid
       end
 
       it 'コメントがついた時に保存できる' do
-        notification = FactoryBot.create(:notification, visitor_id: user.id, visited_id: other_user.id, post_id: post.id, post_comment_id: post_comment.id, action: 'comment')
+        notification = FactoryBot.create(
+          :notification,
+          visitor_id: user.id,
+          visited_id: other_user.id,
+          post_id: post.id,
+          post_comment_id: post_comment.id,
+          action: 'comment'
+        )
         expect(notification).to be_valid
       end
     end
 
     context 'フォロー関連の通知のテスト' do
       it 'フォローされた時に保存できる' do
-        notification = FactoryBot.create(:notification, visitor_id: user.id, visited_id: other_user.id, action: 'follow')
+        notification = FactoryBot.create(
+          :notification,
+          visitor_id: user.id,
+          visited_id: other_user.id,
+          action: 'follow'
+        )
         expect(notification).to be_valid
       end
     end

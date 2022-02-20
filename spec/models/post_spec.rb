@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'Postモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
-
     let(:user) { create(:user) }
     let(:post_image) { create(:post_image) }
     let!(:post) { build(:post, user_id: user.id) }

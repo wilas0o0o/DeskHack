@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Userモデルのテスト", type: :model do
   describe 'バリデーションのテスト' do
-
     let(:user) { build(:user) }
 
     context 'nameカラム' do
@@ -22,7 +21,7 @@ RSpec.describe "Userモデルのテスト", type: :model do
 
     context 'usernameカラム' do
       let(:other_user) { create(:user) }
-      
+
       it '空欄でないこと' do
         user.username = ''
         expect(user).to be_invalid

@@ -81,4 +81,3 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'cocoon'
 gem 'rails-i18n'
-
