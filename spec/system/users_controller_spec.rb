@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 describe 'usersコントローラーのテスト' do
-  let(:user) { create(:user) }
-  let(:other_user) { create(:user) }
-  let(:post_images) { create(:post_images) }
-  let(:post) { create(:post, user: user) }
-  let(:other_post) { create(:post, user: other_user) }
+  let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
+  let!(:original_post) { create(:post, user: user) }
+  let!(:other_post) { create(:post, user: other_user) }
 
   before do
-    # sign_in(user)
     visit new_user_session_path
     fill_in 'user[login]', with: user.username
     fill_in 'user[password]', with: user.password
@@ -36,9 +34,9 @@ describe 'usersコントローラーのテスト' do
       it '保存した投稿リンクが表示されている' do
         expect(page).to have_link '保存した投稿', href: bookmarked_user_path(user)
       end
-      # it '投稿一覧に自分の投稿が表示されている' do
-      #   expect(page).to have_link post.post_image.image, href: post_path(post)
-      # end
+      it '投稿一覧に自分の投稿が表示されている' do
+        expect(page).to have_link '', href: post_path(original_post)
+      end
     end
   end
 
@@ -66,9 +64,9 @@ describe 'usersコントローラーのテスト' do
       it 'フォローするボタンが表示されている' do
         expect(page).to have_link 'フォローする', href: user_relationships_path(other_user)
       end
-      # it '投稿一覧に他人の投稿が表示されている' do
-      #   expect(page).to have_link other_post.post_image.image, href: post_path(other_post)
-      # end
+      it '投稿一覧に他人の投稿が表示されている' do
+        expect(page).to have_link '', href: post_path(other_post)
+      end
     end
   end
 

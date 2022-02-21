@@ -63,9 +63,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
 
-  # ログインヘルパーを呼ぶ
-  # config.include SignInSupport
-
   # テスト実行後に画像を削除する
   config.after(:all) do
     if Rails.env.test?

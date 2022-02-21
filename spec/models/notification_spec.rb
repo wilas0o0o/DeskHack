@@ -6,8 +6,7 @@ RSpec.describe 'Notificationモデルのテスト', type: :model do
     let(:other_user) { create(:user) }
 
     context 'Postに対する通知のテスト' do
-      let(:post_image) { create(:post_image) }
-      let(:post) { create(:post) }
+      let(:original_post) { create(:post) }
       let(:favorite) { create(:favorite) }
       let(:post_comment) { create(:post_comment) }
 
@@ -16,7 +15,7 @@ RSpec.describe 'Notificationモデルのテスト', type: :model do
           :notification,
           visitor_id: user.id,
           visited_id: other_user.id,
-          post_id: post.id,
+          post_id: original_post.id,
           action: 'favorite'
         )
         expect(notification).to be_valid
@@ -27,10 +26,11 @@ RSpec.describe 'Notificationモデルのテスト', type: :model do
           :notification,
           visitor_id: user.id,
           visited_id: other_user.id,
-          post_id: post.id,
+          post_id: original_post.id,
           post_comment_id: post_comment.id,
           action: 'comment'
         )
+        p notification
         expect(notification).to be_valid
       end
     end
