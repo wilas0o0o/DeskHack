@@ -5,9 +5,9 @@
       <div class="user-info d-flex align-items-end">
         <%= link_to user_path(@post.user) do %>
           <% if @post.user.avatar? %>
-            <%= image_tag @post.user.avatar.url, class: "rounded-circle border", size: "60x60" %>
+            <%= image_tag @post.user.avatar.url, class: "rounded-circle border post-user-avatar", size: "60x60" %>
           <% else %>
-            <%= image_tag "no_image_avatar.png", class: "rounded-circle border", size: "60x60" %>
+            <%= image_tag "no_image_avatar.png", class: "rounded-circle border post-user-avatar", size: "60x60" %>
           <% end %>
         <% end %>
         <div class="ml-2">
@@ -17,8 +17,8 @@
       </div>
       <div class="post-option follow-btn ml-auto d-flex align-items-end">
         <% if @post.user == current_user %>
-          <%= link_to "", edit_post_path(@post), class: "fas fa-edit fa-2x text-dark mr-3", id: "post_edit" %>
-          <%= link_to "", post_path(@post), method: :delete, class: "fas fa-trash-alt fa-2x text-danger", id: "post_delete", data: { confirm: '投稿を削除しますか？' } %>
+          <%= link_to "", edit_post_path(@post), class: "fas fa-edit fa-2x text-dark mr-3 post-edit" %>
+          <%= link_to "", post_path(@post), method: :delete, class: "fas fa-trash-alt fa-2x text-danger post-delete", data: { confirm: '投稿を削除しますか？' } %>
         <% else %>
           <%= render 'relationships/follow_btn', user: @post.user %>
         <% end %>

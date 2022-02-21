@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'postsコントローラーのテスト' do
   let(:user) { create(:user) }
   let(:post_image) { create(:post_image) }
-  let(:post) { create(:post) }
+  let(:post) { create(:post, user: user) }
   before do
     visit new_user_session_path
     fill_in 'user[login]', with: user.username
@@ -95,7 +95,8 @@ describe 'postsコントローラーのテスト' do
         expect(page).to have_content post.user.username
       end
       # it 'ユーザーリンクが正しい' do
-      #   expect(page).to have_link("img[src$='test_avatar.png']"), href: user_path(post.user)
+      #   user_link = find('.post-user-avatar')
+      #   expect(user_link[:href]).to eq user_path(post.user)
       # end
       it '投稿画像が表示されている' do
         expect(page).to have_selector("img[src$='test.jpg']")
@@ -109,45 +110,48 @@ describe 'postsコントローラーのテスト' do
       it '投稿のsituationが表示されている' do
         expect(page).to have_content post.situation
       end
-      # it 'item_imageフォームが表示されている' do
-      #   expect(page).to have_field 'item[image]'
-      # end
-      # it 'item_nameフォームが空である' do
-      #   expect(find_field('item[name]').text).to be_blank
-      # end
-      # it 'item_categoryフォームが表示されている ' do
-      #   expect(page).to have_field 'item[category_id]'
-      # end
-      # it 'item_manufacurerフォームが空である' do
-      #   expect(find_field('item[manufacturer]').text).to be_blank
-      # end
-      # it '投稿の編集リンクが表示されている' do
-      #   expect(page).to have_link edit_post_path(post)
-      # end
-      # it '投稿の削除リンクが表示されている' do
-      #   expect(page).to have_link post_path(post)
-      # end
+      it 'item_imageフォームが表示されている' do
+        expect(page).to have_field 'item[image]'
+      end
+      it 'item_nameフォームが空である' do
+        expect(find_field('item[name]').text).to be_blank
+      end
+      it 'item_categoryフォームが表示されている ' do
+        expect(page).to have_field 'item[category_id]'
+      end
+      it 'item_manufacurerフォームが空である' do
+        expect(find_field('item[manufacturer]').text).to be_blank
+      end
+      it '投稿の編集リンクが表示されている' do
+        edit_link = find('.post-edit')
+        expect(edit_link[:href]).to eq edit_post_path(post)
+      end
+      it '投稿の削除リンクが表示されている' do
+        delete_link = find('.post-delete')
+        expect(delete_link[:href]).to eq post_path(post)
+      end
     end
 
-    # context '編集リンクのテスト' do
-    #   it '編集画面に遷移できる' do
-    #     find('#post_edit').click
-    #     expect(current_path).to eq '/posts/' + post.id.to_s + '/edit'
-    #   end
-    # end
+    context '編集リンクのテスト' do
+      it '編集画面に遷移できる' do
+        find('.post-edit').click
+        expect(current_path).to eq '/posts/' + post.id.to_s + '/edit'
+      end
+    end
 
-    # context '削除リンクのテスト' do
-    #   before do
-    #     find('#post_delete').click
-    #     page.driver.browser.switch_to.alert.accept
-    #   end
+    context '削除リンクのテスト' do
+      before do
+        find('.post-delete').click
+        # page.driver.browser.switch_to.alert.accept
+      end
 
-    #   it '正しく削除できる ' do
-    #     expect(Post,where(id: post.id).count).to eq 0
-    #   end
-    #   it 'リダイレクト先が投稿一覧画面である' do
-    #     expect(current_path).to eq '/posts'
-    #   end
-    # end
+      it '正しく削除できる ' do
+        expect(Post.where(id: post.id).count).to eq 0
+      end
+      it 'リダイレクト先がユーザー詳細画面である' do
+        expect(current_path).to eq '/users/' + post.user_id.to_s 
+      end
+    end
   end
+  
 end
