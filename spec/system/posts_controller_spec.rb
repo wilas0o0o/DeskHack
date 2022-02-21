@@ -92,6 +92,24 @@ describe 'postsコントローラーのテスト' do
       end
     end
   end
+  
+  describe '投稿一覧画面のテスト' do
+    before do
+      visit posts_path
+    end
+    
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts'
+      end
+      # it '自分の投稿が表示されている' do
+      #   expect(page).to have_link post.post_image.image, href: post_path(post)
+      # end
+      # it '他人の投稿が表示されている' do
+      #   expect(page).to have_link post.post_image.image, href: post_path(other_post)
+      # end
+    end
+  end
 
   describe '自分の投稿詳細画面のテスト' do
     before do
@@ -183,15 +201,19 @@ describe 'postsコントローラーのテスト' do
       end
       it '他人のユーザーIDが表示されている' do
         expect(page).to have_content other_post.user.username
-      end
+      end 
+      # it 'ユーザーリンクが正しい' do
+      #   user_link = find('.post-user-avatar')
+      #   expect(user_link[:href]).to eq user_path(other_post.user)
+      # end
       it 'itemの"追加する"ボタンが表示されていない' do
-        expect(page).to_not have_button '追加する'
+        expect(page).not_to have_button '追加する'
       end
       it '編集リンクが表示されていない' do
-        expect(page).to_not have_link '', href: edit_post_path(other_post)
+        expect(page).not_to have_link '', href: edit_post_path(other_post)
       end
       it '削除リンクが表示されていない' do
-        expect(page).to_not have_link '', href: post_path(other_post)
+        expect(page).not_to have_link '', href: post_path(other_post)
       end
       it 'フォローボタンが表示されている' do
         expect(page).to have_link 'フォローする', href: user_relationships_path(other_user)
