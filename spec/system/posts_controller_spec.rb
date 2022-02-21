@@ -92,12 +92,12 @@ describe 'postsコントローラーのテスト' do
       end
     end
   end
-  
+
   describe '投稿一覧画面のテスト' do
     before do
       visit posts_path
     end
-    
+
     context '表示内容の確認' do
       it 'URLが正しい' do
         expect(current_path).to eq '/posts'
@@ -201,7 +201,7 @@ describe 'postsコントローラーのテスト' do
       end
       it '他人のユーザーIDが表示されている' do
         expect(page).to have_content other_post.user.username
-      end 
+      end
       # it 'ユーザーリンクが正しい' do
       #   user_link = find('.post-user-avatar')
       #   expect(user_link[:href]).to eq user_path(other_post.user)

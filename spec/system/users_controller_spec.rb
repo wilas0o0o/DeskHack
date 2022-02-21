@@ -8,6 +8,7 @@ describe 'usersコントローラーのテスト' do
   let(:other_post) { create(:post, user: other_user) }
 
   before do
+    # sign_in(user)
     visit new_user_session_path
     fill_in 'user[login]', with: user.username
     fill_in 'user[password]', with: user.password
@@ -65,6 +66,9 @@ describe 'usersコントローラーのテスト' do
       it 'フォローするボタンが表示されている' do
         expect(page).to have_link 'フォローする', href: user_relationships_path(other_user)
       end
+      # it '投稿一覧に他人の投稿が表示されている' do
+      #   expect(page).to have_link other_post.post_image.image, href: post_path(other_post)
+      # end
     end
   end
 
