@@ -2,8 +2,11 @@ require 'rails_helper'
 
 describe 'postsコントローラーのテスト' do
   let(:user) { create(:user) }
-  let(:post_image) { create(:post_image) }
+  let(:other_user) { create(:user) }
+  let(:post_images) { create(:post_images) }
   let(:post) { create(:post, user: user) }
+  let(:other_post) { create(:post, user: other_user) }
+
   before do
     visit new_user_session_path
     fill_in 'user[login]', with: user.username
@@ -97,7 +100,7 @@ describe 'postsコントローラーのテスト' do
 
     context '表示内容の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq  '/posts/' + post.id.to_s
+        expect(current_path).to eq '/posts/' + post.id.to_s
       end
       it 'ユーザー名が表示されている' do
         expect(page).to have_content post.user.name
@@ -133,13 +136,14 @@ describe 'postsコントローラーのテスト' do
       it 'item_manufacurerフォームが空である' do
         expect(find_field('item[manufacturer]').text).to be_blank
       end
+      it 'itemの"追加する"ボタンが表示されている' do
+        expect(page).to have_button '追加する'
+      end
       it '投稿の編集リンクが表示されている' do
-        edit_link = find('.post-edit')
-        expect(edit_link[:href]).to eq edit_post_path(post)
+        expect(page).to have_link '', href: edit_post_path(post)
       end
       it '投稿の削除リンクが表示されている' do
-        delete_link = find('.post-delete')
-        expect(delete_link[:href]).to eq post_path(post)
+        expect(page).to have_link '', href: post_path(post)
       end
     end
 
@@ -161,6 +165,36 @@ describe 'postsコントローラーのテスト' do
       end
       it 'リダイレクト先がユーザー詳細画面である' do
         expect(current_path).to eq '/users/' + post.user_id.to_s
+      end
+    end
+  end
+
+  describe '他人の投稿詳細画面のテスト' do
+    before do
+      visit post_path(other_post)
+    end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/' + other_post.id.to_s
+      end
+      it '他人のユーザー名が表示されている' do
+        expect(page).to have_content other_post.user.name
+      end
+      it '他人のユーザーIDが表示されている' do
+        expect(page).to have_content other_post.user.username
+      end
+      it 'itemの"追加する"ボタンが表示されていない' do
+        expect(page).to_not have_button '追加する'
+      end
+      it '編集リンクが表示されていない' do
+        expect(page).to_not have_link '', href: edit_post_path(other_post)
+      end
+      it '削除リンクが表示されていない' do
+        expect(page).to_not have_link '', href: post_path(other_post)
+      end
+      it 'フォローボタンが表示されている' do
+        expect(page).to have_link 'フォローする', href: user_relationships_path(other_user)
       end
     end
   end

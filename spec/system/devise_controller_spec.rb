@@ -16,7 +16,7 @@ describe 'ログイン前のテスト' do
       it 'Sign inリンクが表示されている' do
         expect(page).to have_link 'Sign in', href: new_user_session_path
       end
-      it 'how_to_useが表示されている 'do
+      it 'how_to_useが表示されている ' do
         expect(page).to have_content 'DeskHackで出来ること'
       end
       it 'aboutが表示されている' do
@@ -30,11 +30,11 @@ describe 'ログイン前のテスト' do
       visit new_user_registration_path
     end
 
-    context '表示内容の確認 'do
+    context '表示内容の確認' do
       it 'URLが正しい' do
         expect(current_path).to eq '/sign_up'
       end
-      it '新規登録ボタンが表示されている 'do
+      it '新規登録ボタンが表示されている' do
         expect(page).to have_button '新規登録'
       end
       it 'nameフォームが表示されている' do
@@ -57,7 +57,7 @@ describe 'ログイン前のテスト' do
       end
     end
 
-    context '登録成功のテスト '  do
+    context '登録成功のテスト ' do
       before do
         fill_in 'user[name]', with: Faker::Lorem.characters(number: 5)
         fill_in 'user[username]', with: Faker::Lorem.characters(number: 5)
@@ -75,7 +75,7 @@ describe 'ログイン前のテスト' do
       end
     end
 
-    context '登録失敗のテスト '  do
+    context '登録失敗のテスト ' do
       before do
         fill_in 'user[name]', with: ''
         fill_in 'user[username]', with: ''
@@ -105,7 +105,7 @@ describe 'ログイン前のテスト' do
       it 'ログインボタンが表示されている' do
         expect(page).to have_button 'ログイン'
       end
-      it 'loginフォームが表示されている 'do
+      it 'loginフォームが表示されている ' do
         expect(page).to have_field 'user[login]'
       end
       it 'passwordフォームが表示されている' do
@@ -117,7 +117,7 @@ describe 'ログイン前のテスト' do
     end
 
     context 'ログイン成功のテスト' do
-      before  do
+      before do
         fill_in 'user[login]', with: user.username
         fill_in 'user[password]', with: user.password
         click_button 'ログイン'
@@ -129,7 +129,7 @@ describe 'ログイン前のテスト' do
     end
 
     context 'ログイン失敗のテスト' do
-      before  do
+      before do
         fill_in 'user[login]', with: ''
         fill_in 'user[password]', with: ''
         click_button 'ログイン'
@@ -142,7 +142,7 @@ describe 'ログイン前のテスト' do
   end
 end
 
-describe 'ユーザーログイン後のテスト 'do
+describe 'ユーザーログイン後のテスト ' do
   let(:user) { create(:user) }
 
   before  do
