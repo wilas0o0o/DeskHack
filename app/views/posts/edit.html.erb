@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-8">
-      <h2 class="text-center mt-5 mb-5">投稿を編集</h2>
+      <h5><%= link_to "", :back, class: "fas fa-arrow-left text-dark mt-3 mb-0" %></h5>
+      <h2 class="text-center mb-3">投稿を編集</h2>
       <%= render 'layouts/errors', obj: @post %>
 
       <%= form_with model:@post, local:true do |f| %>
