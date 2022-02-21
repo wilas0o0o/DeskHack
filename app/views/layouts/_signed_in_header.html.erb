@@ -61,7 +61,8 @@
       <% end %>
     </div>
     <div class="ml-3 d-flex flex-column justify-content-center">
-      <span><%= current_user.name %></span>
+      <span class="text-dark"><%= current_user.name %></span>
+      <span class="text-muted">@<%= current_user.username %></span>
     </div>
   </div>
   <table class="table table-borderless mb-0">
@@ -88,6 +89,6 @@
       <%= paginate notifications %>
     </div>
   <% else %>
-    <p class="mt-3">通知はありません</p>
+    <p class="mt-3 text-dark">通知はありません</p>
   <% end %>
 </div>

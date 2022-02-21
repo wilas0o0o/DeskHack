@@ -21,7 +21,8 @@
       <% end %>
 
       <div class="text-center mt-3">
-        未登録の方は<%= link_to "こちら", new_user_registration_path %>
+        未登録の方は<%= link_to "こちら", new_user_registration_path %><br>
+        ゲストログインは<%= link_to "こちら", users_guest_sign_in_path, method: :post %>
       </div>
     </div>
   </div>

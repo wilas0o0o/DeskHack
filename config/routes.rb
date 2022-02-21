@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'sign_in', to: 'devise/sessions#new', as: :new_user_session
     post 'sign_in', to: 'devise/sessions#create', as: :user_session
     delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
   root 'homes#top'
   get 'search' => 'searches#search'
