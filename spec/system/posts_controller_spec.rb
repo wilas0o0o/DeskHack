@@ -61,7 +61,7 @@ describe 'postsコントローラーのテスト' do
     #   end
     # end
 
-    context '投稿処理のテスト' do
+    context '投稿成功のテスト' do
       image_path = Rails.root.join('spec/fixtures/test.jpg')
       before do
         fill_in 'post[text]', with: Faker::Lorem.characters(number: 10)
@@ -75,6 +75,17 @@ describe 'postsコントローラーのテスト' do
       it 'リダイレクト先が保存した投稿の詳細画面である' do
         click_button '投稿する'
         expect(page).to have_current_path post_path(Post.last)
+      end
+    end
+
+    context '投稿失敗のテスト' do
+      before do
+        fill_in 'post[text]', with: ''
+        click_button '投稿する'
+      end
+
+      it '投稿に失敗し新規投稿画面に戻る' do
+        expect(page).to have_content '新規投稿'
       end
     end
   end
@@ -149,9 +160,63 @@ describe 'postsコントローラーのテスト' do
         expect(Post.where(id: post.id).count).to eq 0
       end
       it 'リダイレクト先がユーザー詳細画面である' do
-        expect(current_path).to eq '/users/' + post.user_id.to_s 
+        expect(current_path).to eq '/users/' + post.user_id.to_s
       end
     end
   end
-  
+
+  describe '投稿編集画面のテスト' do
+    before do
+      visit edit_post_path(post)
+    end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/' + post.id.to_s + '/edit'
+      end
+      it '"投稿を編集"と表示されている' do
+        expect(page).to have_content '投稿を編集'
+      end
+      it '変更ボタンが表示されている' do
+        expect(page).to have_button '変更する'
+      end
+      it 'post_imagesフォームが表示されている' do
+        expect(page).to have_field 'post[post_images_attributes][0][image]'
+      end
+      it 'text編集フォームが表示されている' do
+        expect(page).to have_field 'post[text]', with: post.text
+      end
+      it 'situation編集フォームが表示されている' do
+        expect(page).to have_field 'post[situation]', with: post.situation
+      end
+      it 'tag編集フォームが表示されている' do
+        expect(page).to have_field 'post[caption]', with: post.caption
+      end
+    end
+
+    context '編集成功のテスト' do
+      before do
+        @ex_post_text = post.text
+        fill_in 'post[text]', with: Faker::Lorem.characters(number: 10)
+        click_button '変更する'
+      end
+
+      it 'textが正しく更新される' do
+        expect(post.reload.text).not_to eq @ex_post_text
+      end
+      it 'リダイレクト先が投稿詳細画面である' do
+        expect(current_path).to eq '/posts/' + post.id.to_s
+      end
+    end
+
+    context '編集失敗のテスト' do
+      before do
+        fill_in 'post[text]', with: ''
+      end
+
+      it '編集に失敗し編集画面に戻る' do
+        expect(page).to have_content '投稿を編集'
+      end
+    end
+  end
 end
