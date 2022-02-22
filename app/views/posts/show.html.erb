@@ -49,6 +49,7 @@
       <%= render 'items/item', post: @post, items: @items %>
       <% if @post.items.count < 10 %>
         <% if @post.user == current_user %>
+        <div class="item-add">
           <h6 class="text-primary"><strong>アイテムはいつでも追加できます</strong></h6>
           <div class="item-form bg-white py-1 my-2 rounded">
             <%= render 'layouts/errors', obj: @item %>
@@ -73,12 +74,13 @@
                   <tr class="form-group">
                     <th class="align-middle">メーカー</th>
                     <td><%= f.text_field :manufacturer, class: "form-control" %></td>
-                    <td><%= f.submit "追加する", class: "btn btn-primary" %></td>
+                    <td><%= f.submit "追加する", class: "btn btn-primary add-item-btn" %></td>
                   </tr>
                 </table>
               </div>
             <% end %>
           </div>
+        </div>
         <% end %>
       <% end %>
     </div>
@@ -109,7 +111,7 @@
 <script>
   $(function(){
     // subImgをクリックすると発火
-    $('.subImg img').on('click',function(){
+    $('.subImg img').on('click', function(){
       // クリックした画像のurlを取得
       subimg = $(this).attr('src');
       // 元のmainImgの画像を取得
@@ -123,20 +125,31 @@
     });
   });
 
-   $(document).on('change', '.item-hidden-field', function() {
-      // 選択されたfile-fieldのidの数字の部分を取得
-      var item_id = $(this).attr('id').replace(/[^0-9]/g, '');
-      // 選択した部分のみの.add-item-image-btnにidを与える
-      $(this).parent().last().attr({id: `prev-target-${item_id}`})
-      // 選択された画像データを取得
-      var file = this.files[0];
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function() {
-        // 選択された画像データを.item_imageに代入
-        var item_image = this.result;
-        // 上で与えられたidを持つprev-targetの画像を変更
-        $(`#prev-target-${item_id} img`).attr({src: `${item_image}`});
-      };
+  $(document).on('change', '.item-hidden-field', function() {
+    // 選択されたfile-fieldのidの数字の部分を取得
+    var item_id = $(this).attr('id').replace(/[^0-9]/g, '');
+    // 選択した部分のみの.add-item-image-btnにidを与える
+    $(this).parent().last().attr({id: `prev-target-${item_id}`})
+    // 選択された画像データを取得
+    var file = this.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function() {
+      // 選択された画像データを.item_imageに代入
+      var item_image = this.result;
+      // 上で与えられたidを持つprev-targetの画像を変更
+      $(`#prev-target-${item_id} img`).attr({src: `${item_image}`});
+    };
+  });
+
+  $(document).on('turbolinks:load', function(){
+    $(function(){
+      $('.add-item-btn').on('click', function(){
+        var count = $('.item-list').length;
+        if (count == 9) {
+          $('.item-add').hide();
+        };
+      });
     });
+  });
 </script>
