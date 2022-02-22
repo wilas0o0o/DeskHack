@@ -1,8 +1,8 @@
 <div class="form-container w-100 d-flex justify-content-center align-items-center">
   <div class="form-wrapper">
     <div class="form-signin w-100">
-      <div class="form-logo">
-        <img src="/assets/Logo_white.png" alt="" class="mb-3 form-logo-img mx-auto d-flex">
+      <div class="form-logo mb-4 form-logo-img mx-auto d-flex justify-content-center">
+        <%= image_tag("Logo_white.png") %>
       </div>
       <%= render 'layouts/errors', obj: @user %>
       <%= form_with model: @user, local: true do |f| %>
