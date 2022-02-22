@@ -1,12 +1,12 @@
-<div class="d-flex nested-fields bg-light py-1 border">
-  <div class="add-item-image-btn mx-1">
-    <%= f.label :image, class: "item-label prev-itemImg" do %>
-      <%= image_tag "no_image_item.jpg", class: "img-fluid rounded border" %>
+<div class="row nested-fields bg-light py-1 border">
+  <div class="add-item-image-btn mx-1 col-lg-4 col-md-12 justify-content-center">
+    <%= f.label :image, class: "item-label prev-itemImg d-flex justify-content-center" do %>
+      <%= image_tag "no_image_item.jpg", class: "img-fluid rounded border text-center" %>
     <% end %>
     <%= f.file_field :image, class: "hidden-field item-hidden-field" %>
     <p class="text-center font-weight-bold text-muted">画像クリックで変更</p>
   </div>
-  <table class="table table-borderless mb-0">
+  <table class="table table-borderless mb-0 col-lg-7 col-md-12">
     <tr class="form-group">
       <th class="align-middle">商品名</th>
       <td><%= f.text_field :name, class: "form-control" %></td>

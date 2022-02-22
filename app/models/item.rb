@@ -5,4 +5,12 @@ class Item < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :manufacturer, presence: true, length: { maximum: 30 }
+  validate :post_items_size_validate
+
+  ITEM_MAX = 10
+  def post_items_size_validate
+    if self.post && self.post.items.size > ITEM_MAX
+      errors.add(:base, 'アイテムは最大１０個までです')
+    end
+  end
 end

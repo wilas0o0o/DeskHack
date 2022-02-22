@@ -6,6 +6,7 @@ ja:
         username: ユーザーID
         password: パスワード
         email: メールアドレス
+        password_confirmation: 確認用パスワード
       post:
         post_images: 投稿画像
         text: 本文
@@ -16,7 +17,16 @@ ja:
         category: アイテムのカテゴリ
         name: アイテムの商品名
         manufacturer: アイテムのメーカー
+      item:
+        image: アイテムの画像
+        category: アイテムのカテゴリ
+        name: アイテムの商品名
+        manufacturer: アイテムのメーカー
+      post_comment:
+        comment: コメント
   devise:
     failure:
       user:
-      invalid: IDもしくはパスワードが、一致しません
+      invalid: IDもしくはパスワードが一致しません。
+      not_found_in_database: ユーザー情報が見つかりません。
+      unauthenticated: ユーザー情報が登録されていません。

@@ -4,11 +4,11 @@
     <h5 class="text-center mx-4"><%= link_to "ユーザーで検索", search_path(model: "user", content: @content) %></h5>
   </div>
   <div class="container">
-    <div class="row mt-3 justify-content-center">
+    <div class="row justify-content-center">
         <% if @model == "user" %>
           <% if @records.present? %>
           <div class="col-md-2"></div>
-          <div class="col-md-8">
+          <div class="col-md-8 mt-3">
             <%= render 'relationships/users_list', users: @records %>
           </div>
           <div class="col-md-2"></div>
@@ -25,6 +25,10 @@
           <% end %>
         <% elsif @model == "post" %>
           <% if @records.present? %>
+            <div class="w-100 text-center text-dark py-1 mb-1">
+              <h2 class="d-inline">#<%= @content %> の投稿</h2>
+              <span class="text-muted h5 ml-2"><strong>全<%= @records.count %>件</strong></span>
+            </div>
             <%= render 'posts/index', posts: @records %>
           <% else %>
             <div>
