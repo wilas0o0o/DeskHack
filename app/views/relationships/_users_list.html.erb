@@ -1,6 +1,6 @@
 <table class="table table-borderless">
   <% users.each do |user| %>
-    <tr id="user_<%= user.id %>">
+    <tr>
       <td class="col-2">
         <%= link_to user_path(user) do %>
           <% if user.avatar? %>
