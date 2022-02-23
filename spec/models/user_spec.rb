@@ -42,6 +42,14 @@ RSpec.describe "Userモデルのテスト", type: :model do
         user.username = Faker::Lorem.characters(number: 16)
         expect(user).to be_invalid
       end
+      it '半角英数字と[_]が使用できる: "test_000"は〇' do
+        user.username = 'test_000'
+        expect(user).to be_valid
+      end
+      it '半角英数字と[_]が使用できる: "テスト"は×' do
+        user.username = 'テスト'
+        expect(user).to be_invalid
+      end
       it '一意性があること' do
         user.username = other_user.username
         expect(user).to be_invalid

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   root 'homes#top'
   get 'search' => 'searches#search'
   # resources :users, only: [:show, :edit, :update] do
-  resources :users, path: '/', only: [:show, :edit, :update] do
+  resources :users, path: 'users/', only: [:show, :edit, :update] do
     member do
       get :bookmarked
     end

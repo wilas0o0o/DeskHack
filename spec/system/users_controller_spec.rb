@@ -20,7 +20,7 @@ describe 'usersコントローラーのテスト' do
 
     context '表示内容の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq '/users/' + user.id.to_s
+        expect(current_path).to eq '/users/' + user.username
       end
       it 'ユーザー名が表示されている' do
         expect(page).to have_content user.name
@@ -47,7 +47,7 @@ describe 'usersコントローラーのテスト' do
 
     context '表示内容の確認' do
       it 'URLが正しい' do
-        expect(current_path).to eq '/users/' + other_user.id.to_s
+        expect(current_path).to eq '/users/' + other_user.username
       end
       it 'ユーザー名が表示されている' do
         expect(page).to have_content other_user.name
@@ -109,7 +109,7 @@ describe 'usersコントローラーのテスト' do
         expect(page).to have_selector("img[src$='test_avatar.png']")
       end
       it 'リダイレクト先がユーザー詳細画面である' do
-        expect(current_path).to eq '/users/' + user.id.to_s
+        expect(current_path).to eq '/users/' + user.username
         expect(user.reload.name).to have_content user.name
       end
     end
