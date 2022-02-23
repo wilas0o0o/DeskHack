@@ -53,16 +53,16 @@
         </div>
       </div>
       <div class="row mx-auto sign-up-link">
-        <%= link_to "会員登録する", new_user_registration_path,class: "btn btn-success mx-auto" %>
+        <%= link_to "会員登録する", new_user_registration_path,class: "btn btn-success btn-lg mx-auto" %>
       </div>
       <p class="sign-in-link text-light text-center">
-        すでに登録済みの方は、<%= link_to "こちら ", new_user_session_path, class: "text-success" %>からログインをお願いします。
+        すでに登録済みの方は、<strong><%= link_to "こちら ", new_user_session_path, class: "text-success" %></strong>からログインをお願いします。
       </p>
     </div>
   </section>
   <section id="about">
-    <div class="container py-4">
-      <h1 class="text-center text-dark mb-4">DeskHackとは</h1>
+    <div class="container pt-4 pb-2">
+      <h1 class="text-center text-black mb-4">DeskHackとは</h1>
       <div class="row justify-content-between">
         <div class="about-box border rounded col-lg-6 col-md-12 p-2 mb-2">
           <h3 class="about-content-title text-center"><span>Step1 </span>理想のデスクをイメージしよう</h4>
@@ -92,6 +92,12 @@
           </p>
         </div>
       </div>
+      <div class="row mx-auto sign-up-link mt-3">
+        <%= link_to "会員登録する", new_user_registration_path,class: "btn btn-success btn-lg mx-auto mb-2" %>
+      </div>
+      <p class="sign-in-link text-black text-center">
+        すでに登録済みの方は、<strong><%= link_to "こちら ", new_user_session_path, class: "text-success" %></strong>からログインをお願いします。
+      </p>
     </div>
   </section>
 </div>

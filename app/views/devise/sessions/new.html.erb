@@ -8,7 +8,7 @@
       <%= form_with model: @user, url: user_session_path, local: true do |f| %>
 
         <div class="form-group my-3">
-          <%= f.text_field :login, autofocus: true, placeholder: "ユーザーIDかメールアドレス", class: "form-control" %>
+          <%= f.text_field :login, autofocus: true, autocomplete: "login", placeholder: "ユーザーIDかメールアドレス", class: "form-control" %>
         </div>
 
         <div class="form-group my-3">
