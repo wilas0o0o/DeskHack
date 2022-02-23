@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   end
   root 'homes#top'
   get 'search' => 'searches#search'
-  resources :users, only: [:show, :edit, :update] do
-    # resources :users, param: :username, path: '/', only: [:show, :edit, :update] do
+  # resources :users, only: [:show, :edit, :update] do
+  resources :users, path: '/', only: [:show, :edit, :update] do
     member do
       get :bookmarked
     end
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
   end
+  # get ':username', to: 'users#show', as: :user
   resources :posts do
     resource :favorites, only: [:create, :destroy]
     resource :bookmarks, only: [:create, :destroy]

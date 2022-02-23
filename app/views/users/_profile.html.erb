@@ -14,11 +14,11 @@
 <% end %>
 <div class="d-flex justify-content-center mt-2">
   <div>
-    <h5 class="mx-5"><%= link_to "フォロー中", user_followings_path(user.id), class: "text-dark font-weight-bold" %></h5>
-    <h5 class="mx-5"><%= link_to user.followings.count, user_followings_path(user.id), class: "text-dark font-weight-bold" %></h5>
+    <h5 class="mx-5"><%= link_to "フォロー中", user_followings_path(user.username), class: "text-dark font-weight-bold" %></h5>
+    <h5 class="mx-5"><%= link_to user.followings.count, user_followings_path(user.username), class: "text-dark font-weight-bold" %></h5>
   </div>
   <div>
-    <h5 class="mx-5"><%= link_to "フォロワー", user_followers_path(user.id), class: "text-dark font-weight-bold" %></h5>
-    <h5 class="mx-5"><%= link_to user.followers.count, user_followers_path(user.id), class: "text-dark font-weight-bold" %></h5>
+    <h5 class="mx-5"><%= link_to "フォロワー", user_followers_path(user.username), class: "text-dark font-weight-bold" %></h5>
+    <h5 class="mx-5"><%= link_to user.followers.count, user_followers_path(user.username), class: "text-dark font-weight-bold" %></h5>
   </div>
 </div>

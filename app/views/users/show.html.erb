@@ -1,6 +1,6 @@
 <div class="container mt-3">
   <div class="row d-flex flex-column">
-    <% if @user.name == "guest_user" %>
+    <% if current_user.name == "guest_user" %>
       <span class="text-danger"><%= notice %></span>
     <% end %>
     <div class="profile text-center mx-auto">
