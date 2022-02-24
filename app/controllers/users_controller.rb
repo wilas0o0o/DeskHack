@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :update]
 
   def show
-    # @user = User.find(params[:id])
     @user = User.find_by(username: params[:id])
     @posts = @user.posts.page(params[:page]).per(15)
   end
@@ -20,7 +19,6 @@ class UsersController < ApplicationController
   end
 
   def bookmarked
-    # @user = User.find(params[:id])
     @user = User.find_by(username: params[:id])
     bookmarked_post_ids = @user.bookmarks.pluck(:post_id)
     @posts = Post.where(id: bookmarked_post_ids).page(params[:page]).per(15)
@@ -33,7 +31,6 @@ class UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    # @user = User.find(params[:id])
     @user = User.find_by(username: params[:id])
     unless @user == current_user
       redirect_to user_path(current_user)
@@ -41,7 +38,6 @@ class UsersController < ApplicationController
   end
 
   def ensure_guest_user
-    # @user = User.find(params[:id])
     @user = User.find_by(username: params[:id])
     if @user.name == "guest_user"
       redirect_to user_path(current_user), notice: 'ゲストユーザーはユーザー編集画面へ遷移できません。'
