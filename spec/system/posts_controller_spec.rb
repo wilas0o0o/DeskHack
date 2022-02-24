@@ -45,24 +45,6 @@ describe 'postsコントローラーのテスト' do
       end
     end
 
-    # context '"アイテムを追加"のテスト' do
-    #   before do
-    #     click_link 'アイテムを追加'
-    #   end
-    #   it 'item_imageフォームが表示されている' do
-    #     expect(page).to have_field 'post[items_attributes][new_items][image]'
-    #   end
-    #   it 'item_nameフォームが空である' do
-    #     expect(find_field('post[items_attributes][new_items][name]').text).to be_blank
-    #   end
-    #   it 'item_categoryフォームが表示されている ' do
-    #     expect(page).to have_field 'post[items_attributes][new_items][category_id]'
-    #   end
-    #   it 'item_manufacurerフォームが空である' do
-    #     expect(find_field('post[items_attributes][new_items][manufacturer]').text).to be_blank
-    #   end
-    # end
-
     context '投稿成功のテスト' do
       image_path = Rails.root.join('spec/fixtures/test.jpg')
       before do
@@ -179,7 +161,7 @@ describe 'postsコントローラーのテスト' do
         expect(Post.where(id: original_post.id).count).to eq 0
       end
       it 'リダイレクト先がユーザー詳細画面である' do
-        expect(current_path).to eq '/users/' + original_post.user_id.to_s
+        expect(current_path).to eq '/' + original_post.user.username
       end
     end
   end

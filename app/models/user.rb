@@ -28,7 +28,7 @@ class User < ApplicationRecord
   validates :username,
     uniqueness: true,
     length: { minimum: 5, maximum: 15 },
-    format: { with: /\A[a-z0-9]+\z/, message: "は半角英数字で入力してください" }
+    format: { with: /\A[a-zA-Z0-9_]+\z/, message: "は半角英数字と[_]が使用できます。" }
 
   # ログイン時、username or email でログインできるようにする
   def self.find_first_by_auth_conditions(warden_conditions)
@@ -99,5 +99,9 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.name = 'guest_user'
     end
+  end
+
+  def to_param
+    username
   end
 end
