@@ -7,8 +7,8 @@ class Post < ApplicationRecord
   has_one  :post_image, -> { order(:id).limit(1) }, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :items, dependent: :destroy
-  has_many :post_hashtags
-  has_many :hashtags, through: :post_hashtags
+  has_many :post_hashtags, dependent: :destroy
+  has_many :hashtags, through: :post_hashtags, dependent: :destroy
 
   accepts_nested_attributes_for :post_images, allow_destroy: true
   accepts_nested_attributes_for :items, allow_destroy: true

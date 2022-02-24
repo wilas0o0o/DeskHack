@@ -28,7 +28,7 @@ class User < ApplicationRecord
   validates :username,
     uniqueness: true,
     length: { minimum: 5, maximum: 15 },
-    format: { with: /\A[a-z0-9]+\z/, message: "は半角英数字で入力してください" }
+    format: { with: /\A[a-zA-Z0-9_]+\z/, message: "は半角英数字と[_]が使用できます。" }
 
   # ログイン時、username or email でログインできるようにする
   def self.find_first_by_auth_conditions(warden_conditions)
@@ -87,10 +87,21 @@ class User < ApplicationRecord
     end
   end
 
+  # 未読を既読に変える
+  def checked_notification
+    passive_notifications.where(is_checked: false).each do |notification|
+      notification.update_attributes(is_checked: true)
+    end
+  end
+
   def self.guest
     find_or_create_by!(name: 'guest_user', username: 'guest', email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = 'guest_user'
     end
+  end
+
+  def to_param
+    username
   end
 end

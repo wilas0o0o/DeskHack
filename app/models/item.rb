@@ -9,7 +9,7 @@ class Item < ApplicationRecord
 
   ITEM_MAX = 10
   def post_items_size_validate
-    if self.post && self.post.items.size > ITEM_MAX
+    if post && post.items.size > ITEM_MAX
       errors.add(:base, 'アイテムは最大１０個までです')
     end
   end
