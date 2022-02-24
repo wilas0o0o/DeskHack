@@ -30,7 +30,8 @@ class User < ApplicationRecord
     length: { minimum: 5, maximum: 15 },
     format: { with: /\A[a-zA-Z0-9_]+\z/, message: "は半角英数字と[_]が使用できます。" }
 
-  # ログイン時、username or email でログインできるようにする
+  # usernameかemailでログインできるようにする
+  # どのユーザか特定するメソッド(find_first_by_auth_conditions)を拡張
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
