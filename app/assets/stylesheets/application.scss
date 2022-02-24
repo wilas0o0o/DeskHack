@@ -265,6 +265,10 @@ footer {
 }
 
 //------------- 画像サイズの指定 -------------//
+.images {
+  min-height: 415px;
+}
+
 .subImg img {
   max-height: 110px;
 }
