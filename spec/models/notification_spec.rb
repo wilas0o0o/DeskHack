@@ -30,7 +30,6 @@ RSpec.describe 'Notificationモデルのテスト', type: :model do
           post_comment_id: post_comment.id,
           action: 'comment'
         )
-        p notification
         expect(notification).to be_valid
       end
     end
