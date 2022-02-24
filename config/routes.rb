@@ -10,16 +10,6 @@ Rails.application.routes.draw do
   end
   root 'homes#top'
   get 'search' => 'searches#search'
-  # resources :users, only: [:show, :edit, :update] do
-  resources :users, path: 'users/', only: [:show, :edit, :update] do
-    member do
-      get :bookmarked
-    end
-    resource :relationships, only: [:create, :destroy]
-    get 'followings' => 'relationships#followings', as: 'followings'
-    get 'followers' => 'relationships#followers', as: 'followers'
-  end
-  # get ':username', to: 'users#show', as: :user
   resources :posts do
     resource :favorites, only: [:create, :destroy]
     resource :bookmarks, only: [:create, :destroy]
@@ -28,4 +18,12 @@ Rails.application.routes.draw do
   end
   get '/post/hashtag/:name' => 'posts#hashtag'
   patch 'check' => 'notifications#check'
+  resources :users, path: '/', only: [:show, :edit, :update] do
+    member do
+      get :bookmarked
+    end
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+  end
 end

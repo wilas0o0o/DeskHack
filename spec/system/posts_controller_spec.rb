@@ -161,7 +161,7 @@ describe 'postsコントローラーのテスト' do
         expect(Post.where(id: original_post.id).count).to eq 0
       end
       it 'リダイレクト先がユーザー詳細画面である' do
-        expect(current_path).to eq '/users/' + original_post.user.username
+        expect(current_path).to eq '/' + original_post.user.username
       end
     end
   end
