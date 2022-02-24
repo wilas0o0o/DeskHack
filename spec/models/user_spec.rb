@@ -54,11 +54,11 @@ RSpec.describe "Userモデルのテスト", type: :model do
         user.username = other_user.username
         expect(user).to be_invalid
       end
-      it '半角英数字であること: fff000は〇' do
+      it '半角英数字であること: "fff000"は〇' do
         user.username = "fff000"
         expect(user).to be_valid
       end
-      it '半角英数字であること: ユーザー名は×' do
+      it '半角英数字であること: "ユーザー名"は×' do
         user.username = "ユーザー名"
         expect(user).to be_invalid
       end

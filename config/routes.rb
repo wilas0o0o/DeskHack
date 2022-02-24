@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
     resources :items, only: [:create, :destroy]
   end
-  get '/post/hashtag/:name' => 'posts#hashtag'
+  get '/hashtags/:name' => 'posts#hashtag'
   patch 'check' => 'notifications#check'
   resources :users, path: '/', only: [:show, :edit, :update] do
     member do

@@ -52,7 +52,6 @@ class PostsController < ApplicationController
   end
 
   def hashtag
-    @user = current_user
     @tag = Hashtag.find_by(name: params[:name])
     @posts = @tag.posts.page(params[:page]).per(15)
   end
