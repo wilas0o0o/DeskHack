@@ -59,17 +59,19 @@ $(document).on('turbolinks:load', function() {
 });
 
 // 投稿詳細画面スライド
-$(function(){
-  // subImgをクリックすると発火
-  $('.subImg img').on('click', function(){
-    // クリックした画像のurlを取得
-    var subimg = $(this).attr('src');
-    // 元のmainImgの画像を取得
-    var mainimg = $('mainImg img').attr('src')
-    // mainImgをフェードアウト後、クリックしたsubImgと入れ替える
-    $('.mainImg img').fadeOut(100, function() {
-      $('.mainImg img').attr('src', subimg).on('load', function() {
-        $(this).fadeIn(100);
+$(document).on('turbolinks:load', function() {
+  $(function(){
+    // subImgをクリックすると発火
+    $('.subImg img').on('click', function(){
+      // クリックした画像のurlを取得
+      var subimg = $(this).attr('src');
+      // 元のmainImgの画像を取得
+      var mainimg = $('mainImg img').attr('src');
+      // mainImgをフェードアウト後、クリックしたsubImgと入れ替える
+      $('.mainImg img').fadeOut(100, function() {
+        $('.mainImg img').attr('src', subimg).on('load', function() {
+          $(this).fadeIn(100);
+        });
       });
     });
   });
