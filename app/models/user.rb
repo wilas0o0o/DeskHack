@@ -87,13 +87,14 @@ class User < ApplicationRecord
     end
   end
 
-  # 未読を既読に変える
+  # 未読を既読に変えるメソッド
   def checked_notification
     passive_notifications.where(is_checked: false).each do |notification|
       notification.update_attributes(is_checked: true)
     end
   end
 
+ # ゲストログインの
   def self.guest
     find_or_create_by!(name: 'guest_user', username: 'guest', email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
