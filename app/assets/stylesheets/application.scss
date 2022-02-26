@@ -196,32 +196,21 @@ footer {
 
 //---------- top/about ----------//
 #about {
-  background-color: #CECECF;
-  .about-box {
-    background-color: #fafafa;
-    .about-content-text, .about-content-title {
-      color: #732F2F;
-    }
-    .about-content-image {
-      background-position: top;
-      background-size: cover;
-      height: 400px;
-    }
+  background-image: image-url("about-mv.png");
+  background-position: center;
+  background-size: cover;
+  .about-container {
+    height: 700px;
   }
 }
 
-.about-index-image {
-  background-image: image-url("index.png");
+.about-title:after {
+  background-color: #818274;
+  border-radius: 2px;
+  height: 4px;
+  content: "";
+  display: block;
 }
-
-.about-show-image {
-  background-image: image-url("show.png");
-}
-
-.about-new-image {
-  background-image: image-url("new.png");
-}
-
 //---------- top/how-to-use ----------//
 
 #how-to-use {
