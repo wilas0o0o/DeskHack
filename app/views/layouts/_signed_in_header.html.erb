@@ -60,7 +60,7 @@
         <% end %>
       </div>
       <div class="ml-3 d-flex flex-column justify-content-center">
-        <span class="text-dark"><%= current_user.name %></span>
+        <span class="text-dark"><%= truncate(current_user.name, length: 10) %></span>
         <span class="text-muted">@<%= current_user.username %></span>
       </div>
     </div>
