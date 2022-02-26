@@ -119,7 +119,7 @@ $(document).on('turbolinks:load', function() {
     return post_html;
   }
 
-  // .file_fieldから画像が指定されたら発火
+  // 投稿時のプレビュー機能
   $(document).on('change', '.post-hidden-field', function() {
     // .hidden-fieldのidの数値のみ取得
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
