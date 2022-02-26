@@ -61,43 +61,21 @@
     </div>
   </section>
   <section id="about">
-    <div class="container pt-4 pb-2">
-      <h1 class="text-center text-black mb-4">DeskHackとは</h1>
-      <div class="row justify-content-between">
-        <div class="about-box border rounded col-lg-6 col-md-12 p-2 mb-2">
-          <h3 class="about-content-title text-center"><span>Step1 </span>理想のデスクをイメージしよう</h4>
-          <div class="about-content-image about-index-image mx-auto my-3 border"></div>
-          <p class="text-center about-content-text font-weight-bold">
-            すべてのユーザーのデスクが閲覧できます<br>
-            理想のデスクを探してみてください。
-          </p>
-        </div>
-        <div class="about-box border rounded col-lg-6 col-md-12 p-2 mb-2">
-          <h3 class="about-content-title text-center"><span>Step2 </span>イメージを形にしよう</h4>
-          <div class="about-content-image about-show-image mx-auto my-3 border"></div>
-          <p class="text-center about-content-text font-weight-bold">
-            画像クリックでより詳細な情報を知ることができます。<br>
-            ユーザー同士のコミュニケーションもできます。
-          </p>
+    <div class="container about-container">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="about-content text-dark text-center">
+          <div class="my-4 about-title">
+            <h1>DeskHackでは</h1>
+            <h1>あなたが求めるデスク環境が</h1>
+            <h1 class="mb-4">いつでも見つかります。</h1>
+          </div>
+          <div class="my-5 about-text">
+            <h5>あなたの好みのデスクを探してみてください。</h5>
+            <h5>その環境が自室にある光景をイメージすると</h5>
+            <h5>新たな発見があるかもしれません。</h5>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="about-box border rounded col-lg-12 p-2 mb-2">
-          <h3 class="about-content-title text-center"><span>Step3 </span>作ったデスクを共有しよう</h4>
-          <div class="about-content-image about-new-image mx-auto my-3 border"></div>
-          <p class="text-center about-content-text font-weight-bold">
-            デスクが完成したら共有してみてください。<br>
-            アイテムやハッシュタグの追加はいつでも行えます。<br>
-            共有することで新たな発見があるかもしれません。
-          </p>
-        </div>
-      </div>
-      <div class="row mx-auto sign-up-link mt-3">
-        <%= link_to "会員登録する", new_user_registration_path,class: "btn btn-success btn-lg mx-auto mb-2" %>
-      </div>
-      <p class="sign-in-link text-black text-center">
-        すでに登録済みの方は、<strong><%= link_to "こちら ", new_user_session_path, class: "text-success" %></strong>からログインをお願いします。
-      </p>
     </div>
   </section>
 </div>
