@@ -95,7 +95,7 @@ class User < ApplicationRecord
     end
   end
 
-  # ゲストログインの
+  # ゲストログイン
   def self.guest
     find_or_create_by!(name: 'guest_user', username: 'guest', email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -103,6 +103,7 @@ class User < ApplicationRecord
     end
   end
 
+  # routesにusernameを渡す
   def to_param
     username
   end
