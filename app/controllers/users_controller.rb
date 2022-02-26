@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username: params[:id])
-    @posts = @user.posts.page(params[:page]).per(15)
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(15)
   end
 
   def edit
@@ -21,7 +21,8 @@ class UsersController < ApplicationController
   def bookmarked
     @user = User.find_by(username: params[:id])
     bookmarked_post_ids = @user.bookmarks.pluck(:post_id)
-    @posts = Post.where(id: bookmarked_post_ids).page(params[:page]).per(15)
+    @posts = Post.where(id: bookmarked_post_ids).
+      order(created_at: :desc).page(params[:page]).per(15)
   end
 
   private
