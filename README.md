@@ -28,6 +28,8 @@
 * UI Flow：https://drive.google.com/file/d/132AjR_doeQnlPAo2oZ2ypXfp0-n71GZf/view?usp=sharing
 * テーブル定義書：https://docs.google.com/spreadsheets/d/1Z6HErhvS63dtjl4z_pGEX1reuf1etI1LaKwjm1c8yjQ/edit?usp=sharing
 * 詳細設計：https://docs.google.com/spreadsheets/d/1mbIUArqLyAN15Q0ctspemDmpbD8OV0_muwns3IjfI50/edit?usp=sharing
+* UI Flow ![image](https://user-images.githubusercontent.com/93774386/155867372-95cd65f4-1e87-4afd-9bc8-6b654849f171.png)
+
 
 
 ## チャレンジ要素一覧
