@@ -9,8 +9,8 @@
 「快適」を共有し、オリジナルのデスク環境を創り上げるサイト。
 
 ### テーマを選んだ理由
-コロナ禍での在宅ワークやPCゲームの普及などで、デスクの前で過ごす時間が増えてきました。
-そういった中で「お洒落な空間にしたい」、「配線を整えたい」などのデスク環境に悩みを抱えている人は多いと思います。
+コロナ禍での在宅ワークやPCゲームの普及などで、デスクの前で過ごす時間が増えてきました。  
+そういった中で「お洒落な空間にしたい」、「配線を整えたい」などのデスク環境に悩みを抱えている人は多いと思います。  
 自分だけのデスク環境を共有することで賛同を得たり、他人のデスクから情報収集をすることでより有意義な環境を創る手助けをしたいという願いから、このテーマにしました。
 
 ### ターゲットユーザ
@@ -39,4 +39,7 @@ https://docs.google.com/spreadsheets/d/1GQomQcAm4YTpmRF72-VA_P8Cz_qRoXzSdfiEru8D
 - IDE：Cloud9
 
 ## 使用素材
-- パブリックドメインQ (https://publicdomainq.net/working-room-0014448/)
+- パブリックドメインQ 様 (https://publicdomainq.net/working-room-0014448/)
+- Unsplash 様 (https://unsplash.com)
+- pixabay 様 (https://pixabay.com)
+- photoAC 様 (https://www.photo-ac.com)
