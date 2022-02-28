@@ -52,7 +52,7 @@ $(document).on('change', '.item-hidden-field', function() {
 });
 
 $(document).on('turbolinks:load', function() {
-  
+
   // オーバーレイ表示
   $('.mynotice').on('click',function() {
     $('.mynotice-menu').toggleClass('active');
@@ -167,7 +167,7 @@ $(document).on('turbolinks:load', function() {
     // .check-boxにチェックマークを入れる
     $(`#post_post_images_attributes_${id}__destroy`).prop('checked',true);
      // 取得したidに該当する.file_fieldの中身を削除
-    $(`#post_images_attributes_${id}_image`).val("");
+    $(`#post_post_images_attributes_${id}_image`).val("");
     // 4個目の.prev-boxが削除されたら.label-contentを表示
     var count = $('.prev-box').length;
     if (count < 4) {
