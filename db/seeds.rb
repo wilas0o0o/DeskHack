@@ -45,5 +45,5 @@ Category.find_or_create_by([
   },
   {
     name: "その他"
-  },
+  }
 ])
