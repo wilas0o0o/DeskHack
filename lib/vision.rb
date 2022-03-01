@@ -20,7 +20,7 @@ module Vision
           features: [
             {
               type: 'IMAGE_PROPERTIES',
-              maxResults: 5
+              maxResults: 10
             }
           ]
         }]
@@ -38,9 +38,7 @@ module Vision
       if (error = response_body['responses'][0]['error']).present?
         raise error['message']
       else
-        # response_body['responses'][0]['labelAnnotations'].pluck('description').take(3)
-        response_body['responses'][0]['imagePropertiesAnnotation']
-        byebug
+        response_body['responses'][0]['imagePropertiesAnnotation']['dominantColors']
       end
     end
   end

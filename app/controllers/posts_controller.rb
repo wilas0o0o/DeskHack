@@ -12,10 +12,14 @@ class PostsController < ApplicationController
     if @post.save
 
 
-      hashtags = Vision.get_image_data(@post.post_image)
-      hashtags.each do |hashtag|
-        @post.hashtags.create(name: hashtag)
-      end
+      dominant_colors = Vision.get_image_data(@post.post_image)
+      binding.pry
+      color = dominant_colors['colors'][0]['color']
+      red = color['red']
+      green = color['green']
+      blue = color['blue']
+      hex = [red, green, blue].map{|i| i.to_s(16) }.join.upcase
+      @post.post_image.colors.create(hex: hex)
 
 
       redirect_to post_path(@post)
@@ -41,6 +45,7 @@ class PostsController < ApplicationController
     @first_image = post_images.to_a.first
     @post_comment = PostComment.new
     @item = Item.new
+    @color = Color.find_by(post_image_id: @first_image.id)
   end
 
   def edit

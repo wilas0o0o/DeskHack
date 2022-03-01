@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_01_111153) do
+ActiveRecord::Schema.define(version: 2022_03_01_111726) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -30,13 +30,11 @@ ActiveRecord::Schema.define(version: 2022_03_01_111153) do
   end
 
   create_table "colors", force: :cascade do |t|
-    t.integer "post_id_id"
-    t.integer "red"
-    t.integer "green"
-    t.integer "blue"
+    t.integer "post_image_id"
+    t.string "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id_id"], name: "index_colors_on_post_id_id"
+    t.index ["post_image_id"], name: "index_colors_on_post_image_id"
   end
 
   create_table "favorites", force: :cascade do |t|
