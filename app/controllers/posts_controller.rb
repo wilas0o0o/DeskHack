@@ -12,9 +12,9 @@ class PostsController < ApplicationController
     if @post.save
 
 
-      colors = Vision.get_image_data(@post.post_image)
-      colors.each do |color|
-        @post.colors.create(name: color)
+      hashtags = Vision.get_image_data(@post.post_image)
+      hashtags.each do |hashtag|
+        @post.hashtags.create(name: hashtag)
       end
 
 

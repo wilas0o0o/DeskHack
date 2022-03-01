@@ -20,7 +20,7 @@ module Vision
           features: [
             {
               type: 'IMAGE_PROPERTIES',
-              maxResults: 10
+              maxResults: 5
             }
           ]
         }]
@@ -40,7 +40,7 @@ module Vision
       else
         # response_body['responses'][0]['labelAnnotations'].pluck('description').take(3)
         response_body['responses'][0]['imagePropertiesAnnotation']
-        p response_body
+        byebug
       end
     end
   end
