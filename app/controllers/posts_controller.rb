@@ -10,6 +10,14 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
+
+
+      colors = Vision.get_image_data(@post.post_image)
+      colors.each do |color|
+        @post.colors.create(name: color)
+      end
+
+
       redirect_to post_path(@post)
     else
       @post.post_images.build

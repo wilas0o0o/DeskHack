@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Category.find_or_create_by([
+Category.create!([
   {
     name: "デスク"
   },
@@ -45,5 +45,5 @@ Category.find_or_create_by([
   },
   {
     name: "その他"
-  },
+  }
 ])
