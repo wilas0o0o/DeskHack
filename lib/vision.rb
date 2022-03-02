@@ -20,7 +20,7 @@ module Vision
           features: [
             {
               type: 'IMAGE_PROPERTIES',
-              maxResults: 10
+              maxResults: 50
             }
           ]
         }]
@@ -39,7 +39,6 @@ module Vision
         raise error['message']
       else
         response_body['responses'][0]['imagePropertiesAnnotation']['dominantColors']
-        binding.pry
       end
     end
   end

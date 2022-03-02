@@ -108,7 +108,7 @@
         <h5>メイン画像のパレット</h5>
         <div class="d-flex">
           <% @colors.each do |color| %>
-            <div class="color" style=background-color:#<%= color.hex %>;>色</div>
+            <div class="color" style="background-color:#<%= color.hex %>;width:<%= color.pixel_fraction / @post_image.calc_pixelFraction * 100 %>%;"></div>
           <% end %>
         </div>
       </div>

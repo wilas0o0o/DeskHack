@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2022_03_01_111726) do
   create_table "colors", force: :cascade do |t|
     t.integer "post_image_id"
     t.string "hex"
+    t.float "pixel_fraction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_image_id"], name: "index_colors_on_post_image_id"
