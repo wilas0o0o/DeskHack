@@ -15,11 +15,8 @@ class PostsController < ApplicationController
       dominant_colors = Vision.get_image_data(@post.post_image)
       colors = dominant_colors['colors']
       colors.each do |color|
-        red = color['color']['red']
-        green = color['color']['green']
-        blue = color['color']['blue']
-        binding.pry
-        hex = [red, green, blue].map{ |i| i.to_s(16) }.join.upcase
+        dec = (color['color']['red'] << 16) | (color['color']['green'] << 8) | color['color']['blue']
+        hex = sprintf('#%06X', dec)
         pixel_fraction = color['pixelFraction']
         @post.post_image.colors.create(hex: hex, pixel_fraction: pixel_fraction)
       end
@@ -57,6 +54,15 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      @post.post_image.colors.destroy_all
+      dominant_colors = Vision.get_image_data(@post.post_image)
+      colors = dominant_colors['colors']
+      colors.each do |color|
+        dec = (color['color']['red'] << 16) | (color['color']['green'] << 8) | color['color']['blue']
+        hex = sprintf('#%06X', dec)
+        pixel_fraction = color['pixelFraction']
+        @post.post_image.colors.create(hex: hex, pixel_fraction: pixel_fraction)
+      end
       redirect_to post_path(@post)
     else
       render :edit
