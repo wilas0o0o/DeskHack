@@ -39,6 +39,7 @@ module Vision
         raise error['message']
       else
         response_body['responses'][0]['imagePropertiesAnnotation']['dominantColors']
+        binding.pry
       end
     end
   end

@@ -13,13 +13,15 @@ class PostsController < ApplicationController
 
 
       dominant_colors = Vision.get_image_data(@post.post_image)
-      binding.pry
-      color = dominant_colors['colors'][0]['color']
-      red = color['red']
-      green = color['green']
-      blue = color['blue']
-      hex = [red, green, blue].map{|i| i.to_s(16) }.join.upcase
-      @post.post_image.colors.create(hex: hex)
+      colors = dominant_colors['colors']
+      colors.each do |color|
+        # hexの作成
+        red = color['color']['red']
+        green = color['color']['green']
+        blue = color['color']['blue']
+        hex = [red, green, blue].map{ |i| i.to_s(16) }.join.upcase
+        @post.post_image.colors.create(hex: hex)
+      end
 
 
       redirect_to post_path(@post)
@@ -45,7 +47,7 @@ class PostsController < ApplicationController
     @first_image = post_images.to_a.first
     @post_comment = PostComment.new
     @item = Item.new
-    @color = Color.find_by(post_image_id: @first_image.id)
+    @colors = @post.post_image.colors
   end
 
   def edit
