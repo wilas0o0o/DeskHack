@@ -8,9 +8,9 @@ class PostImage < ApplicationRecord
   # pixelFractionの合計値
   def calc_pixelFraction
     sum = 0
-    self.colors.each do |color|
-      sum = sum + color.pixel_fraction
+    colors.each do |color|
+      sum += color.pixel_fraction
     end
-    return sum
+    sum
   end
 end

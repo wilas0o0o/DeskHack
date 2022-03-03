@@ -10,8 +10,6 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-
-
       dominant_colors = Vision.get_image_data(@post.post_image)
       colors = dominant_colors['colors']
       colors.each do |color|
@@ -20,8 +18,6 @@ class PostsController < ApplicationController
         pixel_fraction = color['pixelFraction']
         @post.post_image.colors.create(hex: hex, pixel_fraction: pixel_fraction)
       end
-
-
       redirect_to post_path(@post)
     else
       @post.post_images.build
@@ -41,12 +37,10 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    post_images = @post.post_images
-    @first_image = post_images.to_a.first
+    @post_image = @post.post_image
     @post_comment = PostComment.new
     @item = Item.new
-    @colors = @post.post_image.colors
-    @post_image = @post.post_image
+    @colors = @post_image.colors
   end
 
   def edit

@@ -15,15 +15,15 @@ module Vision
       params = {
         requests: [{
           image: {
-            content: base64_image
+            content: base64_image,
           },
           features: [
             {
               type: 'IMAGE_PROPERTIES',
-              maxResults: 50
-            }
-          ]
-        }]
+              maxResults: 50,
+            },
+          ],
+        }],
       }.to_json
 
       # Google Cloud Vision APIにリクエスト
@@ -34,6 +34,7 @@ module Vision
       request['Content-Type'] = 'application/json'
       response = https.request(request, params)
       response_body = JSON.parse(response.body)
+
       # APIレスポンス出力
       if (error = response_body['responses'][0]['error']).present?
         raise error['message']
