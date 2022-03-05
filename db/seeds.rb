@@ -80,3 +80,9 @@ User.create!([
     password: "123456"
   }
 ])
+
+Post.create!([
+  {
+    text ''
+  }
+])
