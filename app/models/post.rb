@@ -34,6 +34,7 @@ class Post < ApplicationRecord
     Post.where('caption LIKE ?', '%' + content + '%')
   end
 
+  # Vision APIを使用してdominantColorを保存
   def create_colors(post)
     dominant_colors = Vision.get_image_data(post.post_image)
     colors = dominant_colors['colors']
@@ -45,26 +46,10 @@ class Post < ApplicationRecord
     end
   end
   
+  # #を外してハッシュタグを保存
   def create_hashtags(post)
-    
-  end
-  # create時に#を外して保存する
-  after_create do
-    post = Post.find_by(id: id)
     hashtags = caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     post.hashtags = []
-    hashtags.uniq.map do |hashtag|
-      # ハッシュタグは先頭の#を外して保存
-      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
-      post.hashtags << tag
-    end
-  end
-
-  # update時に#を外して保存する
-  before_update do
-    post = Post.find_by(id: id)
-    post.hashtags.clear
-    hashtags = caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     hashtags.uniq.map do |hashtag|
       tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
       post.hashtags << tag
