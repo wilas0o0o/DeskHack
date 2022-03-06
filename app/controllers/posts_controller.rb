@@ -41,6 +41,7 @@ class PostsController < ApplicationController
     @post_comment = PostComment.new
     @item = Item.new
     @colors = @post_image.colors
+    @comment_reply = @post.post_comments.new
   end
 
   def edit
