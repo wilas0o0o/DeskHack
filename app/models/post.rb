@@ -34,6 +34,20 @@ class Post < ApplicationRecord
     Post.where('caption LIKE ?', '%' + content + '%')
   end
 
+  def create_colors(post)
+    dominant_colors = Vision.get_image_data(post.post_image)
+    colors = dominant_colors['colors']
+    colors.each do |color|
+      dec = (color['color']['red'] << 16) | (color['color']['green'] << 8) | color['color']['blue']
+      hex = sprintf('#%06X', dec)
+      pixel_fraction = color['pixelFraction']
+      post.post_image.colors.create(hex: hex, pixel_fraction: pixel_fraction)
+    end
+  end
+  
+  def create_hashtags(post)
+    
+  end
   # create時に#を外して保存する
   after_create do
     post = Post.find_by(id: id)
