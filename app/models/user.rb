@@ -44,24 +44,20 @@ class User < ApplicationRecord
     end
   end
 
-  # すでにフォローしているかどうか
   def followings?(user)
     followings.include?(user)
   end
 
-  # フォローするメソッド
   def follow(user)
     unless self == user
       active_relationships.create(followed_id: user.id)
     end
   end
 
-  # フォローを外すメソッド
   def unfollow(user)
     active_relationships.find_by(followed_id: user.id).destroy
   end
 
-  # 検索メソッド
   def self.search_for(content)
     User.where('name LIKE ?', '%' + content + '%')
   end
@@ -81,7 +77,6 @@ class User < ApplicationRecord
         visited_id: id,
         action: "follow"
       )
-      # 不備がなければ保存する
       notification.save if notification.valid?
     end
   end
@@ -93,7 +88,7 @@ class User < ApplicationRecord
     end
   end
 
-  # ゲストログインの
+  # ゲストログイン
   def self.guest
     find_or_create_by!(name: 'guest_user', username: 'guest', email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
