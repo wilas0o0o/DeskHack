@@ -28,22 +28,6 @@ class User < ApplicationRecord
     length: { minimum: 5, maximum: 15 },
     format: { with: /\A[a-zA-Z0-9_]+\z/, message: "は半角英数字と[_]が使用できます。" }
 
-  # usernameかemailでログインできるようにする
-  # どのユーザか特定するメソッド(find_first_by_auth_conditions)を拡張
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).where(
-        [
-          "username = :value OR lower(email) = lower(:value)",
-          { :value => login }
-        ]
-      ).first
-    else
-      where(conditions).first
-    end
-  end
-
   def followings?(user)
     followings.include?(user)
   end
@@ -98,5 +82,21 @@ class User < ApplicationRecord
 
   def to_param
     username
+  end
+  
+  # usernameかemailでログインできるようにする
+  # どのユーザか特定するメソッド(find_first_by_auth_conditions)を拡張
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(
+        [
+          "username = :value OR lower(email) = lower(:value)",
+          { :value => login }
+        ]
+      ).first
+    else
+      where(conditions).first
+    end
   end
 end
