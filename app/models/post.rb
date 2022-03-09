@@ -76,7 +76,6 @@ class Post < ApplicationRecord
       if notification.visitor_id == notification.visited_id
         notification.is_checked = true
       end
-      # 通知レコードに不備がなければ保存
       notification.save if notification.valid?
     end
   end
@@ -105,7 +104,6 @@ class Post < ApplicationRecord
     if notification.visitor_id == notification.visited_id
       notification.is_checked = true
     end
-    # 不備がなければ保存
     notification.save if notification.valid?
   end
 end
