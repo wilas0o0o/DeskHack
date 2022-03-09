@@ -80,6 +80,7 @@ class User < ApplicationRecord
     end
   end
 
+  # routesにusernameを渡す
   def to_param
     username
   end
