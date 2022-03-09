@@ -35,18 +35,16 @@ $(window).on('scroll', function() {
 
 // アイテム追加時のプレビュー機能
 $(document).on('change', '.item-hidden-field', function() {
-  // 選択されたfile-fieldのidの数字の部分を取得
-  var item_id = $(this).attr('id').replace(/[^0-9]/g, '');
   // 選択した部分のみの.add-item-image-btnにidを与える
+  var item_id = $(this).attr('id').replace(/[^0-9]/g, '');
   $(this).parent().last().attr({id: `prev-target-${item_id}`});
   // FileReaderオブジェクトを作成
   var file = this.files[0];
   var reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = function() {
-    // 選択された画像データを.item_imageに代入
-    var item_image = this.result;
     // 上で与えられたidを持つprev-targetの画像を変更
+    var item_image = this.result;
     $(`#prev-target-${item_id} img`).attr({src: `${item_image}`});
   };
 });
@@ -94,14 +92,14 @@ $(document).on('turbolinks:load', function() {
     $('.delete-box').each(function(index, box){
       $(box).attr('id', `delete_btn_${index}`);
     });
-    var count = $('.prev-box').length;
     //プレビューが4個あるときは.label-contentを隠す
+    var count = $('.prev-box').length;
     if (count == 4) {
       $('.label-content').hide();
     }
   }
 
-  // 画像をプレビュー表示させる場所(.prev-box)を作成
+  // 投稿画像をプレビューする場所を作成
   function buildPostHTML(count) {
     var post_html = `<div class="prev-box" id="prev-box__${count}">
                   <div class="prev-img w-100">
@@ -119,7 +117,7 @@ $(document).on('turbolinks:load', function() {
     return post_html;
   }
 
-  // .file_fieldから画像が指定されたら発火
+  // 投稿作成時のプレビュー機能
   $(document).on('change', '.post-hidden-field', function() {
     // .hidden-fieldのidの数値のみ取得
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
@@ -138,9 +136,8 @@ $(document).on('turbolinks:load', function() {
       var image = this.result;
       // プレビューが元々なかった場合のみ実行
       if ($(`#prev-box__${id}`).length == 0) {
-        // 変数post_htmlに.prev-boxを代入
+        // .label-contentの直前に変数post_htmlを追加
         var post_html = buildPostHTML(id);
-        // .label-contentの直前に変数htmlを追加
         var prevContent = $('.label-content').prev();
         $(prevContent).append(post_html);
       }
@@ -162,11 +159,9 @@ $(document).on('turbolinks:load', function() {
   $(document).on('click', '.delete-box', function() {
     // post_post_images_attributes_${id}_image から${id}に入った数字のみ取得
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
-    // 取得したidに該当する.prev-boxを削除
+    // 取得したidに該当するプレビューの削除
     $(`#prev-box__${id}`).remove();
-    // .check-boxにチェックマークを入れる
     $(`#post_post_images_attributes_${id}__destroy`).prop('checked',true);
-     // 取得したidに該当する.file_fieldの中身を削除
     $(`#post_post_images_attributes_${id}_image`).val("");
     // 4個目の.prev-boxが削除されたら.label-contentを表示
     var count = $('.prev-box').length;
@@ -179,6 +174,7 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
+  // プロフィール画像をプレビューする場所を作成
   function buildAvatarHTML(avatar) {
     var avatar_html = `<div class="prev-target">
                   <img src="${avatar}", alt="preview" class="prev-avatar rounded-circle" width="100" height="100">
@@ -197,9 +193,8 @@ $(document).on('turbolinks:load', function() {
       var avatar = this.result;
       // プレビュー画像がなければ処理を実行
       if ($('.prev-target').length == 0) {
-        // 読み込んだ画像ファイル(変数avatar)をbuildHTMLに渡す
-        var avatar_html = buildAvatarHTML(avatar);
         // 作成した.prev-targetをno-avatarの代わりに表示
+        var avatar_html = buildAvatarHTML(avatar);
         $('.prev-box').prepend(avatar_html);
         $('.no-avatar').hide();
         // 既に画像がプレビューされていれば画像データのみを入れ替る
