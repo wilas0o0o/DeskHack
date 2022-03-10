@@ -1,7 +1,7 @@
-<div class="form-container w-100 d-flex justify-content-center align-items-center">
+<div class="form-container d-flex justify-content-center align-items-center w-100">
   <div class="form-wrapper">
     <div class="form-signin w-100">
-      <div class="form-logo mb-4 form-logo-img mx-auto d-flex justify-content-center">
+      <div class="form-logo form-logo-img d-flex justify-content-center mb-4 mx-auto">
         <%= image_tag("Logo_white.png") %>
       </div>
       <p class="alert text-danger"><%= alert %></p>
@@ -15,7 +15,7 @@
           <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "form-control" %>
         </div>
 
-        <div class="actions my-3">
+        <div class="form-action my-3">
           <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
         </div>
       <% end %>
