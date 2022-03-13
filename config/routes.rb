@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       get :bookmarked
     end
     resource :relationships, only: [:create, :destroy]
+    post 'ajax_create' => 'relationships#ajax_create'
+    delete 'ajax_destroy' => 'relationships#ajax_destroy'
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
   end
