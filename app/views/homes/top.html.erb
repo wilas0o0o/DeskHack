@@ -1,8 +1,8 @@
 <div class="top-container w-100">
   <section id="mv" class="d-flex text-center">
-    <div class="mv-mask d-flex justify-content-center align-items-center flex-column w-100">
+    <div class="mv-mask d-flex flex-column justify-content-center align-items-center w-100">
       <h1 class="mv-title text-light">DeskHack</h1>
-      <p class="mv-content text-light text-center">快適を共有しよう。</p>
+      <p class="mv-content text-center text-light">快適を共有しよう。</p>
     </div>
   </section>
   <section id="how-to-use">
@@ -52,24 +52,24 @@
           <p class="text-light">発見は快適への近道</p>
         </div>
       </div>
-      <div class="row mx-auto sign-up-link">
+      <div class="row mx-auto">
         <%= link_to "会員登録する", new_user_registration_path,class: "btn btn-success btn-lg mx-auto" %>
       </div>
-      <p class="sign-in-link text-light text-center">
+      <p class="text-light text-center my-2">
         すでに登録済みの方は、<strong><%= link_to "こちら ", new_user_session_path, class: "text-success" %></strong>からログインをお願いします。
       </p>
     </div>
   </section>
   <section id="about">
     <div class="container about-container">
-      <div class="row h-100 justify-content-center align-items-center">
-        <div class="about-content text-dark text-center">
-          <div class="my-4 about-title">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="about-content text-center text-dark">
+          <div class="about-title my-4">
             <h1>DeskHackでは</h1>
             <h1>あなたが求めるデスク環境が</h1>
             <h1 class="mb-4">いつでも見つかります。</h1>
           </div>
-          <div class="my-5 about-text">
+          <div class="about-text my-5">
             <h5>あなたの好みのデスクを探してみてください。</h5>
             <h5>その環境が自室にある光景をイメージすると</h5>
             <h5>新たな発見があるかもしれません。</h5>

@@ -24,7 +24,7 @@
       </table>
       <div class="item-delete d-flex justify-content-end align-items-end m-2 mr-4">
         <% if post.user == current_user %>
-          <%= link_to "", post_item_path(item.post, item), method: :delete, remote: true, class: "fa fa-trash-alt fa-lg text-muted delete-item-btn"%>
+          <%= link_to "", post_item_path(item.post, item), method: :delete, remote: true, class: "delete-item-btn fa fa-trash-alt fa-lg text-muted"%>
         <% end %>
       </div>
     </div>
