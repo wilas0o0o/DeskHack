@@ -10,16 +10,16 @@
     <p><%= user.email %></p>
     <%= link_to "編集", edit_user_path(user), class: "btn btn-success btn-sm" %>
   <% else %>
-    <p class="follow-btn"><%= render 'relationships/follow_btn', user: user %></p>
+    <p class="follow-btn"><%= render 'relationships/ajax_follow_btn', user: user %></p>
   <% end %>
 <% end %>
 <div class="d-flex justify-content-center mt-2">
   <div>
     <h5 class="mx-5"><%= link_to "フォロー中", user_followings_path(user.username), class: "text-dark font-weight-bold" %></h5>
-    <h5 class="mx-5"><%= link_to user.followings.count, user_followings_path(user.username), class: "text-dark font-weight-bold" %></h5>
+    <h5 class="mx-5 followints-count"><%= link_to user.followings.count, user_followings_path(user.username), class: "text-dark font-weight-bold" %></h5>
   </div>
   <div>
     <h5 class="mx-5"><%= link_to "フォロワー", user_followers_path(user.username), class: "text-dark font-weight-bold" %></h5>
-    <h5 class="mx-5"><%= link_to user.followers.count, user_followers_path(user.username), class: "text-dark font-weight-bold" %></h5>
+    <h5 class="mx-5 followers-count"><%= render 'relationships/followers_link', user: user %></h5>
   </div>
 </div>
