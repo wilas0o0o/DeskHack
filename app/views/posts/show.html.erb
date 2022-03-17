@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row mt-2">
     <h5><%= link_to "", :back, class: "fas fa-arrow-left mr-4 text-dark mx-2" %></h5>
-    <div class="col-12 d-flex mb-3">
+    <div class="col-12 d-flex mb-3" id = "user_<%= @post.user.id %>">
       <div class="user-info d-flex align-items-end">
         <%= link_to user_path(@post.user) do %>
           <% if @post.user.avatar? %>
