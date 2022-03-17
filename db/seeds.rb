@@ -47,36 +47,3 @@ Category.create!([
     name: "その他"
   }
 ])
-
-User.create!([
-  {
-    name: "Alice",
-    username: "alice",
-    email: "alice@example.com",
-    password: "123456"
-  },
-  {
-    name: "Bob",
-    username: "boblim",
-    email: "bob@example.com",
-    password: "123456"
-  },
-  {
-    name: "Chris",
-    username: "chris",
-    email: "chris@example.com",
-    password: "123456"
-  },
-  {
-    name: "Daniel",
-    username: "daniel",
-    email: "daniel@example.com",
-    password: "123456"
-  },
-  {
-    name: "太郎",
-    username: "tarotaros",
-    email: "taro@example.com",
-    password: "123456"
-  }
-])

@@ -1,5 +1,0 @@
-<% if current_user.followings?(user) %>
-  <%= link_to "フォロー中", user_ajax_destroy_path(user), method: :delete, remote: true, class: "btn btn-secondary" %>
-<% else %>
-  <%= link_to "フォローする", user_ajax_create_path(user), method: :post, remote: true, class: "btn btn-primary" %>
-<% end %>

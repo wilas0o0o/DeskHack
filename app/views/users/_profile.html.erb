@@ -11,7 +11,7 @@
     <%= link_to "編集", edit_user_path(user), class: "btn btn-success btn-sm" %>
   <% end %>
 <% else %>
-  <p class="follow-btn"><%= render 'relationships/ajax_follow_btn', user: user %></p>
+  <p class="follow-btn"><%= render 'relationships/follow_btn', user: user %></p>
 <% end %>
 <div class="d-flex justify-content-center mt-2">
   <div>
