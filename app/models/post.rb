@@ -45,7 +45,7 @@ class Post < ApplicationRecord
       post.post_image.colors.create(hex: hex, pixel_fraction: pixel_fraction)
     end
   end
-  
+
   # #を外してハッシュタグを保存
   def create_hashtags(post)
     hashtags = caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)

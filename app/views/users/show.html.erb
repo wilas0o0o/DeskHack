@@ -3,7 +3,7 @@
     <% if current_user.name == "guest_user" %>
       <span class="text-danger"><%= notice %></span>
     <% end %>
-    <div class="profile text-center mx-auto">
+    <div class="profile text-center mx-auto" id = "user_<%= @user.id%>">
       <%= render 'users/profile', user: @user %>
     </div>
     <div class="post-box mt-3">
