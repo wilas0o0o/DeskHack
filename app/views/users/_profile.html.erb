@@ -5,13 +5,13 @@
 <% end %>
 <h3 class="text-center"><%= user.name %></h3>
 <h5 class="text-center">@<%= user.username %></h5>
-<% unless(user.name == "guest_user") %>
-  <% if user == current_user %>
-    <p><%= user.email %></p>
+<% if user == current_user %>
+  <p><%= user.email %></p>
+  <% unless(user.name == "guest_user") %>
     <%= link_to "編集", edit_user_path(user), class: "btn btn-success btn-sm" %>
-  <% else %>
-    <p class="follow-btn"><%= render 'relationships/ajax_follow_btn', user: user %></p>
   <% end %>
+<% else %>
+  <p class="follow-btn"><%= render 'relationships/ajax_follow_btn', user: user %></p>
 <% end %>
 <div class="d-flex justify-content-center mt-2">
   <div>
