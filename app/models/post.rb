@@ -33,9 +33,12 @@ class Post < ApplicationRecord
   def self.search_for(content)
     Post.where('caption LIKE ?', '%' + content + '%')
   end
-  
-  after_create do
-    post = Post.find(params[:id])
+
+  # dominatColorとHashtagの保存
+  after_save do
+    post = Post.find_by(id: self.id)
+    post.post_image.colors.clear
+    post.hashtags.clear
     post.create_colors(post)
     post.create_hashtags(post)
   end
@@ -52,7 +55,7 @@ class Post < ApplicationRecord
     end
   end
 
-  # #を外してハッシュタグを保存
+  # #を外してHashtagを保存
   def create_hashtags(post)
     hashtags = caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     post.hashtags = []
