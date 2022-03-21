@@ -57,22 +57,23 @@ class PostsController < ApplicationController
   end
 
   private
-    def post_params
-      params.require(:post).
-        permit(
-          :user_id,
-              :situation,
-              :text,
-              :caption,
-              post_images_attributes: [:image, :id, :_destroy],
-              items_attributes: [:post_id, :category_id, :image, :name, :manufacturer]
-        )
-    end
 
-    def ensure_correct_user
-      @post = Post.find(params[:id])
-      unless @post.user_id == current_user.id
-        redirect_to post_path(@post)
-      end
+  def post_params
+    params.require(:post).
+      permit(
+        :user_id,
+            :situation,
+            :text,
+            :caption,
+            post_images_attributes: [:image, :id, :_destroy],
+            items_attributes: [:post_id, :category_id, :image, :name, :manufacturer]
+      )
+  end
+
+  def ensure_correct_user
+    @post = Post.find(params[:id])
+    unless @post.user_id == current_user.id
+      redirect_to post_path(@post)
     end
+  end
 end

@@ -17,14 +17,15 @@ class ItemsController < ApplicationController
   end
 
   private
-    def item_params
-      params.require(:item).permit(:category_id, :name, :manufacturer, :image)
-    end
 
-    def ensure_correct_user
-      @post = Post.find(params[:post_id])
-      unless @post.user_id == current_user.id
-        redirect_to post_path(@post)
-      end
+  def item_params
+    params.require(:item).permit(:category_id, :name, :manufacturer, :image)
+  end
+
+  def ensure_correct_user
+    @post = Post.find(params[:post_id])
+    unless @post.user_id == current_user.id
+      redirect_to post_path(@post)
     end
+  end
 end

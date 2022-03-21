@@ -36,7 +36,7 @@ class Post < ApplicationRecord
 
   # dominatColorとHashtagの保存
   after_save do
-    post = Post.find_by(id: self.id)
+    post = Post.find_by(id: id)
     post.post_image.colors.clear
     post.hashtags.clear
     post.create_colors(post)
