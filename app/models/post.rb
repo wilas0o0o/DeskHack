@@ -33,6 +33,12 @@ class Post < ApplicationRecord
   def self.search_for(content)
     Post.where('caption LIKE ?', '%' + content + '%')
   end
+  
+  after_create do
+    post = Post.find(params[:id])
+    post.create_colors(post)
+    post.create_hashtags(post)
+  end
 
   # Vision APIを使用してdominantColorを保存
   def create_colors(post)

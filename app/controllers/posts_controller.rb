@@ -10,8 +10,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      @post.create_colors(@post)
-      @post.create_hashtags(@post)
+      # @post.create_colors(@post)
+      # @post.create_hashtags(@post)
       redirect_to post_path(@post)
     else
       @post.post_images.build
@@ -63,23 +63,22 @@ class PostsController < ApplicationController
   end
 
   private
-
-  def post_params
-    params.require(:post).
-      permit(
-        :user_id,
-            :situation,
-            :text,
-            :caption,
-            post_images_attributes: [:image, :id, :_destroy],
-            items_attributes: [:post_id, :category_id, :image, :name, :manufacturer]
-      )
-  end
-
-  def ensure_correct_user
-    @post = Post.find(params[:id])
-    unless @post.user_id == current_user.id
-      redirect_to post_path(@post)
+    def post_params
+      params.require(:post).
+        permit(
+          :user_id,
+              :situation,
+              :text,
+              :caption,
+              post_images_attributes: [:image, :id, :_destroy],
+              items_attributes: [:post_id, :category_id, :image, :name, :manufacturer]
+        )
     end
-  end
+  
+    def ensure_correct_user
+      @post = Post.find(params[:id])
+      unless @post.user_id == current_user.id
+        redirect_to post_path(@post)
+      end
+    end
 end
