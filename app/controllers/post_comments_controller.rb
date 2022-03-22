@@ -1,7 +1,8 @@
 class PostCommentsController < ApplicationController
-  before_action :ensure_correct_user, only: [:create, :destroy]
+  before_action :ensure_correct_user, only: [:destroy]
 
   def create
+    @post = Post.find(params[:post_id])
     @post = Post.find(params[:post_id])
     @post_comment = @post.post_comments.new(post_comment_params)
     @post_comment.user_id = current_user.id
