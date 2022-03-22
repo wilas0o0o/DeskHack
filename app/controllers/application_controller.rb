@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       @notifications = current_user.passive_notifications.
         order(created_at: :desc).
-        page(params[:page]).per(5)
+        page(params[:page]).per(10)
     end
   end
 end
