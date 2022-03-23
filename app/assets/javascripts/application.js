@@ -51,7 +51,7 @@ $(document).on('change', '.item-hidden-field', function() {
 
 $(document).on('turbolinks:load', function() {
 
-  // オーバーレイ表示
+  // オーバーレイを表示
   $('.mynotice').on('click',function() {
     $('.mynotice-menu').toggleClass('active');
   });
@@ -60,7 +60,7 @@ $(document).on('turbolinks:load', function() {
     $('.mypage-menu').toggleClass('active');
   });
 
-  // オーバーレイ非表示
+  // オーバーレイを非表示
   $(document).on('click', function(e) {
     if (!$(e.target).closest('.mynotice').length) {
       $('.mynotice-menu').removeClass('active');
