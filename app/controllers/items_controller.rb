@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :ensure_correct_user, only: [:create, :destroy]
+  before_action :ensure_correct_user, only: [:destroy]
 
   def create
     @post = Post.find(params[:post_id])
@@ -12,7 +12,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
     @item = @post.items.find(params[:id]).destroy
   end
 
