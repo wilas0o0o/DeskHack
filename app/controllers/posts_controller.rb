@@ -10,8 +10,6 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      @post.create_colors(@post)
-      @post.create_hashtags(@post)
       redirect_to post_path(@post)
     else
       @post.post_images.build
@@ -42,10 +40,6 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      @post.post_image.colors.clear
-      @post.hashtags.clear
-      @post.create_colors(@post)
-      @post.create_hashtags(@post)
       redirect_to post_path(@post)
     else
       render :edit
