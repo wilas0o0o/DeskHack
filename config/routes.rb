@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   resources :users, path: '/', only: [:show, :edit, :update] do
     member do
       get :bookmarked
-      get :thanx
-      get :withdrawal
+      get :unsubxcribe
+      patch :withdrawal
     end
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
