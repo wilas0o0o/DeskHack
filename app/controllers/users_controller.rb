@@ -25,6 +25,12 @@ class UsersController < ApplicationController
       order(created_at: :desc).page(params[:page]).per(15)
   end
 
+  def unsubscribe
+  end
+
+  def withdrawal
+  end
+
   private
 
   def user_params
