@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2022_03_01_111726) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "avatar"
+    t.boolean "is_deleted", default: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -136,7 +137,6 @@ ActiveRecord::Schema.define(version: 2022_03_01_111726) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end
