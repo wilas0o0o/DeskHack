@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update, :unsubscribe, :withdrawal]
   before_action :ensure_guest_user, only: [:edit, :update]
 
   def show
@@ -29,6 +29,9 @@ class UsersController < ApplicationController
   end
 
   def withdrawal
+    @user.update(is_deleted: true)
+    reset_session
+    redirect_to root_path
   end
 
   private
