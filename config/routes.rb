@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     get 'sign_up', to: 'devise/registrations#new', as: :new_user_registration
     post 'sign_up', to: 'devise/registrations#create', as: :user_registration
     get 'sign_in', to: 'devise/sessions#new', as: :new_user_session
-    post 'sign_in', to: 'devise/sessions#create', as: :user_session
+    post 'sign_in', to: 'users/sessions#create', as: :user_session
     delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
     post 'guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :users, path: '/', only: [:show, :edit, :update] do
     member do
       get :bookmarked
-      get :unsubxcribe
+      get :unsubscribe
       patch :withdrawal
     end
     resource :relationships, only: [:create, :destroy]

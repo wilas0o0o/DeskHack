@@ -15,6 +15,10 @@
           <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "form-control" %>
         </div>
 
+        <div class="form-group">
+          <%= f.check_box :is_deleted, checked: true%>
+        </div>
+
         <div class="form-action my-3">
           <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
         </div>
