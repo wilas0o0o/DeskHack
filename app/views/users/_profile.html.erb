@@ -9,7 +9,7 @@
   <p><%= user.email %></p>
   <% unless(user.name == "guest_user") %>
     <%= link_to "編集", edit_user_path(user), class: "btn btn-success btn-sm" %>
-    <%= link_to "退会", unsubscribe_user_path(user), class: "btn btn-danger btn-sm" %>
+    <%= link_to "退会", withdrawal_user_path(@user), method: :patch, class: "btn btn-danger btn-sm", "data-confirm" => "本当に退会しますか？\n１か月以内にログインするとデータは復旧されます。" %>
   <% end %>
 <% else %>
   <p class="follow-btn"><%= render 'relationships/follow_btn', user: user %></p>

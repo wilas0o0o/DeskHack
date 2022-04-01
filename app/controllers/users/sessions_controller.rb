@@ -11,7 +11,7 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super
-    resource.update(is_deleted: false)
+    resource.update(deleted_at: nil)
   end
 
   # DELETE /resource/sign_out

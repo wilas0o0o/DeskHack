@@ -25,11 +25,8 @@ class UsersController < ApplicationController
       order(created_at: :desc).page(params[:page]).per(15)
   end
 
-  def unsubscribe
-  end
-
   def withdrawal
-    @user.update(is_deleted: true)
+    @user.update(deleted_at: Time.current)
     reset_session
     redirect_to root_path
   end

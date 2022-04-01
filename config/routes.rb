@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   resources :users, path: '/', only: [:show, :edit, :update] do
     member do
       get :bookmarked
-      get :unsubscribe
       patch :withdrawal
     end
     resource :relationships, only: [:create, :destroy]
