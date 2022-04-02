@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :ensure_correct_user, only: [:edit, :update, :unsubscribe, :withdrawal]
+  before_action :ensure_correct_user, only: [:edit, :update, :withdrawal]
   before_action :ensure_guest_user, only: [:edit, :update]
 
   def show

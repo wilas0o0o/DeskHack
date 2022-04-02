@@ -24,10 +24,8 @@ rails_env = Rails.env.to_sym
 set :environment, rails_env
 set :output, 'log/cron.log'
 every :day do
-  begin
-    runner "Batch::UserReset.user_reset"
-  rescue => e
-    Rails.logger.error("aborted rails runner")
-    raise e
-  end
+  runner "Batch::UserReset.user_reset"
+rescue => e
+  Rails.logger.error("aborted rails runner")
+  raise e
 end

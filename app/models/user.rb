@@ -84,7 +84,7 @@ class User < ApplicationRecord
   def to_param
     username
   end
-  
+
   # usernameかemailでログインできるようにする
   # どのユーザか特定するメソッド(find_first_by_auth_conditions)を拡張
   def self.find_first_by_auth_conditions(warden_conditions)
@@ -93,7 +93,7 @@ class User < ApplicationRecord
       where(conditions).where(
         [
           "username = :value OR lower(email) = lower(:value)",
-          { :value => login }
+          { :value => login },
         ]
       ).first
     else
