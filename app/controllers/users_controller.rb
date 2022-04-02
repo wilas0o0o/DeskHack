@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update, :withdrawal]
   before_action :ensure_guest_user, only: [:edit, :update]
 
   def show
@@ -23,6 +23,12 @@ class UsersController < ApplicationController
     bookmarked_post_ids = @user.bookmarks.pluck(:post_id)
     @posts = Post.where(id: bookmarked_post_ids).
       order(created_at: :desc).page(params[:page]).per(15)
+  end
+
+  def withdrawal
+    @user.update(deleted_at: Time.current)
+    reset_session
+    redirect_to root_path
   end
 
   private
