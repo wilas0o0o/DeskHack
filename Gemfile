@@ -88,4 +88,4 @@ gem 'whenever', require: false
 # SNS認証
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
-gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
