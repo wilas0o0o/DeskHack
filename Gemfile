@@ -81,4 +81,11 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'cocoon'
 gem 'rails-i18n'
+
+# バッチ処理
 gem 'whenever', require: false
+
+# SNS認証
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-github'
