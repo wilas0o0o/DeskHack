@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   }
   devise_scope :user do
     get 'sign_up', to: 'devise/registrations#new', as: :new_user_registration
-    post 'sign_up', to: 'devise/registrations#create', as: :user_registration
+    post 'sign_up', to: 'users/registrations#create', as: :user_registration
     get 'sign_in', to: 'devise/sessions#new', as: :new_user_session
     post 'sign_in', to: 'users/sessions#create', as: :user_session
     delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
