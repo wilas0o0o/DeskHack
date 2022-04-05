@@ -21,6 +21,7 @@ class User < ApplicationRecord
             class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
   has_many :passive_notifications,
             class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+  has_many :sns
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :username,
