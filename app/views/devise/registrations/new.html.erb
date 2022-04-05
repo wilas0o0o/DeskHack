@@ -30,6 +30,10 @@
         <div class="form-actions mt-4">
           <%= f.submit "新規登録", class: "btn btn-primary btn-block" %>
         </div>
+
+        <%= link_to 'Twitterで登録', user_twitter_omniauth_authorize_path, method: :post%>
+        <%= link_to 'Googleで登録', user_google_oauth2_omniauth_authorize_path, method: :post%>
+
       <% end %>
 
       <div class="text-center mt-4">
