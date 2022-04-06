@@ -317,17 +317,12 @@ footer {
 }
 
 // ログイン画面
-.head-border {
-  display: flex;
-  align-items: center;
-}
-
 .head-border:before,
 .head-border:after {
   content: "";
   height: 1px;
   flex-grow: 1;
-  background-color: #0f0f0f;
+  background-color: #b5b5b5;
 }
 
 .head-border:before {
@@ -339,26 +334,10 @@ footer {
 }
 
 // ログインボタン
-.login-btn {
-  border-radius: 4px;
-  display:inline-block;
-  width:90%;
-  font-size:20px;
-  transition:.4s;
-  text-decoration:none;
-  :hover {
-    color:#fff!important;
-    text-decoration:none;
-  }
-}
-
 .twitter-login {
-  border: solid 1px #55acee;
-  color: #55acee;
-  :hover {
-    border:solid 1px #55acee;
-  background:#55acee;
-  }
+  background-color: #55acee;
 }
 
-.google-login
+.google-login {
+  background-color: #ef3f56;
+}
