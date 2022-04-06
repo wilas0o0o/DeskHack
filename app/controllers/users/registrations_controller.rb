@@ -12,6 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     if params[:sns_auth] == 'true'
+      # Devise内部でセキュアなパスワードをランダム生成
       pass = Devise.friendly_token(10)
       params[:user][:password] = pass
       params[:user][:password_confirmation] = pass

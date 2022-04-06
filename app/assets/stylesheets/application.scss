@@ -315,3 +315,50 @@ footer {
 .color {
   height: 60px;
 }
+
+// ログイン画面
+.head-border {
+  display: flex;
+  align-items: center;
+}
+
+.head-border:before,
+.head-border:after {
+  content: "";
+  height: 1px;
+  flex-grow: 1;
+  background-color: #0f0f0f;
+}
+
+.head-border:before {
+  margin-right: 1rem;
+}
+
+.head-border:after {
+  margin-left: 1rem;
+}
+
+// ログインボタン
+.login-btn {
+  border-radius: 4px;
+  display:inline-block;
+  width:90%;
+  font-size:20px;
+  transition:.4s;
+  text-decoration:none;
+  :hover {
+    color:#fff!important;
+    text-decoration:none;
+  }
+}
+
+.twitter-login {
+  border: solid 1px #55acee;
+  color: #55acee;
+  :hover {
+    border:solid 1px #55acee;
+  background:#55acee;
+  }
+}
+
+.google-login

@@ -15,18 +15,16 @@
           <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "form-control" %>
         </div>
         
-        <%= link_to 'Twitterでログイン', user_twitter_omniauth_authorize_path, method: :post%>
-        <%= link_to 'Googleでログイン', user_google_oauth2_omniauth_authorize_path, method: :post%>
+        <%= link_to 'Twitterでログイン', user_twitter_omniauth_authorize_path, method: :post %>
+        <%= link_to 'Googleでログイン', user_google_oauth2_omniauth_authorize_path, method: :post %>
 
         <div class="form-action my-3">
           <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
         </div>
       <% end %>
 
-      <div class="text-center mt-3">
         未登録の方は<%= link_to "こちら", new_user_registration_path %><br>
         ゲストログインは<%= link_to "こちら", guest_sign_in_path, method: :post %>
-      </div>
     </div>
   </div>
 </div>
