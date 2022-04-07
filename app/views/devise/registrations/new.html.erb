@@ -19,22 +19,43 @@
           <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>
         </div>
 
-        <div class="form-group d-flex justify-content-center">
-          <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（6文字以上）", class: "form-control" %>
-        </div>
+        <% if @sns_id.present? %>
+          <%= hidden_field_tag :sns_auth, true %>
+        <% else %>
+          <div class="form-group d-flex justify-content-center">
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（6文字以上）", class: "form-control" %>
+          </div>
 
-        <div class="form-group d-flex justify-content-center">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認用パスワード", class: "form-control" %>
-        </div>
+          <div class="form-group d-flex justify-content-center">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認用パスワード", class: "form-control" %>
+          </div>
+        <% end %>
 
         <div class="form-actions mt-4">
-          <%= f.submit "新規登録", class: "btn btn-primary btn-block" %>
+          <%= f.submit "新規登録", class: "btn btn-primary rounded-pill btn-block mb-1" %>
+          <%= link_to "登録済みの方はこちら", new_user_session_path %>
         </div>
+
       <% end %>
 
-      <div class="text-center mt-4">
-        登録済みの方は<%= link_to "こちら", new_user_session_path %><br>
-        ゲストログインは<%= link_to "こちら", guest_sign_in_path, method: :post %>
+      <div class="text-center">
+        <div class="head-border d-flex align-items-center my-2">
+          SNSで登録
+        </div>
+        <div class="d-flex">
+          <!--<div class="w-100">-->
+            <%#= link_to ' Twitter', user_twitter_omniauth_authorize_path, method: :post, class: "fab fa-twitter text-white btn rounded-pill twitter-login btn-block btn-lg" %>
+          <!--</div>-->
+          <div class="w-100">
+            <%= link_to ' Google', user_google_oauth2_omniauth_authorize_path, method: :post, class: "fab fa-google text-white rounded-pill google-login btn btn-block btn-lg" %>
+          </div>
+        </div>
+        <div class="head-border d-flex align-items-center  mt-4 mb-2">
+          ゲストの方
+        </div>
+        <button class="btn btn-secondary rounded-pill btn-block">
+          <%= link_to "ゲストログイン", guest_sign_in_path, method: :post, class: "text-white" %>
+        </button>
       </div>
     </div>
   </div>

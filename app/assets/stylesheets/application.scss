@@ -315,3 +315,29 @@ footer {
 .color {
   height: 60px;
 }
+
+// ログイン画面
+.head-border:before,
+.head-border:after {
+  content: "";
+  height: 1px;
+  flex-grow: 1;
+  background-color: #b5b5b5;
+}
+
+.head-border:before {
+  margin-right: 1rem;
+}
+
+.head-border:after {
+  margin-left: 1rem;
+}
+
+// ログインボタン
+.twitter-login {
+  background-color: #55acee;
+}
+
+.google-login {
+  background-color: #ef3f56;
+}
