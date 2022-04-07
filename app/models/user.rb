@@ -114,7 +114,6 @@ class User < ApplicationRecord
       sns.user = user
       sns.save
     end
-    binding.pry
     { user: user, sns: sns }
   end
 end
