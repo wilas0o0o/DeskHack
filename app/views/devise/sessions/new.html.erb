@@ -28,9 +28,9 @@
           SNSでログイン
         </div>
         <div class="d-flex justify-content-center">
-          <!--<div class="w-100">-->
-            <%#= link_to ' Twitter', user_twitter_omniauth_authorize_path, method: :post, class: "fab fa-twitter text-white btn rounded-pill twitter-login btn-block btn-lg" %>
-          <!--</div>-->
+          <div class="w-100">
+            <%= link_to ' Twitter', user_twitter_omniauth_authorize_path, method: :post, class: "fab fa-twitter text-white btn rounded-pill twitter-login btn-block btn-lg" %>
+          </div>
           <div class="w-100">
             <%= link_to ' Google', user_google_oauth2_omniauth_authorize_path, method: :post, class: "fab fa-google text-white rounded-pill google-login btn btn-block btn-lg" %>
           </div>
